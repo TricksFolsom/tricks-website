@@ -83,7 +83,10 @@ function resetLocationButtons() {
     $(obj).hide();
   });
   $('#choose_program_modal').hide();
-  $('.program-button#Swim').fadeOut(300);
+  $('.program-button#swim').fadeOut(300);
+  console.log("Reseting location buttons")
+  $('.program-button#school-age_dance').fadeIn(300);
+  $('.program-button#preschool_dance').fadeIn(300);
 }
 
 function updateLocation(loc) {
@@ -102,7 +105,11 @@ function updateLocation(loc) {
   $('.location-schedule-pdf#' + loc).show();
   $('#choose_program_modal').show();
   if (loc == "FOL") {
-    $('.program-button#Swim').fadeIn(300);
+    $('.program-button#swim').fadeIn(300);
+  }
+  if (loc == "SAC") {
+    $('.program-button#school-age_dance').fadeOut(300);
+    $('.program-button#preschool_dance').fadeOut(300);
   }
   $('.party_price').hide();
   $('.NONE_price').hide();

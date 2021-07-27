@@ -88,7 +88,7 @@
             </li>
             <li><%= tag_link = link_to "TAG", tag_path %></li>
             <li><%= swim_link = link_to "Swim", swim_path %></li>
-            <li><%= campus_link = link_to "CampUs", campus_path %></li>
+            <!-- <li><%#= campus_link = link_to "CampUs", campus_path %></li> -->
           </ul>
         </li>
         <li>
@@ -214,7 +214,7 @@
                   </li>
                   <li><%= tag_link %></li>
                   <li><%= swim_link %></li>
-                  <li><%= campus_link %></li>
+                  <%= if defined? campus_link then ('<li>' + campus_link + '</li>').html_safe end %>
                 </ul>
               </li>
               <li class="has-submenu">
@@ -375,10 +375,10 @@
         <div id="choose_program_modal">
           <h1>Choose a Program</h1>
           <div class="row" style="margin-top: 20px;">
-            <% programs = {"Preschool Gymnastics" => tumblebunnies_path, "School-Age Gymnastics" => gymnastics_path, "Preschool Dance" => preschool_dance_path, "School-Age Dance" => dance_path, "TAG" => tag_path, "Swim" => swim_path} %> 
+            <% programs = {"Preschool Gymnastics" => tumblebunnies_path, "School-Age Gymnastics" => gymnastics_path, "TAG" => tag_path, "Preschool Dance" => preschool_dance_path, "School-Age Dance" => dance_path, "Swim" => swim_path} %> 
             <% programs.each do |prog| %>
               <div class="columns small-12 large-6">
-                <%= link_to prog[0], prog[1], class: "button expanded program-button", id: prog[0] %>
+                <%= link_to prog[0], prog[1], class: "button expanded program-button", id: prog[0].parameterize(separator: '_') %>
               </div>
             <% end %>
           </div>
