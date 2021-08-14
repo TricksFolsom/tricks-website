@@ -86,8 +86,8 @@
     const container = document.getElementById("select-location-and-department-container");
     let priority = 1;
     let visible = 0;
-    const max_combos = 10;
-    function addPriority() {
+    const max_combos = 3;
+    function addPriority(first_one = false) {
       if (visible < max_combos){
         let div = document.createElement("fieldset");
         div.className = "fieldset";
@@ -115,12 +115,12 @@
                 <%= (select_tag "app_priorities[${priority}][department]", options_for_select(departments), class: "input-group-field").to_s %>
 
               </div>
-            </div>
-            <div class="columns large-2 small-6">
+            </div>` + (first_one ? `</div>` :
+            `<div class="columns large-2 small-6">
               <a class="button expanded alert" href="javascript:removePriority(${priority});">Remove</a>
             </div>
           </div>
-          `;
+          `);
         container.append(div);
         priority++;
         visible++;
@@ -137,7 +137,7 @@
         document.getElementById("add_button").classList.remove("disabled");
       }
     }
-    addPriority();
+    addPriority(true);
   </script>
   
   

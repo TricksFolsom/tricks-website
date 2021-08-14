@@ -17,8 +17,14 @@ class EmploymentApplicationsController < ApplicationController
     
     if params.has_key?(:status)
       query[:status] = params[:status]
+      if (params[:status] != 4 && params[:status != 5])
+        # for maybe_later and not_hired we can show non active reviews, but for all others, we only want the active reviews
+        # this means that once hired, further reviews would never have been looked at.
+        query[:active] = true
+      end
     else
       query[:status] = "0"
+      query[:active] = true
     end
     
     if params.has_key?(:department)
@@ -102,36 +108,44 @@ class EmploymentApplicationsController < ApplicationController
   def create
     @employment_application = EmploymentApplication.new(employment_application_params)
 
-    # if verify_recaptcha(model: @employment_application) && @employment_application.save
+    if verify_recaptcha(model: @employment_application) && @employment_application.save
       # reverse them so that we create the last review first, that way they can reference the next one
-      # review = EmploymentApplicationReview.new
+      review = EmploymentApplicationReview.new
       params["app_priorities"].to_unsafe_h.to_a.reverse.each do |priority, app|
         # need a way to chain the reviews together so that it can continue on when one priority rejects
-
         puts priority + ": " + app["location"] + " " + app["department"]
 
+        # review won't have an id on the first pass, only having having been saved does it get an id
+        if (!review.id.nil?)
+          old_id = review.id
+          review = EmploymentApplicationReview.new
+          review.next_review_id = old_id
+        end
+        # link the review to the applications
+        review.employment_application_id = @employment_application.id
 
-        # if (!review.id.nil?)
-        #   old_id = review.id
-        #   review = EmploymentApplicationReview.new
-        #   review.next_review_id = old_id
-        # end
-        # review.employment_application_id = @employment_application.id
-        # review.location = app["location"]
-        # review.department = app["department"]
-        # if review.save
-        #   # only deliver to the highest priority gym first
-        #   if (priority == 1)
-        #     EmploymentApplicationMailer.gym_notification(review).deliver_now
-        #   end
-        # end
+        # review location and department
+        review.location = app["location"]
+        review.department = app["department"]
+
+        # this works because user cannot remove the first priority choice
+        if (priority == "1")
+          review.active = true
+        else
+          review.active = false
+        end
+
+        review.save
       end
 
-      # EmploymentApplicationMailer.application_confirmation(@employment_application).deliver_now
-      # redirect_to thankyou_path, notice: 'Employment Application was successfully submitted.'
-    # else
-      # render :new
-    # end
+      # only deliver to the highest priority gym (which should be the last review created)
+      EmploymentApplicationMailer.gym_notification(review).deliver_now
+
+      EmploymentApplicationMailer.application_confirmation(@employment_application).deliver_now
+      redirect_to thankyou_path, notice: 'Employment Application was successfully submitted.'
+    else
+      render :new
+    end
   end
 
   # PATCH/PUT /employment_applications/1
@@ -152,9 +166,23 @@ class EmploymentApplicationsController < ApplicationController
       review.department = params[:employment_application_review][:department].downcase
     end
     review.status = params[:employment_application_review][:status]
+
     review.notes = params[:employment_application_review][:notes]
     review.last_edited_by = params[:employment_application_review][:last_edited_by]
+
+    review.active = false
     if review.save
+      if (review.status == 4 || review.status == 5)
+        # 4 == Maybe Later, 5 == Not Hired
+        # If status was maybe_later or not_hired, pass to next review priority
+        if (!review.next_review_id.nil?)
+          next_review = EmploymentApplicationReview.find(review.next_review_id)
+          next_review.active = true
+          if next_review.save
+            EmploymentApplicationMailer.gym_notification(next_review).deliver_now
+          end
+        end
+      end
       redirect_to employment_applications_url, notice: 'Application Review has been updated.'
     else
       redirect_to review, notice: "Failed to update Application Review"
