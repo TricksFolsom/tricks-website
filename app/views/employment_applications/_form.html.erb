@@ -14,7 +14,7 @@
     border: solid red 3px;
   }
 </style>
-<% required_fields = false %>
+<% required_fields = true %>
 <%= form_for(@employment_application) do |f| %>
   <% if @employment_application.errors.any? %>
     <div id="error_explanation">
