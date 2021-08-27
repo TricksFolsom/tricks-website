@@ -14,7 +14,7 @@
     border: solid red 3px;
   }
 </style>
-<% required_fields = true %>
+<% required_fields = false %>
 <%= form_for(@employment_application) do |f| %>
   <% if @employment_application.errors.any? %>
     <div id="error_explanation">
@@ -76,70 +76,11 @@
     <h6>Your highest preference should be at the top and lowest preference at the bottom.</h6>
   </div>
   
-    <div class="row align-center">
-      <div class="columns small-6">
-        <a class="button expanded" id="add_button" href="javascript:addPriority()">Add Another</a>
-      </div>
+  <div class="row align-center">
+    <div class="columns small-6">
+      <a class="button expanded" id="add_button" href="javascript:addPriority()">Add Another</a>
     </div>
-    
-  <script>
-    const container = document.getElementById("select-location-and-department-container");
-    let priority = 1;
-    let visible = 0;
-    const max_combos = 3;
-    function addPriority(first_one = false) {
-      if (visible < max_combos){
-        let div = document.createElement("fieldset");
-        div.className = "fieldset";
-        div.style="padding-top: 15px;"
-        div.id = `priority-${priority}`
-        div.innerHTML = `
-          <div class="row align-center">
-            <div class="columns large-4 small-12" >
-              <div class=" input-group">
-                <%= (label_tag "app_priorities[${priority}][location]", "Location", class: "input-group-label").to_s %>
-                
-                <% locations = [] %>
-                <% Location.all.each do |loc| %>
-                  <% locations.push([loc.name, loc.name.downcase.gsub(" ", "_")]) %>
-                <% end %>
-
-                <%= (select_tag "app_priorities[${priority}][location]", options_for_select(locations), class: "input-group-field").to_s %>
-              </div>
-            </div>
-            <div class="columns large-4 small-12">
-              <div class=" input-group">
-                <%= (label_tag "app_priorities[${priority}][department]", "Department", class: "input-group-label").to_s %>
-                
-                <% departments = [['Gymnastics', 'gymnastics'], ['Dance', 'dance'], ['Swim', 'swim'], ['TAG', 'tag'], ['Hospitality (Office Staff)', 'hospitality']] %>
-                <%= (select_tag "app_priorities[${priority}][department]", options_for_select(departments), class: "input-group-field").to_s %>
-
-              </div>
-            </div>` + (first_one ? `</div>` :
-            `<div class="columns large-2 small-6">
-              <a class="button expanded alert" href="javascript:removePriority(${priority});">Remove</a>
-            </div>
-          </div>
-          `);
-        container.append(div);
-        priority++;
-        visible++;
-        if (visible >= max_combos){
-          document.getElementById("add_button").classList.add("disabled");
-        }
-      }
-    }
-
-    function removePriority(id){
-      document.getElementById("priority-" + id).outerHTML = "";
-      visible--;
-      if (visible < max_combos){
-        document.getElementById("add_button").classList.remove("disabled");
-      }
-    }
-    addPriority(true);
-  </script>
-  
+  </div>  
   
   <fieldset class="fieldset">
     <legend><h1>Personal Information</h1></legend>
@@ -307,3 +248,99 @@
     </div>
   </fieldset>
 <% end %>
+
+  <script>
+    const container = document.getElementById("select-location-and-department-container");
+    let priority = 1;
+    let visible = 0;
+    const max_combos = 3;
+
+    function evaluateSelections() {
+      // any time a selector changes, check state of them all, and show/require correlated fields
+      let hospitality = false
+      let gymnastics = false
+      document.querySelectorAll(".app-priority-department-selector").forEach((selector) => {
+        if (selector.value === 'hospitality'){
+          hospitality = true
+        } else {
+          gymnastics = true
+        }
+      });
+      
+      if (gymnastics){
+        $('#coach_questions').show();
+        $("#coach_questions textarea").attr("required", true);
+      } else {
+        $('#coach_questions').hide();
+        $("#coach_questions textarea").removeAttr("required");
+      }
+
+      if (hospitality) {
+        $('#hospitality_questions').show();
+        $("#hospitality_questions textarea").attr("required", true);
+      } else {
+        $('#hospitality_questions').hide();
+        $("#hospitality_questions textarea").removeAttr("required");
+      }
+    }
+
+    function addPriority(first_one = false) {
+      if (visible < max_combos){
+        let div = document.createElement("fieldset");
+        div.className = "fieldset";
+        div.style="padding-top: 15px;"
+        div.id = `priority-${priority}`
+        div.innerHTML = `
+          <div class="row align-center">
+            <div class="columns large-4 small-12" >
+              <div class=" input-group">
+                <%= (label_tag "app_priorities[${priority}][location]", "Location", class: "input-group-label").to_s %>
+                
+                <% locations = [] %>
+                <% Location.all.each do |loc| %>
+                  <% locations.push([loc.name, loc.name.downcase.gsub(" ", "_")]) %>
+                <% end %>
+
+                <%= (select_tag "app_priorities[${priority}][location]", options_for_select(locations), class: "input-group-field app-priority-location-selector").to_s %>
+              </div>
+            </div>
+            <div class="columns large-4 small-12">
+              <div class=" input-group">
+                <%= (label_tag "app_priorities[${priority}][department]", "Department", class: "input-group-label").to_s %>
+                
+                <% departments = [['Gymnastics', 'gymnastics'], ['Dance', 'dance'], ['Swim', 'swim'], ['TAG', 'tag'], ['Hospitality (Office Staff)', 'hospitality']] %>
+                <%= (select_tag "app_priorities[${priority}][department]", options_for_select(departments), class: "input-group-field app-priority-department-selector").to_s %>
+
+              </div>
+            </div>` + (first_one ? `</div>` :
+            `<div class="columns large-2 small-6">
+              <a class="button expanded alert" href="javascript:removePriority(${priority});">Remove</a>
+            </div>
+          </div>
+          `);
+        container.append(div);
+        priority++;
+        visible++;
+        if (visible >= max_combos){
+          document.getElementById("add_button").classList.add("disabled");
+        }
+        document.querySelectorAll(".app-priority-department-selector").forEach((selector) => {
+          // I feel it is ok to directly set the onchange function here instead of using an event listener, because this is the only functionality of the button
+          // this function loops over all priorities and sets their onchange.
+          // easier than finding the most recently added priority
+          selector.onchange = evaluateSelections;
+        })
+        evaluateSelections();
+      }
+    }
+
+    function removePriority(id){
+      document.getElementById("priority-" + id).outerHTML = "";
+      visible--;
+      if (visible < max_combos){
+        document.getElementById("add_button").classList.remove("disabled");
+      }
+    }
+    addPriority(true);
+
+  </script>

@@ -22,6 +22,7 @@ class EmploymentApplicationsController < ApplicationController
         # this means that once hired, further reviews will never have be looked at, should probably just delete them at that point.
         query[:active] = true
       end
+      # otherwise we DO want to include the inactive ones, because that should be everything in those 2 categories
     else
       query[:status] = "0"
       query[:active] = true
@@ -108,34 +109,54 @@ class EmploymentApplicationsController < ApplicationController
   def create
     @employment_application = EmploymentApplication.new(employment_application_params)
 
+    # I should do some priority duplication checks here, that way an applicant can't apply to the same
+    # location and department more than once.
+
     if verify_recaptcha(model: @employment_application) && @employment_application.save
       # reverse them so that we create the last review first, that way they can reference the next one
       review = EmploymentApplicationReview.new
-      params["app_priorities"].to_unsafe_h.to_a.reverse.each do |priority, app|
-        # need a way to chain the reviews together so that it can continue on when one priority rejects
-        puts priority + ": " + app["location"] + " " + app["department"]
+      priorities = params["app_priorities"].to_unsafe_h.to_a
+      priorities.reverse.each do |priority, app|
+        unique_string = app["location"] + "_" + app["department"]
+        should_create = true
 
-        # review won't have an id on the first pass, only having having been saved does it get an id
-        if (!review.id.nil?)
-          old_id = review.id
-          review = EmploymentApplicationReview.new
-          review.next_review_id = old_id
-        end
-        # link the review to the applications
-        review.employment_application_id = @employment_application.id
-
-        # review location and department
-        review.location = app["location"]
-        review.department = app["department"]
-
-        # this works because user cannot remove the first priority choice
-        if (priority == "1")
-          review.active = true
-        else
-          review.active = false
+        # loop over higher up priorities, priority contains the key, (1-max_priorities)
+        # doing -1 makes sure we don't compare with self
+        priorities.first(priority.to_i - 1).each do |priority2, app2|
+          # starting at the top, skip review creation if we know we have a higher priority duplicate
+          # that will be created in the future
+          if unique_string == app2["location"] + "_" + app2["department"]
+            should_create = false
+          end
         end
 
-        review.save
+        if should_create
+          # need a way to chain the reviews together so that it can continue on when one priority rejects
+          # puts priority + ": " + app["location"] + " " + app["department"]
+
+          # review won't have an id on the first pass, only having having been saved does it get an id
+          if (!review.id.nil?)
+            old_id = review.id
+            review = EmploymentApplicationReview.new
+            review.next_review_id = old_id
+          end
+          # link the review to the applications
+          review.employment_application_id = @employment_application.id
+
+          # review location and department
+          review.location = app["location"]
+          review.department = app["department"]
+
+          # this works because user cannot remove the first priority choice
+          if (priority == "1")
+            review.active = true
+          else
+            review.active = false
+          end
+          review.save
+        # else
+          # puts "DUPLICATE FOUND"
+        end
       end
 
       # only deliver to the highest priority gym (which should be the last review created)

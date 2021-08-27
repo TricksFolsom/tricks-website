@@ -34,7 +34,7 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 	# Sets a specific timeout for some actions so they don't cause the server to hang until crash
-	gem "rack-timeout" # causing problems locally
+	# gem "rack-timeout" # causing problems locally
 end
 
 group :development do
