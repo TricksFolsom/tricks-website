@@ -19,7 +19,7 @@ class EmploymentApplicationsController < ApplicationController
       query[:status] = params[:status]
       if (params[:status] != 4 && params[:status != 5])
         # for maybe_later and not_hired we can show non active reviews, but for all others, we only want the active reviews
-        # this means that once hired, further reviews would never have been looked at.
+        # this means that once hired, further reviews will never have be looked at, should probably just delete them at that point.
         query[:active] = true
       end
     else
@@ -170,7 +170,13 @@ class EmploymentApplicationsController < ApplicationController
     review.notes = params[:employment_application_review][:notes]
     review.last_edited_by = params[:employment_application_review][:last_edited_by]
 
-    review.active = false
+    if (review.status == 4 || review.status == 5)
+      # 4 == Maybe Later, 5 == Not Hired
+      # A decision has been made to pass this review to the next one, mark this one as not active.
+      # the filter pages for these status should search both active and non active reviews.
+      review.active = false
+    end
+
     if review.save
       if (review.status == 4 || review.status == 5)
         # 4 == Maybe Later, 5 == Not Hired
