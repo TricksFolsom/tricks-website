@@ -200,7 +200,7 @@
       <div class="row">
         <div class="columns">
           
-          <% if @employment_application.gymnastics || @employment_application.dance || @employment_application.swim || @employment_application.tag %>
+          <%# if @employment_application.gymnastics || @employment_application.dance || @employment_application.swim || @employment_application.tag %>
             <p>
               <b>Previous experience teaching:</b><br>
               <%= @employment_application.previous_experience %>
@@ -209,9 +209,9 @@
               <b>Experience with children:</b><br>
               <%= @employment_application.experience_with_children %>
             </p>
-          <% end %>
+          <%# end %>
           
-          <% if @employment_application.hospitality %>
+          <%# if @employment_application.hospitality %>
             <p>
               <b>Previous office experience:</b><br>
               <%= @employment_application.previous_office_experience %>
@@ -220,7 +220,7 @@
               <b>Customer service experience:</b><br>
               <%= @employment_application.customer_service_experience %>
             </p>
-          <% end %>
+          <%# end %>
           
           <p>
             <b>Why they want to work at Tricks:</b><br>

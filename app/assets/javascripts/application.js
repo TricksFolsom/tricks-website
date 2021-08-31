@@ -58,8 +58,11 @@ $(function() {
 
     if (show_uploading_overlay) {
       $("input:file").each(function(index) {
-        if ($(this).val() != "")
+        // If there are files to upload:
+        if ($(this).val() != ""){
+          // Show the modal that signifies files are being uploaded
           $("#uploading_modal_hidden_trigger").trigger('click');
+        }
         return;
       });
     }

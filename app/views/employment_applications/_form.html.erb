@@ -203,10 +203,20 @@
     <div class="actions" style="margin-top: 50px; margin-bottom: 30px;">
       <div class="row">
         <div class="columns small-12 large-4">
-          <%= recaptcha_tags %>
+          <script>
+            function recaptchaClicked() {
+              // Enable the submit button, submitting without a valid recaptcha causes the page to reload, which loses the selcted image and resume. This is a simple way around it.
+              document.getElementById("application_submit_button").removeAttribute("disabled")
+            }
+            function recaptchaExpired() {
+              // Disable the submit button
+              document.getElementById("application_submit_button").setAttribute("disabled", true)
+            }
+          </script>
+          <%= recaptcha_tags callback: "recaptchaClicked", expired_callback: "recaptchaExpired", error_callback: "recaptchaExpired" %>
         </div>
         <div class="columns small-12 large-8">
-          <%= f.submit "Submit Application", class: "button expanded" %>
+          <%= f.submit "Submit Application", class: "button expanded", id: "application_submit_button", disabled: true %>
         </div>
       </div>
     </div>
