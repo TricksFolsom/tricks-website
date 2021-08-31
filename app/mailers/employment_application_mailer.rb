@@ -3,16 +3,7 @@ class EmploymentApplicationMailer < ApplicationMailer
     @review = review
     subject = "Employment Application for: " + @review.employment_application.firstname + " " + @review.employment_application.lastname
     
-    email = ""
-    if review.location == "granite_bay"
-      email = "tricksgb@gmail.com"
-    elsif review.location == "folsom"
-      email = "tricksfol@gmail.com"
-    elsif review.location == "sacramento"
-      email = "trickssac@gmail.com"
-    end
-    
-    mail to: "trickswebmaster@gmail.com", cc: email, subject: subject #TODO: change to bcc: after i have verified it works
+    mail to: "trickswebmaster@gmail.com", cc: get_location_email(review.location), subject: subject #TODO: change to bcc: after i have verified it works
   end
   
   def application_confirmation(application)

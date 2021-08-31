@@ -48,7 +48,7 @@
     </div>
   </div>
   
-  <div class="row align-center">
+  <div class="row">
     <div class="columns large-6 ">
       <%= render partial: 'helper_fields/date', locals: {form: f, field: :last_day, label: "Last Day of Class"} %>
     </div>
@@ -60,8 +60,16 @@
     </div>
   </div>
   
-  <div class="actions" style="margin-top: 50px; margin-bottom: 150px;">
-    <%#= f.submit "Submit Notice", class: "button expanded" %>
-    <%= invisible_recaptcha_tags text: 'Submit Notice', class: "button expanded" %>
+  <div class="row">
+    <div class="columns small-12">
+      <%= recaptcha_tags %>
+    </div>
   </div>
+  
+  <div class="row" style="margin-top: 50px; margin-bottom: 150px;">
+    <div class="columns small-12">
+      <%= f.submit "Submit Notice", class: "button expanded" %>
+    </div>
+  </div>
+
 <% end %>

@@ -237,8 +237,16 @@ class EmploymentApplicationsController < ApplicationController
   
   def archive
   	@review.archived = true
-  	@review.save
-    redirect_to employment_applications_url, notice: 'Application Review was Archived. If this was a mistake, contact the webmaster.'
+  	if @review.save
+      if (!@review.next_review_id.nil?)
+        next_review = EmploymentApplicationReview.find(@review.next_review_id)
+        next_review.active = true
+        if next_review.save
+          EmploymentApplicationMailer.gym_notification(next_review).deliver_now
+        end
+      end
+      redirect_to employment_applications_url, notice: 'Application Review was Archived. If this was a mistake, contact the webmaster.'
+    end
     #check for things archived more than 30 days ago, destroy them all.
   end
 

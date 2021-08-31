@@ -14,6 +14,8 @@ class EmploymentApplication < ActiveRecord::Base
     
 	has_one_attached :image_new
     has_one_attached :resume_new
+
+    validates_presence_of :firstname
     
 	def self.search(search)
         if search

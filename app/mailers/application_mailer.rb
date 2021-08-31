@@ -3,11 +3,11 @@ class ApplicationMailer < ActionMailer::Base
   
   def get_location_email(location)
     if Rails.env.production?
-      if (location == "Granite Bay")
+      if (location == "Granite Bay" || location == "granite_bay")
         return "tricksgb@gmail.com"
-      elsif (location == "Folsom")
+      elsif (location == "Folsom" || location == "folsom")
         return "tricksfol@gmail.com"
-      elsif (location == "Sacramento")
+      elsif (location == "Sacramento" || location == "sacramento")
         return "trickssac@gmail.com"
       else
         return "football80@gmail.com"

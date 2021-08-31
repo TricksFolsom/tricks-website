@@ -109,13 +109,14 @@ $(function() {
       return $('#convictions_question').hide('slow');
     }
   });
-  $('#employment_application_image').change(function() {
-    $('#employment_application_image').prev().addClass('success');
-    return $('#employment_application_image').prev().html("Change Image");
+  $('#employment_application_image_new').change(function() {
+    console.log("Here i am")
+    $('#employment_application_image_new').prev().addClass('success');
+    return $('#employment_application_image_new').prev().html("Change Image");
   });
-  $('#employment_application_resume').change(function() {
-    $('#employment_application_resume').prev().addClass('success');
-    return $('#employment_application_resume').prev().html("Change Resume");
+  $('#employment_application_resume_new').change(function() {
+    $('#employment_application_resume_new').prev().addClass('success');
+    return $('#employment_application_resume_new').prev().html("Change Resume");
   });
   return autoResizeImageContainers();
 });
