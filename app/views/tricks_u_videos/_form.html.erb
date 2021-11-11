@@ -12,17 +12,17 @@
   <% end %>
 
   <div class="row align-center">
-    <div class="columns small-12 large-5">
+    <div class="columns small-12 large-10">
       <%= render partial: 'helper_fields/text', locals: {form: f, field: :title, required: true} %>
     </div>
-    <div class="columns small-12 large-5">
-      <%= render partial: 'helper_fields/text', locals: {form: f, field: :url, required: true} %>
+    <div class="columns small-12 large-10">
+      <%= render partial: 'helper_fields/text', locals: {form: f, field: :url, label: "URL", required: true} %>
     </div>
     <div class="columns small-12 large-5">
       <%= render partial: 'helper_fields/select', locals: {form: f, field: :category_id, options: options_from_collection_for_select(TricksUCategory.all, :id, :title, @video.category_id), label: "Category"} %>
     </div>
     <div class="columns small-12 large-5">
-      <%= render partial: 'helper_fields/number', locals: {form: f, field: :weight} %>
+      <%= render partial: 'helper_fields/number', locals: {form: f, field: :weight, label: "Sort Order"} %>
     </div>
   </div>
   <div class="row align-center" style="margin-bottom: 100px; margin-top: 50px;">

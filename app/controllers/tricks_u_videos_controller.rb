@@ -25,6 +25,23 @@ class TricksUVideosController < ApplicationController
 
   def create
     @video = TricksUVideo.new(tricks_u_video_params)
+
+    # now we need to take the given URL and rip out the video ID, then we can use it to create an embeded link.
+    url = tricks_u_video_params[:url].delete_prefix('"').delete_suffix('"')
+    if url.include? "youtu"
+      if (url.include? "embed") || (url.include? "youtu.be")
+        # an "embed" link was given, video id is at the end of the path
+        video_id = url.split('/').last
+      else
+        uri = Addressable::URI.parse(url)
+        video_id = uri.query_values["v"]
+      end
+      
+      if !video_id.nil?
+        @video.url = "https://www.youtube.com/embed/" + video_id
+      end
+    end
+
     respond_to do |format|
       if @video.save
         format.html { redirect_to tricksu_path }
@@ -37,8 +54,27 @@ class TricksUVideosController < ApplicationController
   end
 
   def update
+    # now we need to take the given URL and rip out the video ID, then we can use it to create an embeded link.
+    new_params = tricks_u_video_params
+    url = new_params[:url].delete_prefix('"').delete_suffix('"')
+    if url.include? "youtu"
+      if (url.include? "embed") || (url.include? "youtu.be")
+        # an "embed" link was given, video id is at the end of the path
+        video_id = url.split('/').last
+      else
+        uri = Addressable::URI.parse(url)
+        if !uri.query_values.nil?
+          video_id = uri.query_values["v"]
+        end
+      end
+
+      if !video_id.nil?
+        new_params[:url] = "https://www.youtube.com/embed/" + video_id
+      end
+    end
+
     respond_to do |format|
-      if @video.update(tricks_u_video_params)
+      if @video.update(new_params)
         format.html { redirect_to @video, notice: 'Video was successfully updated.' }
         format.json { head :no_content }
       else
