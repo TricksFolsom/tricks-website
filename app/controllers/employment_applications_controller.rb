@@ -92,6 +92,7 @@ class EmploymentApplicationsController < ApplicationController
   # GET /employment_applications/1
   def show
     @review = EmploymentApplicationReview.find(params[:id])
+    @past_reviews = EmploymentApplicationReview.where(employment_application_id: @review.employment_application_id, active: false).where.not(status: 0)
     @employment_application = @review.employment_application
   end
 

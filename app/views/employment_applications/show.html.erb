@@ -124,6 +124,39 @@
         </div>
       </div>
     <% end %>
+    
+
+    <div class="row">
+      <div class="columns">
+        
+        <fieldset class="fieldset" style="padding-bottom: 10px;">
+          <legend><h1>Previous Reviews:</h1></legend>
+          <% @past_reviews.each do |past_review| %>
+            <div class="row" style="border: solid 2px #888; padding: 10px; border-radius: 5px; margin: 10px;">
+              <div class="columns small-12 large-8">
+                <h5><%= past_review.location.titleize %> <%= past_review.department.titleize %>: <%= EmploymentApplication::STATUS[past_review.status][0] %></h5>
+              </div>
+              <div class="columns small-12 large-4" style="text-align: right; margin-bottom: 20px;">
+                <h5><%= past_review.updated_at.in_time_zone.strftime("%B %d, %Y") %></h5>
+              </div>
+              <div class="columns small-12 large-8">
+                <p><b>Notes:</b> <%= past_review.notes %></p>
+              </div>
+              <div class="columns small-12 large-4" style="text-align: right;">
+                Decision from: <%= past_review.last_edited_by %>
+              </div>
+            </div>
+          <% end %>
+        </fieldset>
+      </div>
+    </div>
+    
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="columns">
     <fieldset class="fieldset">
       <legend><h1>Personal Information</h1></legend>
       <div class="row">
@@ -200,18 +233,19 @@
       <div class="row">
         <div class="columns">
           
-          <%# if @employment_application.gymnastics || @employment_application.dance || @employment_application.swim || @employment_application.tag %>
+          <% if @review.department == "gymnastics" || @review.department == "dance" || @review.department == "swim" || @review.department == "tag" %>
             <p>
               <b>Previous experience teaching:</b><br>
               <%= @employment_application.previous_experience %>
             </p>
+            <%= console %>
             <p>
               <b>Experience with children:</b><br>
               <%= @employment_application.experience_with_children %>
             </p>
-          <%# end %>
+          <% end %>
           
-          <%# if @employment_application.hospitality %>
+          <% if @review.department == "hospitality" %>
             <p>
               <b>Previous office experience:</b><br>
               <%= @employment_application.previous_office_experience %>
@@ -220,7 +254,7 @@
               <b>Customer service experience:</b><br>
               <%= @employment_application.customer_service_experience %>
             </p>
-          <%# end %>
+          <% end %>
           
           <p>
             <b>Why they want to work at Tricks:</b><br>
@@ -233,8 +267,7 @@
         </div>
       </div>  
     </fieldset>
-  </div>
-  
+  </div>  
 </div>
 <div class="row">
   <div class="columns">
