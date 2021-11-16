@@ -126,30 +126,32 @@
     <% end %>
     
 
-    <div class="row">
-      <div class="columns">
-        
-        <fieldset class="fieldset" style="padding-bottom: 10px;">
-          <legend><h1>Previous Reviews:</h1></legend>
-          <% @past_reviews.each do |past_review| %>
-            <div class="row" style="border: solid 2px #888; padding: 10px; border-radius: 5px; margin: 10px;">
-              <div class="columns small-12 large-8">
-                <h5><%= past_review.location.titleize %> <%= past_review.department.titleize %>: <%= EmploymentApplication::STATUS[past_review.status][0] %></h5>
+    <% if @past_reviews.length > 0 %>
+      <div class="row">
+        <div class="columns">
+          
+          <fieldset class="fieldset" style="padding-bottom: 10px;">
+            <legend><h1>Previous Reviews:</h1></legend>
+            <% @past_reviews.each do |past_review| %>
+              <div class="row" style="border: solid 2px #888; padding: 10px; border-radius: 5px; margin: 10px;">
+                <div class="columns small-12 large-8">
+                  <h5><%= past_review.location.titleize %> <%= past_review.department.titleize %>: <%= EmploymentApplication::STATUS[past_review.status][0] %></h5>
+                </div>
+                <div class="columns small-12 large-4" style="text-align: right; margin-bottom: 20px;">
+                  <h5><%= past_review.updated_at.in_time_zone.strftime("%B %d, %Y") %></h5>
+                </div>
+                <div class="columns small-12 large-8">
+                  <p><b>Notes:</b> <%= past_review.notes %></p>
+                </div>
+                <div class="columns small-12 large-4" style="text-align: right;">
+                  Decision from: <%= past_review.last_edited_by %>
+                </div>
               </div>
-              <div class="columns small-12 large-4" style="text-align: right; margin-bottom: 20px;">
-                <h5><%= past_review.updated_at.in_time_zone.strftime("%B %d, %Y") %></h5>
-              </div>
-              <div class="columns small-12 large-8">
-                <p><b>Notes:</b> <%= past_review.notes %></p>
-              </div>
-              <div class="columns small-12 large-4" style="text-align: right;">
-                Decision from: <%= past_review.last_edited_by %>
-              </div>
-            </div>
-          <% end %>
-        </fieldset>
+            <% end %>
+          </fieldset>
+        </div>
       </div>
-    </div>
+    <% end %>
     
   </div>
 </div>
