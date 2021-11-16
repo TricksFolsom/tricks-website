@@ -71,10 +71,10 @@
                 </h4> 
                 <p style="text-align: justify;"><%= kno.details %></li> 
                 <p>
-                <b>Date: <%= kno.date.strftime("%B %e, %Y") %> </b>
-                <br>Sacramento: <%= kno.sac_time.strftime("%l:%M%P") %>
-                <br>Granite Bay: <%= kno.gb_time.strftime("%l:%M%P") %>
-                <br>Folsom: <%= kno.fol_time.strftime("%l:%M%P") %>
+                <b>Date: <%= kno.date.nil? ? "none" : kno.date.strftime("%B %e, %Y") %> </b>
+                <br>Sacramento: <%= kno.sac_time.nil? ? "none" : kno.sac_time.strftime("%l:%M%P") %>
+                <br>Granite Bay: <%= kno.gb_time.nil? ? "none" : kno.gb_time.strftime("%l:%M%P") %>
+                <br>Folsom: <%= kno.fol_time.nil? ? "none" : kno.fol_time.strftime("%l:%M%P") %>
                 </p>
             </div>
         </div>
