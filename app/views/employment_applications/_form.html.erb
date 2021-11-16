@@ -16,7 +16,9 @@
 </style>
 <% required_fields = true %>
 <%= form_for(@employment_application) do |f| %>
-  <% if @employment_application.errors.any? %>
+  <%
+=begin%>
+ <% if @employment_application.errors.any? %>
     <div id="error_explanation" style="border: solid 2px red; background-color: pink; padding: 15px;">
       <h4><%= pluralize(@employment_application.errors.count, "error") %> stopped this Employment Application from being submitted:</h2>
 
@@ -26,7 +28,9 @@
       <% end %>
       </ul>
     </div>
-  <% end %>
+  <% end %> 
+<%
+=end%>
 
   <div id="select-location-and-department-container" style="text-align: center;">
     <h4>Please select all Location/Department combinations you would like to apply for.</h4>
@@ -243,7 +247,7 @@
     
     if (gymnastics){
       $('#coach_questions').show();
-      $("#coach_questions textarea").attr("required", true);
+      $("#coach_questions textarea").attr("required", <%= required_fields %>);
     } else {
       $('#coach_questions').hide();
       $("#coach_questions textarea").removeAttr("required");
@@ -251,7 +255,7 @@
 
     if (hospitality) {
       $('#hospitality_questions').show();
-      $("#hospitality_questions textarea").attr("required", true);
+      $("#hospitality_questions textarea").attr("required", <%= required_fields %>);
     } else {
       $('#hospitality_questions').hide();
       $("#hospitality_questions textarea").removeAttr("required");
@@ -275,7 +279,7 @@
                 <% locations.push([loc.name, loc.name.downcase.gsub(" ", "_")]) %>
               <% end %>
 
-              <%= (select_tag "app_priorities[${priority}][location]", options_for_select(locations), class: "input-group-field app-priority-location-selector").to_s %>
+              <%= (select_tag "app_priorities[${priority}][location]", options_for_select(locations), {prompt: '', required: required_fields, class: "input-group-field app-priority-location-selector"}).to_s %>
             </div>
           </div>
           <div class="columns large-4 small-12">
@@ -283,7 +287,7 @@
               <%= (label_tag "app_priorities[${priority}][department]", "Department", class: "input-group-label").to_s %>
               
               <% departments = [['Gymnastics', 'gymnastics'], ['Dance', 'dance'], ['Swim', 'swim'], ['TAG', 'tag'], ['Hospitality (Office Staff)', 'hospitality']] %>
-              <%= (select_tag "app_priorities[${priority}][department]", options_for_select(departments), class: "input-group-field app-priority-department-selector").to_s %>
+              <%= (select_tag "app_priorities[${priority}][department]", options_for_select(departments), {prompt: '', required: required_fields, class: "input-group-field app-priority-department-selector"}).to_s %>
 
             </div>
           </div>` + (first_one ? `</div>` :
@@ -315,6 +319,36 @@
       document.getElementById("add_button").classList.remove("disabled");
     }
   }
-  addPriority(true);
+
+  <% first = true %>
+  <% if !params["app_priorities"].nil? %>
+    <% params["app_priorities"].each do |pri| %>
+      addPriority(<%= first %>);
+      <% first = false %>
+    <% end %>
+  <% end %>
+
+  <% if first %>
+    addPriority(true);
+  <% else %>
+    // Update the added priorities with previous selections
+    <% params["app_priorities"].each do |key, pri| %>
+      let loc<%=key%> = document.getElementsByName("app_priorities[<%= key %>][location]")[0]
+      loc<%=key%>.value = "<%= pri["location"] %>"
+      // If it is empty, show as an error
+      if (loc<%=key%>.value == ""){
+        loc<%=key%>.parentNode.style.border = "solid 2px red"
+        loc<%=key%>.style.backgroundColor = "pink"
+      }
+
+      let dep<%=key%> = document.getElementsByName("app_priorities[<%= key %>][department]")[0]
+      dep<%=key%>.value = "<%= pri["department"] %>"
+      // If it is empty, show as an error
+      if (dep<%=key%>.value == ""){
+        dep<%=key%>.parentNode.style.border = "solid 2px red"
+        dep<%=key%>.style.backgroundColor = "pink"
+      }
+    <% end %>
+  <% end %>
 
 </script>

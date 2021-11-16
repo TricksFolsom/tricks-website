@@ -109,10 +109,16 @@ class EmploymentApplicationsController < ApplicationController
   def create
     @employment_application = EmploymentApplication.new(employment_application_params)
 
-    # I should do some priority duplication checks here, that way an applicant can't apply to the same
-    # location and department more than once.
+    # validate that priorites do not contain blanks. Only reason that should happen is because of modifying local javascript code in the form.
+    priorities_are_valid = true
+    puts params["app_priorities"].to_unsafe_h.to_a
+    params["app_priorities"].to_unsafe_h.to_a.each do |priority, app|
+      if (app["location"].empty? || app["department"].empty?)
+        priorities_are_valid = false
+      end
+    end
 
-    if verify_recaptcha(model: @employment_application) && @employment_application.save
+    if verify_recaptcha(model: @employment_application) && priorities_are_valid && @employment_application.save
       # reverse them so that we create the last review first, that way they can reference the next one
       review = EmploymentApplicationReview.new
       priorities = params["app_priorities"].to_unsafe_h.to_a
@@ -165,6 +171,7 @@ class EmploymentApplicationsController < ApplicationController
       EmploymentApplicationMailer.application_confirmation(@employment_application).deliver_now
       redirect_to thankyou_path, notice: 'Employment Application was successfully submitted.'
     else
+      flash[:error] = 'Could not save Employment Application, please check form and try again.'
       render :new
     end
   end
