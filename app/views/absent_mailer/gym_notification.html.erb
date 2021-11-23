@@ -8,6 +8,8 @@
 
     <p><b><%= @absent.first_name + " " + @absent.last_name %></b> will be absent from class on: <b><%= @absent.date.strftime("%b %e, %Y") %></b></p>
 
+    <p><b>Reason:</b> <%= @absent.reason %></p>
+
     <table style="margin: 10px; border-spacing: 0px; border: 1px #444 solid;">
       <tr>
         <td style="padding: 5px 15px; border: solid #444 1px;">Location: </td>

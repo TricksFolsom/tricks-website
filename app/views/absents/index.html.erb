@@ -8,22 +8,18 @@
     <th>Day</th>
     <th>Time</th>
     <th>Level</th>
-    <th></th>
-    <th></th>
-    <th></th>
+    <th>Reason</th>
   </tr>
 
 <% @absents.each do |absent| %>
   <tr>
     <td><%= absent.first_name + " " + absent.last_name %></td>
-    <td><%= absent.location %></td>
+    <td><%= Absent::HUMAN_LOCATIONS[absent.location] %></td>
     <td><%= absent.date.strftime("%b %e, %Y") %></td>
     <td><%= absent.date.strftime("%A") %></td>
     <td><%= absent.time.strftime("%l:%M %p") %></td>
-    <td><%= absent.level_id %></td>
-    <td><%= link_to 'Show', absent %></td>
-    <td><%= link_to 'Edit', edit_absent_path(absent) %></td>
-    <td><%= link_to 'Destroy', absent, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= absent.level.levelname %></td>
+    <td><%= absent.reason %></td>
   </tr>
 <% end %>
 </table>
