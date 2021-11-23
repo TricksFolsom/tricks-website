@@ -4,7 +4,10 @@ class KidsNightOutsController < ApplicationController
 
   # GET /kids_night_outs
   def index
-    @kids_night_outs = KidsNightOut.where("date >= ?", Date.today).order(:date)
+    @kids_night_outs = KidsNightOut.where("gb_datetime >= ?", Date.today)
+                   .or(KidsNightOut.where("fol_datetime >= ?", Date.today))
+                   .or(KidsNightOut.where("sac_datetime >= ?", Date.today))
+                   .order(:created_at)
   end
 
   # GET /kids_night_outs/new
@@ -50,6 +53,6 @@ class KidsNightOutsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def kids_night_out_params
-      params.require(:kids_night_out).permit(:title, :date, :details, :sac_time, :fol_time, :gb_time, :image, :image_new)
+      params.require(:kids_night_out).permit(:title, :details, :sac_datetime, :fol_datetime, :gb_datetime, :image, :image_new)
     end
 end

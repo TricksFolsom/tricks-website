@@ -27,17 +27,14 @@
   </div>
   
   <div class="row align-center">
-    <div class="column small-6 large-3">
-      <%= render partial: 'helper_fields/date', locals: {form: f, field: :date} %>
+    <div class="column small-12 large-7">
+      <%= render partial: 'helper_fields/datetime', locals: {form: f, field: :gb_datetime, label: "Granite Bay Date & Time"} %>
     </div>
-    <div class="column small-6 large-3">
-      <%= render partial: 'helper_fields/time', locals: {form: f, field: :gb_time, label: "GB Time"} %>
+    <div class="column small-12 large-7">
+      <%= render partial: 'helper_fields/datetime', locals: {form: f, field: :fol_datetime, label: "Folsom Date & Time"} %>
     </div>
-    <div class="column small-6 large-3">
-      <%= render partial: 'helper_fields/time', locals: {form: f, field: :fol_time, label: "Fol Time"} %>
-    </div>
-    <div class="column small-6 large-3">
-      <%= render partial: 'helper_fields/time', locals: {form: f, field: :sac_time, label: "Sac Time"} %>
+    <div class="column small-12 large-7">
+      <%= render partial: 'helper_fields/datetime', locals: {form: f, field: :sac_datetime, label: "Sacramento Date & Time"} %>
     </div>
   </div>
    

@@ -1,0 +1,20 @@
+<%# 
+    Required locals:
+    form
+    field
+    label
+    
+    Optional locals:
+    required
+%>
+<% if !defined? label %>
+    <% label = "" %>
+<% end %>
+<% if !defined? required %>
+    <% required = false %>
+<% end %>
+
+<div class=" input-group">
+  <%= form.label field, label, class: "input-group-label" %>
+  <%= form.datetime_local_field field, required: required, class: "input-group-field" %>
+</div>

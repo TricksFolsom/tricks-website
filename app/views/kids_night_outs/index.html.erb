@@ -70,12 +70,30 @@
                     <% end %>
                 </h4> 
                 <p style="text-align: justify;"><%= kno.details %></li> 
-                <p>
-                <b>Date: <%= kno.date.nil? ? "none" : kno.date.strftime("%B %e, %Y") %> </b>
-                <br>Sacramento: <%= kno.sac_time.nil? ? "none" : kno.sac_time.strftime("%l:%M%P") %>
-                <br>Granite Bay: <%= kno.gb_time.nil? ? "none" : kno.gb_time.strftime("%l:%M%P") %>
-                <br>Folsom: <%= kno.fol_time.nil? ? "none" : kno.fol_time.strftime("%l:%M%P") %>
-                </p>
+                
+                <table>
+                    <% if !kno.gb_datetime.nil? %>
+                    <tr>
+                        <td><b>Granite Bay</b></td>
+                        <td><%= kno.gb_datetime.strftime("%B %e, %Y") %></td>
+                        <td><%= kno.gb_datetime.strftime("%l:%M%P") %></td>
+                    </tr>
+                    <% end %>
+                    <% if !kno.fol_datetime.nil? %>
+                    <tr>
+                        <td><b>Folsom</b></td>
+                        <td><%= kno.fol_datetime.strftime("%B %e, %Y") %></td>
+                        <td><%= kno.fol_datetime.strftime("%l:%M%P") %></td>
+                    </tr>
+                    <% end %>
+                    <% if !kno.sac_datetime.nil? %>
+                    <tr>
+                        <td><b>Sacramento</b></td>
+                        <td><%= kno.sac_datetime.strftime("%B %e, %Y") %></td>
+                        <td><%= kno.sac_datetime.strftime("%l:%M%P") %></td>
+                    </tr>
+                    <% end %>
+                </table>
             </div>
         </div>
     <% end %>
