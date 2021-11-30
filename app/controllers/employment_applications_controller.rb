@@ -6,7 +6,7 @@ class EmploymentApplicationsController < ApplicationController
   # GET /employment_applications
   def index
     # EmploymentApplication.first.employment_application_reviews.first.id
-    search_result = EmploymentApplicationReview.joins(:employment_application).search(params[:search])
+    search_result = EmploymentApplicationReview.joins(:employment_application).search(params[:name_search])
 
     query = Hash.new
     query[:archived] = nil

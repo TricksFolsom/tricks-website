@@ -3,13 +3,17 @@
 <h1>Employment Applications</h1>
 
 <%= form_tag employment_applications_path, :method => 'get', :id => "applicant_search" do %>
+    <% request.query_parameters.collect do |key, value| %>
+        <%# make sure not to cache "name_search" param, since that will create a stale duplicate which messes up our Javascript %>
+        <% if key != "name_search" %>
+            <%= hidden_field_tag key, value %>
+        <% end %>
+    <% end %>
     <div class="row">  
-        <div class="columns small-expand large-8" style="margin-bottom: 10px;">
-            <%= text_field_tag :search, params[:search], placeholder: "Search for First or Last name" %>
+        <div class="columns small-12" style="margin-bottom: 10px;">
+            <%= text_field_tag :name_search, params[:name_search], placeholder: "Search for First or Last name", id: "name_search_field" %>
         </div>
-        <div class="columns small-shrink large-4">  
-            <%= submit_tag "Search", class: "button expanded" %>
-        </div>
+        <%= submit_tag "Submit", hidden: true %>
     </div>    
 <% end %>
 
