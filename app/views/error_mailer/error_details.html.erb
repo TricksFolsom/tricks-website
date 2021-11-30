@@ -5,7 +5,7 @@
 <body style="color:#222; font-size:16px; font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;">
   <div>
   	<h3>URL: <%= @url %></h3>
-    <h4>error.inspect: <%= @error.inspect %></h4>
+    <h4>@error.inspect: <%= @error.inspect %></h4>
 		<p style="margin-top: 100px;"><b>Application Trace:</b></p>
 		<% if @trace %>
 			<table style="margin: 10px 10px 50px 10px; border-spacing: 0px; border: 1px #444 solid;">
@@ -15,9 +15,9 @@
 			</table>
 		<% end %>
 		<p style="margin-top: 100px;"><b>Exception Trace:</b></p>
-		<% if @@exception_wrapper.exception_trace %>
+		<% if @exception_wrapper.exception_trace %>
 			<table style="margin: 10px 10px 50px 10px; border-spacing: 0px; border: 1px #444 solid;">
-				<% @@exception_wrapper.exception_trace.each do |trace| %>
+				<% @exception_wrapper.exception_trace.each do |trace| %>
 					<tr><td style="padding: 5px 15px; border: solid #444 1px;"><%= trace %></td></tr>
 				<% end %>
 			</table>
