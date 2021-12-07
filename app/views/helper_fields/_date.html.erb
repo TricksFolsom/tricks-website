@@ -20,6 +20,9 @@
 <% if !defined? default_date %>
     <% default_date = "" %>
 <% end %>
+<% if !defined? future %>
+    <% future = false %>
+<% end %>
 
 <div class=" input-group">
     <%= form.label field, label, class: "input-group-label" %>
@@ -28,7 +31,11 @@
 </div>
 
 <script>
-  $('input:last').datepicker({dateFormat: 'MM d, yy'})
+  <% if future %>
+    $('input:last').datepicker({dateFormat: 'MM d, yy', minDate: 0})
+  <% else %>
+    $('input:last').datepicker({dateFormat: 'MM d, yy'})
+  <% end %>
   // Have to hide the date picker because adding here caused it to be shown at the bottom of the page on load
   $('#ui-datepicker-div').hide()
 </script>

@@ -12,10 +12,10 @@
     <% end %>
     <div class="row">
       <div class="columns large-6 small-12">
-        <%= render partial: 'helper_fields/text', locals: {form: f, field: :first_name, label: "First Name", required: true} %>
+        <%= render partial: 'helper_fields/text', locals: {form: f, field: :first_name, label: "Child's First Name", required: true} %>
       </div>
       <div class="columns large-6 small-12">
-        <%= render partial: 'helper_fields/text', locals: {form: f, field: :last_name, label: "Last Name", required: true} %>
+        <%= render partial: 'helper_fields/text', locals: {form: f, field: :last_name, label: "Child's Last Name", required: true} %>
       </div>
     </div>
    
@@ -44,7 +44,7 @@
 
     <div class="row">
       <div class="columns large-6 small-12">
-        <%= render partial: 'helper_fields/date', locals: {form: f, field: :date, required: true} %>
+        <%= render partial: 'helper_fields/date', locals: {form: f, field: :date, future: true, required: true} %>
       </div>
       <div class="columns large-6 small-12">
         <%= render partial: 'helper_fields/time', locals: {form: f, field: :time, required: true} %>
