@@ -1,18 +1,27 @@
 jQuery(function() {
-  var levels;
-  $('#absent_level_id').prop("disabled", true);
-  levels = $('#absent_level_id').html();
-  return $('#absent_classtype_id').change(function() {
-    var classtype, options;
-    classtype = $('#absent_classtype_id :selected').text();
-    options = $(levels).filter("optgroup[label=" + classtype + "]").html();
-    console.log(options);
+  const all_levels = $('#level_select').html();
+
+  function updateLevels() {
+    console.log($("#classtype_select option:selected").length)
+    const classtype = $('#classtype_select :selected').text();
+    const options = '<option value="" label=" "></option>' + $(all_levels).filter("optgroup[label=" + classtype + "]").html();
     if (options) {
-      $('#absent_level_id').html(options);
-      return $('#absent_level_id').prop("disabled", false);
+      $('#level_select').html(options);
+      return $('#level_select').prop("disabled", false);
     } else {
-      $('#absent_level_id').empty();
-      return $('#absent_level_id').prop("disabled", true);
+      $('#level_select').empty();
+      return $('#level_select').prop("disabled", true);
     }
-  });
+  }
+
+  // if no classtype is selected
+  console.log($("#classtype_select").val());
+  if (!$("#classtype_select").val()){
+    $('#level_select').prop("disabled", true);
+  } else {
+    updateLevels();
+  }
+  
+  // update levels when classtype select changes
+  $('#classtype_select').change(updateLevels);
 });

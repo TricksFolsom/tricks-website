@@ -2,7 +2,7 @@
   <%= form_for(@absent) do |f| %>
     <% if @absent.errors.any? %>
       <div id="error_explanation">
-        <h2><%= pluralize(@absent.errors.count, "error") %> prohibited this absent from being saved:</h2>
+        <h4><%= pluralize(@absent.errors.count, "error") %> prohibited this Absence from being submitted:</h4>
         <ul>
         <% @absent.errors.full_messages.each do |msg| %>
           <li><%= msg %></li>
@@ -30,13 +30,13 @@
         <%#= render partial: 'helper_fields/collection_select', locals: {form: f, field: :classtype_id, fieldname: "Class Type", collection: Classtype.where(:id => 1..5), id: :id, name: :name, prompt: "Select a Class Type"} %>
         <div class=" input-group">
           <%= f.label :classtype_id, "Class Type", class: "input-group-label" %>
-          <%= f.collection_select :classtype_id, Classtype.where(:id => 1..5), :id, :name, prompt: "Select a Class Type", id: "classtype_select", class: "input-group-field" %>
+          <%= f.collection_select :classtype_id, Classtype.where(:id => 1..5), :id, :name, {}, {id: "classtype_select", class: "input-group-field", required: true} %>
         </div>
       </div>
       <div class="columns large-6 small-12">
         <div class=" input-group">
           <%= f.label :level_id, "Level", class: "input-group-label" %>
-          <%= f.grouped_collection_select :level_id, Classtype.all, :levels, :name, :id, :levelname, class: "input-group-field" %>
+          <%= f.grouped_collection_select :level_id, Classtype.all, :levels, :name, :id, :levelname, {}, {id: "level_select", class: "input-group-field", required: true }%>
         </div>
       </div>
     </div>

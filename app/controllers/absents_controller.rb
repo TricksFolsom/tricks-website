@@ -16,12 +16,14 @@ class AbsentsController < ApplicationController
   # GET /absents/new.json
   def new
     @absent = Absent.new
+    @absent.reason = ""
   end
 
   # POST /absents
   # POST /absents.json
   def create
     @absent = Absent.new(absent_params)
+    puts @absent
     respond_to do |format|
       if verify_recaptcha(model: @absent) && @absent.save
         AbsentMailer.gym_notification(@absent).deliver_now
@@ -53,6 +55,6 @@ class AbsentsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def absent_params
-      params.require(:absent).permit(:first_name, :last_name, :location, :classtype_id, :level_id, :date, :time)
+      params.require(:absent).permit(:first_name, :last_name, :location, :classtype_id, :level_id, :date, :time, :reason)
     end
 end

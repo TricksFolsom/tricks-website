@@ -666,3 +666,10 @@ body.is-reveal-open {
 .dropdown.menu > li > a  {
 	background-color: transparent;
 }
+
+#error_explanation{
+	border: solid 2px red;
+	background-color: pink;
+	padding: 15px;
+	margin: 15px 0;
+}
