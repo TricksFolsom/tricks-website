@@ -80,7 +80,7 @@
         <%= render partial: 'helper_fields/date', locals: {form: f, field: :date_available, label: "Date Available", required: required_fields} %>
       </div>
       <div class="columns large-4 small-12">
-        <%= render partial: 'helper_fields/switch', locals: {form: f, field: :over_eighteen, question: "Are you over 18 years old?"} %>
+        <%= render partial: 'helper_fields/switch', locals: {form: f, field: :over_eighteen, question: "Are you over 15 1/2 years old? (You must be at least 15 1/2 years old to apply)"} %>
       </div>
       <div class="columns large-4 small-12">
         <%= render partial: 'helper_fields/switch', locals: {form: f, field: :can_drive, question: "Do you have your own transportation?"} %>
