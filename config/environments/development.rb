@@ -81,4 +81,6 @@ Rails.application.configure do
   config.time_zone = "Pacific Time (US & Canada)"
   
   config.action_mailer.default_url_options = { :host => "http://www.tricksgym.com" }
+
+  config.active_record.legacy_connection_handling = false
 end

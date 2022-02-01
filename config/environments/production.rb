@@ -105,6 +105,8 @@ Rails.application.configure do
 
   # allows us to handle exceptions through error_controller.rb
   config.exceptions_app = self.routes
+
+  config.active_record.legacy_connection_handling = false
 end
 
 
