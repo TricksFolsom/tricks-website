@@ -1,9 +1,12 @@
 {
-  "dependencies": {
-    "@rails/webpacker": "^4.0.7"
+  "name": "tricks-app",
+  "engines": {
+    "node": "16.x"
   },
-  "devDependencies": {
-    "webpack-dev-server": "^3.8.1"
-  },
-  "license": "UNLICENSED"
+  "license": "UNLICENSED",
+  "version": "1.0.0",
+  "description": "Website for Tricks Gymnastics Inc.",
+  "main": "index.js",
+  "repository": "git@github.com:TricksGymnastics/tricks-website.git",
+  "author": "Jordan Taylor <trickswebmaster@gmail.com>"
 }
