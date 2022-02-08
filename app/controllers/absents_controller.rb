@@ -23,7 +23,7 @@ class AbsentsController < ApplicationController
   # POST /absents.json
   def create
     @absent = Absent.new(absent_params)
-    puts @absent
+    
     respond_to do |format|
       if verify_recaptcha(model: @absent) && @absent.save
         AbsentMailer.gym_notification(@absent).deliver_now

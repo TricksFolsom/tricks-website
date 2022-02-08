@@ -1,7 +1,6 @@
 <div id="form">
   <%= form_for(@user) do |f| %>
 
-
     <% if @user.errors.any? %>
       <div id="error_explanation">
         <h2><%= pluralize(@user.errors.count, "error") %> prohibited this User from being saved:</h2>
@@ -14,21 +13,28 @@
       </div>
     <% end %>
     
-    <%= render partial: 'helper_fields/email', locals: {form: f, field: :email, required: true} %>
-    
-    <div class="input-group">
-			<%= f.label :password, class: "input-group-label" %>
-			<%= f.password_field :password, required: true, class: "input-group-field" %>
-		</div>
-		
-    <div class="input-group">
-			<%= f.label :password_digest, "Password Confirmation", class: "input-group-label" %>
-			<%= f.password_field :password_confirmation, required: true, class: "input-group-field" %>
-		</div>
-		
-		<% if can? :manage, @user %>
-			<%= render partial: 'helper_fields/radio_buttons', locals: {form: f, field: :role, array: {superadmin: "Superadmin", admin: "Admin", moderator: "Moderator", coach: "Coach", author: "Author"}} %>
-		<% end %>
-		<%= f.submit "Submit", class: "button expanded" %>
+        <h5 style="text-align: center; margin-bottom: 50px;">(If you have not been asked to be here, you're in the wrong place.)</h5>
+    <div class="row align-center">
+      <div class="columns large-6 small-11">
+
+        <%= render partial: 'helper_fields/email', locals: {form: f, field: :email, required: true, disabled: !@user.id.nil?} %>
+        
+        <div class="input-group">
+          <%= f.label :password, class: "input-group-label" %>
+          <%= f.password_field :password, required: true, class: "input-group-field" %>
+        </div>
+        
+        <div class="input-group">
+          <%= f.label :password_digest, "Confirm Password", class: "input-group-label" %>
+          <%= f.password_field :password_confirmation, required: true, class: "input-group-field" %>
+        </div>
+        
+        <% if can? :manage, @user %>
+          <%= render partial: 'helper_fields/select', locals: {form: f, field: :role, options: {superadmin: "Superadmin", admin: "Admin", moderator: "Moderator", coach: "Coach", author: "Author"}} %>
+        <% end %>
+        
+        <%= f.submit "Submit", class: "button expanded", style: "margin-top: 50px;" %>
+      </div>
+    </div>
 	<% end %>
 </div>

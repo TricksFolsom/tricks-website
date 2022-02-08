@@ -6,6 +6,7 @@
     Optional locals:
     label
     required
+    disabled
 %>
 
 <%#= render partial: 'helper_fields/email', locals: {form: f, field: :email} %>
@@ -16,8 +17,11 @@
 <% if !defined? required %>
     <% required = false %>
 <% end %>
+<% if !defined? disabled %>
+    <% disabled = false %>
+<% end %>
 
 <div class="input-group">
     <%= form.label field, label, class: "input-group-label" %>
-    <%= form.email_field field, required: required, class: "input-group-field" %>
+    <%= form.email_field field, required: required, class: "input-group-field", disabled: disabled %>
 </div>

@@ -84,6 +84,9 @@ class Ability
 			can :read, Level
 			can :create, DiscontinueNotice
 			can :create, EmploymentApplication
+			can :create, User
+			can :show, User
+			can :update, User
 			# can :create, RecitalSignUp
 		end
 	end 

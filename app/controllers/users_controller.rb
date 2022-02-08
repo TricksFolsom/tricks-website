@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   helper_method :sort_column, :sort_direction 
 
   def index
-    @users = User.search(params[:search]).order(sort_column + " " + sort_direction).page(params[:page]).per(10)
+    @users = User.search(params[:search]).order(sort_column + " " + sort_direction)
   end
 
 	# GET /users/new
@@ -14,9 +14,11 @@ class UsersController < ApplicationController
 
 	def create
 	  @user = User.new(user_params)
+    @user.role = "author"
+
 		if @user.save
-			session[:user_id] = @user.id
-			redirect_to users_path, notice: "User succesfully created!"
+      SignupMailer.notification(@user).deliver_now
+			redirect_to thankyou_path, notice: "Your account has been successfully created."
 		else
 			render "new"
 		end
@@ -35,7 +37,11 @@ class UsersController < ApplicationController
   # PUT /users/1.json
   def update
     respond_to do |format|
-      if @user.update(user_params)
+      if @user.email != user_params[:email]
+        @user.errors.add(:base, :cannot_change_email, message: "You cannot change your email.")
+      end
+
+      if @user.email == user_params[:email] && @user.update(user_params)
         format.html { redirect_to users_path, notice: 'User was successfully updated.' }
         format.json { head :no_content }
       else
@@ -64,7 +70,7 @@ private
 
   # Only allow a trusted parameter "white list" through.
   def user_params
-    params.require(:user).permit(:email, :password, :password_confirmation, :role)
+    params.require(:user).permit(:email, :password, :password_confirmation, :role, :direction, :sort)
   end
 
   def sort_column
@@ -74,7 +80,4 @@ private
   def sort_direction
       %w[asc desc].include?(params[:direction]) ? params[:direction] : "desc"
   end
-
-
-
 end
