@@ -3,7 +3,13 @@ class Ability
 
 	def initialize(user) 
 		user ||= User.new
-			
+
+		# is logged in
+		if !user.id.nil?
+			can :show, User, email: user.email
+			can :update, User, email: user.email
+		end
+
 		## List of Actions ##
 		# :read (index)
 		# :create (create)
@@ -85,8 +91,6 @@ class Ability
 			can :create, DiscontinueNotice
 			can :create, EmploymentApplication
 			can :create, User
-			can :show, User
-			can :update, User
 			# can :create, RecitalSignUp
 		end
 	end 

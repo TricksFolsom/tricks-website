@@ -3,11 +3,11 @@
 <% end %>
 <% orientation = vertical ? "vertical" : "horizontal" %>
 
-<ul class="menu <%= orientation %>">
+<ul class="menu <%= orientation %>" style="margin-right: 0;">
   <% if vertical %>
     <li style="text-align: center; padding: 10px;">
       <div style="font-size: 20px;">Staff Menu</div>
-      <div><%= current_user.email %></div>
+      <div><%= link_to current_user.email, current_user, class: "button expanded"%></div>
     </li>
   <% end %>
   <% if can? :manage, User %>
@@ -61,5 +61,5 @@
   <% if can? :show, EmploymentApplication %>
     <li><%= link_to "Applications", employment_applications_path %></li>
   <% end %>
-  <li style="padding: <%= vertical ? 10 : 5 %>px; margin: 0;"><%= link_to "Logout", logout_path, class: "button alert expand", style: "padding: " + (vertical ? "10" : "5") + "px 10px;" %> </li>
+  <li style="padding: <%= vertical ? 10 : 5 %>px;"><%= link_to "Logout", logout_path, class: "button alert expand", style: "padding: " + (vertical ? "10" : "5") + "px 10px;" %> </li>
 </ul>

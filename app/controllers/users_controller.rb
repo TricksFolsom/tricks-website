@@ -37,12 +37,18 @@ class UsersController < ApplicationController
   # PUT /users/1.json
   def update
     respond_to do |format|
-      if @user.email != user_params[:email]
+      if !user_params[:email].nil? && @user.email != user_params[:email]
+        puts @user.email
+        puts user_params[:email]
         @user.errors.add(:base, :cannot_change_email, message: "You cannot change your email.")
       end
 
-      if @user.email == user_params[:email] && @user.update(user_params)
-        format.html { redirect_to users_path, notice: 'User was successfully updated.' }
+      if (!can? :manage, @user) && !user_params[:role].nil?
+        @user.errors.add(:base, :cannot_change_role, message: "You cannot change your role.")
+      end
+
+      if !@user.errors.any? && @user.update(user_params)
+        format.html { redirect_to @user, notice: 'User was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

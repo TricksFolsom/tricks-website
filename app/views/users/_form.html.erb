@@ -13,20 +13,21 @@
       </div>
     <% end %>
     
-        <h5 style="text-align: center; margin-bottom: 50px;">(If you have not been asked to be here, you're in the wrong place.)</h5>
+    <h5 style="text-align: center; margin-bottom: 50px;">(If you have not been asked to be here, you're in the wrong place.)</h5>
     <div class="row align-center">
       <div class="columns large-6 small-11">
-
-        <%= render partial: 'helper_fields/email', locals: {form: f, field: :email, required: true, disabled: !@user.id.nil?} %>
+        <% if @user.id.nil? %>
+          <%= render partial: 'helper_fields/email', locals: {form: f, field: :email, required: true} %>
+        <% end %>
         
         <div class="input-group">
           <%= f.label :password, class: "input-group-label" %>
-          <%= f.password_field :password, required: true, class: "input-group-field" %>
+          <%= f.password_field :password, required: (!can? :manage, @user), class: "input-group-field" %>
         </div>
         
         <div class="input-group">
           <%= f.label :password_digest, "Confirm Password", class: "input-group-label" %>
-          <%= f.password_field :password_confirmation, required: true, class: "input-group-field" %>
+          <%= f.password_field :password_confirmation, required: (!can? :manage, @user), class: "input-group-field" %>
         </div>
         
         <% if can? :manage, @user %>

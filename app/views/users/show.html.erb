@@ -1,26 +1,8 @@
-<br>
-<br>
-
-<p>
-  <b>E-mail:</b>
-  <%= @user.email %>
-</p>
-
-<p>
-  <b>Role:</b>
-  <%= @user.role %>
-</p>
-
-<p>
-  <b>Date Created:</b>
-  <%= @user.created_at.strftime("%b %e,%Y (%l:%M %p )") %>
-</p> 
-
-<p>
-  <b>User ID#:</b>
-  <%= @user.id %>
-</p>
-
-<br>
-
-<%= link_to 'Edit', edit_user_path(@user) %>
+<div class="row align-center">
+  <div class="columns large-6 small-11">
+    <h1>User Details</h1>
+    <p><b>Email:</b> <%= @user.email %></p>
+    <p><b>Role:</b> <%= @user.role %><p>
+    <%= link_to 'Change Password', edit_user_path(@user), class: "button expanded", style: "margin-top: 50px;" %>  
+  </div>
+</div>
