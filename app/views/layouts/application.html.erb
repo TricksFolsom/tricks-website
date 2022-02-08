@@ -172,7 +172,7 @@
       <% if current_user %>
         <div class="top-bar show-for-xlarge" id="staff_menu">
           <div class="top-bar-left">
-            <div class="title-bar-title" style="margin-left: 6px;"><%= current_user.email %></div>
+            <div class="title-bar-title" style="margin-left: 6px;"><%= link_to current_user.email, current_user, class: "button expanded", style: "margin: 0px; padding: 7px;" %></div>
           </div>
           <div class="top-bar-right">
             <%= render partial: '/layouts/staff_menu', locals: {vertical: false} %>
