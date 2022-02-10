@@ -1,0 +1,30 @@
+<%# 
+    Required locals:
+    object
+    
+    Optional locals:
+%>
+
+<%#= render partial: 'helper_fields/errors', locals: {object: @user} %>
+
+<%# if !defined? label %>
+    <%# label = "" %>
+<%# end %>
+<%# if !defined? required %>
+    <%# required = false %>
+<%# end %>
+<%# if !defined? disabled %>
+    <%# disabled = false %>
+<%# end %>
+
+<% if object.errors.any? %>
+  <div class="row align-center">
+    <div class="columns large-6 small-11">
+      <ul id="error_explanation">
+        <% object.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+<% end %>

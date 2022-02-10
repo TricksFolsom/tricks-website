@@ -1,16 +1,6 @@
 <div id="form">
   <%= form_for(@kid_quote) do |f| %>
-    <% if @kid_quote.errors.any? %>
-      <div id="error_explanation">
-        <h2><%= pluralize(@kid_quote.errors.count, "error") %> prohibited this kid_quote from being saved:</h2>
-
-        <ul>
-        <% @kid_quote.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-        </ul>
-      </div>
-    <% end %>
+    <%= render partial: 'helper_fields/errors', locals: {object: @kid_quote} %>
     <div class="row align-center">
       <div class="columns small-11 large-8">
         <%= render partial: 'helper_fields/text_area', locals: {form: f, field: :quote} %>

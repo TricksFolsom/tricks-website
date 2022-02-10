@@ -1,15 +1,5 @@
 <%= form_for(@camp) do |f| %>
-  <% if @camp.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@camp.errors.count, "error") %> prohibited this camp from being saved:</h2>
-
-      <ul>
-      <% @camp.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <%= render partial: 'helper_fields/errors', locals: {object: @camp} %>
 
   <div class="row align-center">
     <div class="columns small-10">

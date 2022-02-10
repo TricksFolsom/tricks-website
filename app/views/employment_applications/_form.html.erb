@@ -16,21 +16,8 @@
 </style>
 <% required_fields = true %>
 <%= form_for(@employment_application) do |f| %>
-  <%
-=begin%>
- <% if @employment_application.errors.any? %>
-    <div id="error_explanation" style="border: solid 2px red; background-color: pink; padding: 15px;">
-      <h4><%= pluralize(@employment_application.errors.count, "error") %> stopped this Employment Application from being submitted:</h2>
 
-      <ul>
-      <% @employment_application.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %> 
-<%
-=end%>
+  <%= render partial: 'helper_fields/errors', locals: {object: @employment_application} %>
 
   <div id="select-location-and-department-container" style="text-align: center;">
     <h4>Please select all Location/Department combinations you would like to apply for.</h4>

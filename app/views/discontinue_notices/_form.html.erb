@@ -2,18 +2,7 @@
 
 
 <%= form_for(@discontinue_notice) do |f| %>
-  <% if @discontinue_notice.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@discontinue_notice.errors.count, "error") %> prohibited this discontinue_notice from being saved:</h2>
-
-      <ul>
-      <% @discontinue_notice.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-  
+  <%= render partial: 'helper_fields/errors', locals: {object: @discontinue_notice} %>
 
   <div class="row">
     <div class="columns large-12 ">

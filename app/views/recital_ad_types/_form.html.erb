@@ -1,15 +1,5 @@
 <%= form_for(@recital_ad_type) do |f| %>
-  <% if @recital_ad_type.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@recital_ad_type.errors.count, "error") %> prohibited this recital_ad_type from being saved:</h2>
-
-      <ul>
-      <% @recital_ad_type.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <%= render partial: 'helper_fields/errors', locals: {object: @recital_ad_type} %>
 
   <div class="row align-center">
     <div class="columns small-12 large-4">

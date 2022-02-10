@@ -1,16 +1,5 @@
 <%= form_for(@website_pdf) do |f| %>
-  <% if @website_pdf.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@website_pdf.errors.count, "error") %> prohibited this website_pdf from being saved:</h2>
-
-      <ul>
-      <% @website_pdf.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
+  <%= render partial: 'helper_fields/errors', locals: {object: @website_pdf} %>
     
   <div class="row align-center">
     <div class="columns large-4 small-10">

@@ -6,7 +6,6 @@
     Optional locals:
     label
     placeholder
-    help_text
     required
     disabled
 %>
@@ -15,9 +14,6 @@
 
 <% if !defined? label %>
     <% label = "" %>
-<% end %>
-<% if !defined? help_text %>
-    <% help_text = "" %>
 <% end %>
 <% if !defined? placeholder %>
     <% placeholder = "" %>
@@ -29,10 +25,7 @@
     <% disabled = false %>
 <% end %>
 
-<div class="input-group" style="flex-wrap: wrap;">
+<div class="input-group">
     <%= form.label field, label, class: "input-group-label" %>
     <%= form.text_field field, required: required, placeholder: placeholder, disabled: disabled, class: "input-group-field" %>
-    <% if !help_text.empty? %>
-        <p class="help-text" style="flex-basis: 100%;">(<%= help_text %>)</p>
-    <% end %>
 </div>

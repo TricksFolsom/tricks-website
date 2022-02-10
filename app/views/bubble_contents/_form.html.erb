@@ -1,15 +1,5 @@
 <%= form_for(@bubble_content) do |f| %>
-  <% if @bubble_content.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@bubble_content.errors.count, "error") %> prohibited this bubble_content from being saved:</h2>
-
-      <ul>
-      <% @bubble_content.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <%= render partial: 'helper_fields/errors', locals: {object: @bubble_content} %>
 
   <div class="row align-center">
     <div class="columns large-9 small-11">

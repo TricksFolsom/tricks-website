@@ -1,19 +1,7 @@
 <div id="form">
   <%= form_for(@promo_slide) do |f| %>
-    <% if @promo_slide.errors.any? %>
-      <div id="error_explanation">
-        <h2><%= pluralize(@promo_slide.errors.count, "error") %> prohibited this promo slide from being saved:</h2>
+    <%= render partial: 'helper_fields/errors', locals: {object: @promo_slide} %>
 
-        <ul>
-        <% @promo_slide.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-        </ul>
-      </div>
-    <% end %>
-  
-    
-    
     <div class="row">
       <div class="columns large-12">
         <%= render partial: 'helper_fields/text', locals: {form: f, field: :title} %>

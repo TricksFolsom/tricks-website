@@ -1,15 +1,5 @@
 <%= form_for(@making_a_difference) do |f| %>
-  <% if @making_a_difference.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@making_a_difference.errors.count, "error") %> prohibited this making_a_difference from being saved: %></h2>
-
-      <ul>
-      <% @making_a_difference.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <%= render partial: 'helper_fields/errors', locals: {object: @making_a_difference} %>
 
   <div class="row align-center">
     <div class="column large-5 small-12">

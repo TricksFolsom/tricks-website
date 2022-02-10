@@ -1,15 +1,6 @@
 <div id="form">
   <%= form_for(@absent) do |f| %>
-    <% if @absent.errors.any? %>
-      <div id="error_explanation">
-        <h4><%= pluralize(@absent.errors.count, "error") %> prohibited this Absence from being submitted:</h4>
-        <ul>
-        <% @absent.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-        </ul>
-      </div>
-    <% end %>
+    <%= render partial: 'helper_fields/errors', locals: {object: @absent} %>
     <div class="row">
       <div class="columns large-6 small-12">
         <%= render partial: 'helper_fields/text', locals: {form: f, field: :first_name, label: "Child's First Name", required: true} %>

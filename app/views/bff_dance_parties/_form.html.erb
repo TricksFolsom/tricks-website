@@ -1,15 +1,5 @@
 <%= form_for(@bff_dance_party) do |f| %>
-  <% if @bff_dance_party.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@bff_dance_party.errors.count, "error") %> prohibited this bff_dance_party from being saved:</h2>
-
-      <ul>
-      <% @bff_dance_party.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <%= render partial: 'helper_fields/errors', locals: {object: @bff_dance_party} %>
   
   <div class="row">
     <div class="columns small-8">

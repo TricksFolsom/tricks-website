@@ -1,84 +1,75 @@
 <div id="levelform">
   <%= form_for(@level) do |f| %>
-    <% if @level.errors.any? %>
-      <div id="error_explanation">
-        <h2><%= pluralize(@level.errors.count, "error") %> prohibited this level from being saved:</h2>
-        <ul>
-          <% @level.errors.full_messages.each do |msg| %>
-            <li><%= msg %></li>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
+    <%= render partial: 'helper_fields/errors', locals: {object: @level} %>
 
-  <div class="row align-center">
-    <div class="columns large-8 ">
-      <div class="row">
-        <div class="columns large-6 ">
-          <%= render partial: 'helper_fields/text', locals: {form: f, field: :levelname, label: "Level"} %>
-        </div>
-        <div class="columns large-6 ">
-          <%= render partial: 'helper_fields/text', locals: {form: f, field: :jack_rabbit_name, label: "Jackrabbit Name"} %>
-        </div>
-      </div>
-      
-      <div class="row">
-        <div class="columns large-6 ">
-          <div class="input-group">
-            <%= f.label :classtype_id, "Class Type", class: "input-group-label" %>
-            <%= f.collection_select :classtype_id, Classtype.where(:id => 1..9), :id, :name, :prompt => "Select a Class Type", class: "input-group-field" %>
+    <div class="row align-center">
+      <div class="columns large-8 ">
+        <div class="row">
+          <div class="columns large-6 ">
+            <%= render partial: 'helper_fields/text', locals: {form: f, field: :levelname, label: "Level"} %>
+          </div>
+          <div class="columns large-6 ">
+            <%= render partial: 'helper_fields/text', locals: {form: f, field: :jack_rabbit_name, label: "Jackrabbit Name"} %>
           </div>
         </div>
-        <div class="columns large-3 ">
-          <%= render partial: 'helper_fields/text', locals: {form: f, field: :age, label: "Ages"} %>
-        </div>
-        <div class="columns large-3 ">
-          <%= render partial: 'helper_fields/select', locals: {form: f, field: :gender, options: ['Girls', 'Boys', 'Both'], prompt: "Select a Gender"} %>
-        </div>
-      </div>
-      
-      <div class="row">
-        <div class="columns large-4 ">
-          <%= render partial: 'helper_fields/switch', locals: {form: f, field: :active, question: "Is Active?"} %>
-        </div>
-        <div class="columns large-4">
-          <%= render partial: 'helper_fields/number', locals: {form: f, field: :length} %>
-        </div>
-        <div class="columns large-4 ">
-          <%= render partial: 'helper_fields/switch', locals: {form: f, field: :show_registration, question: "Beginner Level?"} %>
-        </div>
-      </div>
-      <div class="row">
-        <div class="columns large-6 ">
-          <%= render partial: 'helper_fields/color_picker', locals: {form: f, field: :color, label: "Class Bar Color"} %>
-        </div>
-        <div class="columns large-6 ">
-          <%= render partial: 'helper_fields/number', locals: {form: f, field: :sort_order} %>
-        </div>
-      </div>
-      
-      
-      <div class="row">
-        <div class="columns large-6 ">
-          <%= render partial: 'helper_fields/text', locals: {form: f, field: :video_url} %>
-        </div>
-        <div class="columns large-6 ">
-          <%= render partial: 'helper_fields/image_uploader', locals: {form: f, field: :image, image: @level.image} %>
-        </div>
-      </div>
         
-      <div class="row">
-        <div class="columns large-12 ">
-          <%= render partial: 'helper_fields/text_area', locals: {form: f, field: :short_description, question: "Description", placeholder: "Text describing what the class is about", height: 200} %>
+        <div class="row">
+          <div class="columns large-6 ">
+            <div class="input-group">
+              <%= f.label :classtype_id, "Class Type", class: "input-group-label" %>
+              <%= f.collection_select :classtype_id, Classtype.where(:id => 1..9), :id, :name, :prompt => "Select a Class Type", class: "input-group-field" %>
+            </div>
+          </div>
+          <div class="columns large-3 ">
+            <%= render partial: 'helper_fields/text', locals: {form: f, field: :age, label: "Ages"} %>
+          </div>
+          <div class="columns large-3 ">
+            <%= render partial: 'helper_fields/select', locals: {form: f, field: :gender, options: ['Girls', 'Boys', 'Both'], prompt: "Select a Gender"} %>
+          </div>
         </div>
-      </div>
+        
+        <div class="row">
+          <div class="columns large-4 ">
+            <%= render partial: 'helper_fields/switch', locals: {form: f, field: :active, question: "Is Active?"} %>
+          </div>
+          <div class="columns large-4">
+            <%= render partial: 'helper_fields/number', locals: {form: f, field: :length} %>
+          </div>
+          <div class="columns large-4 ">
+            <%= render partial: 'helper_fields/switch', locals: {form: f, field: :show_registration, question: "Beginner Level?"} %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="columns large-6 ">
+            <%= render partial: 'helper_fields/color_picker', locals: {form: f, field: :color, label: "Class Bar Color"} %>
+          </div>
+          <div class="columns large-6 ">
+            <%= render partial: 'helper_fields/number', locals: {form: f, field: :sort_order} %>
+          </div>
+        </div>
+        
+        
+        <div class="row">
+          <div class="columns large-6 ">
+            <%= render partial: 'helper_fields/text', locals: {form: f, field: :video_url} %>
+          </div>
+          <div class="columns large-6 ">
+            <%= render partial: 'helper_fields/image_uploader', locals: {form: f, field: :image, image: @level.image} %>
+          </div>
+        </div>
+          
+        <div class="row">
+          <div class="columns large-12 ">
+            <%= render partial: 'helper_fields/text_area', locals: {form: f, field: :short_description, question: "Description", placeholder: "Text describing what the class is about", height: 200} %>
+          </div>
+        </div>
 
-      <div class="row align-center" style="margin-bottom: 100px; margin-top: 50px;">
-        <div class="columns small-8">
-          <%= f.submit "Submit", class: "button expanded" %>
+        <div class="row align-center" style="margin-bottom: 100px; margin-top: 50px;">
+          <div class="columns small-8">
+            <%= f.submit "Submit", class: "button expanded" %>
+          </div>
         </div>
       </div>
     </div>
-  </div>
   <% end %>
 </div>

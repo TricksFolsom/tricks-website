@@ -1,15 +1,6 @@
 <div id="form" style="margin-top: 30px;">
   <%= form_for @coach, :html => {:multipart => true} do |f| %>
-    <% if @coach.errors.any? %>
-      <div id="error_explanation">
-        <h2><%= pluralize(@coach.errors.count, "error") %> prohibited this coach from being saved:</h2>
-        <ul>
-        <% @coach.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-        </ul>
-      </div>
-    <% end %>
+    <%= render partial: 'helper_fields/errors', locals: {object: @coach} %>
 
     <div class="row">
       <div class="columns large-2 ">
@@ -25,7 +16,7 @@
             <%= render partial: 'helper_fields/text', locals: {form: f, field: :firstname, label: "First Name"} %>
           </div>
           <div class="columns large-6 ">
-            <%= render partial: 'helper_fields/text', locals: {form: f, field: :lastname, label: "Last Name", help_text: "Not Displayed unless logged in"} %>
+            <%= render partial: 'helper_fields/text', locals: {form: f, field: :lastname, label: "Last Name", placeholder: "Not Displayed unless logged in"} %>
           </div>
           <div class="columns large-6 ">
             <%= render partial: 'helper_fields/radio_buttons', locals: {form: f, field: :gender, array: {girl: "Girl", boy: "Boy"}} %>

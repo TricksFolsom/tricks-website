@@ -1,56 +1,45 @@
 <div id="form">
   <%= form_for(@comment) do |f| %>
-    <% if @comment.errors.any? %>
-      <div id="error_explanation">
-        <h2><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
+    <%= render partial: 'helper_fields/errors', locals: {object: @comment} %>
 
-        <ul>
-        <% @comment.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
+    <div class="row align-center">
+      <div class="columns large-10 ">
+        <div class="row">
+          <div class="columns large-4 ">
+            <%= render partial: 'helper_fields/text', locals: {form: f, field: :name, label: "First Name"} %>
+          </div>
+          <div class="columns large-4 ">
+            <%= render partial: 'helper_fields/email', locals: {form: f, field: :email} %>
+          </div>
+          <div class="columns large-4 ">
+            <%= render partial: 'helper_fields/select', locals: {form: f, field: :activity, options: ['Gymnastics', 'TAG', 'Dance', "Swim"], prompt: "Select an Activity"} %>
+          </div>
+        </div>
+        
+        <div class="row">
+          <div class="columns large-12 ">
+            <%= render partial: 'helper_fields/text_area', locals: {form: f, field: :comment, required: false, placeholder: "Let us know how we are doing\n\nIf you are having an issue with billing please call your gym directly", maxlength: 1000, height: 200} %>
+          </div>
+        </div>
+        
+        <% if can? :update, @comment %>
+          <div class="row align-center">
+            <div class="columns large-4 small-10">
+              <%= render partial: 'helper_fields/number', locals: {form: f, field: :score, min: 0, max: 10} %>
+            </div>
+          </div>
         <% end %>
-        </ul>
-      </div>
-    <% end %>
-
-  <div class="row align-center">
-    <div class="columns large-10 ">
-      <div class="row">
-        <div class="columns large-4 ">
-          <%= render partial: 'helper_fields/text', locals: {form: f, field: :name, label: "First Name"} %>
-        </div>
-        <div class="columns large-4 ">
-          <%= render partial: 'helper_fields/email', locals: {form: f, field: :email} %>
-        </div>
-        <div class="columns large-4 ">
-          <%= render partial: 'helper_fields/select', locals: {form: f, field: :activity, options: ['Gymnastics', 'TAG', 'Dance', "Swim"], prompt: "Select an Activity"} %>
-        </div>
-      </div>
-      
-      <div class="row">
-        <div class="columns large-12 ">
-          <%= render partial: 'helper_fields/text_area', locals: {form: f, field: :comment, required: false, placeholder: "Let us know how we are doing\n\nIf you are having an issue with billing please call your gym directly", maxlength: 1000, height: 200} %>
-        </div>
-      </div>
-      
-      <% if can? :update, @comment %>
-        <div class="row align-center">
-          <div class="columns large-4 small-10">
-            <%= render partial: 'helper_fields/number', locals: {form: f, field: :score, min: 0, max: 10} %>
+        
+          <div class="row align-center">
+            <div class="columns small-6">
+              <% if can? :manage, Comment %>
+                <%= f.submit class: "button expanded" %>
+              <% else %>
+                <%= f.submit :confirm => "After you submit this comment, you will not be able to edit it. Click 'Ok' to submit your comment, or 'Cancel' to edit it.", class: "button expanded" %>
+              <% end %>
+            </div>
           </div>
-        </div>
-      <% end %>
-      
-        <div class="row align-center">
-          <div class="columns small-6">
-            <% if can? :manage, Comment %>
-              <%= f.submit class: "button expanded" %>
-            <% else %>
-              <%= f.submit :confirm => "After you submit this comment, you will not be able to edit it. Click 'Ok' to submit your comment, or 'Cancel' to edit it.", class: "button expanded" %>
-            <% end %>
-          </div>
-        </div>
-    </div>
-  </div>
-  
+      </div>
+    </div>  
   <% end %>
 </div>

@@ -1,23 +1,14 @@
 <div id="form">
   <%= form_for(@user) do |f| %>
-
-    <% if @user.errors.any? %>
-      <div id="error_explanation">
-        <h2><%= pluralize(@user.errors.count, "error") %> prohibited this User from being saved:</h2>
-
-        <ul>
-        <% @user.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-        </ul>
-      </div>
-    <% end %>
-    
+    <% required = false %>
     <h5 style="text-align: center; margin-bottom: 50px;">(If you have not been asked to be here, you're in the wrong place.)</h5>
+
+    <%= render partial: 'helper_fields/errors', locals: {object: @user} %>
+
     <div class="row align-center">
       <div class="columns large-6 small-11">
         <% if @user.id.nil? %>
-          <%= render partial: 'helper_fields/email', locals: {form: f, field: :email, required: true} %>
+          <%= render partial: 'helper_fields/email', locals: {form: f, field: :email, required: required} %>
         <% end %>
         
         <div class="input-group">
@@ -26,7 +17,7 @@
         </div>
         
         <div class="input-group">
-          <%= f.label :password_digest, "Confirm Password", class: "input-group-label" %>
+          <%= f.label :password_confirmation, "Confirm Password", class: "input-group-label" %>
           <%= f.password_field :password_confirmation, required: (!can? :manage, @user), class: "input-group-field" %>
         </div>
         

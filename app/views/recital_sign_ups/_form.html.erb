@@ -1,17 +1,7 @@
 
 
 <%= form_for(@recital_sign_up) do |f| %>
-  <% if @recital_sign_up.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@recital_sign_up.errors.count, "error") %> prohibited this recital_sign_up from being saved:</h2>
-
-      <ul>
-      <% @recital_sign_up.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <%= render partial: 'helper_fields/errors', locals: {object: @recital_sign_up} %>
 
 
 <div class="row align-center">

@@ -1,15 +1,5 @@
 <div id="personal_errors">
-  <% if @recital_ad.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@recital_ad.errors.count, "error") %> prohibited this Recital Ad Order from being saved:</h2>
-
-      <ul>
-      <% @recital_ad.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <%= render partial: 'helper_fields/errors', locals: {object: @recital_ad} %>
 </div>
 
 
