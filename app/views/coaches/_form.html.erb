@@ -1,3 +1,5 @@
+<%= javascript_include_tag 'coaches' %>
+
 <div id="form" style="margin-top: 30px;">
   <%= form_for @coach, :html => {:multipart => true} do |f| %>
     <%= render partial: 'helper_fields/errors', locals: {object: @coach} %>

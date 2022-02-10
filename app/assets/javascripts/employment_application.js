@@ -28,7 +28,6 @@ $(function() {
     }
   });
   $('#employment_application_image_new').change(function() {
-    console.log("Here i am")
     $('#employment_application_image_new').prev().addClass('success');
     return $('#employment_application_image_new').prev().html("Change Image");
   });
@@ -40,11 +39,10 @@ $(function() {
   // only focus the text box if is has already been selected recently
   const param = 'name_search=';
   const search_params = location.search;
-  console.log(search_params);
   let result = search_params.indexOf(param);
   if (result >= 0){
     // param found, check if param is empty
-    console.log(search_params.charAt(result + param.length));
+    // console.log(search_params.charAt(result + param.length));
     // If I wanted to make sure the param was all the way gone, I could use the below check, but the scenario
     // where the param is present but empty is a case where I believe the user would still want to have the text box focused.
     // if (search_params.charAt(result + param.length) !== '&'){

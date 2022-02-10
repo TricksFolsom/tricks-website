@@ -1,3 +1,4 @@
+// Loads in parties from JackRabbit upon request
 jQuery(function() {
   $('.level_details').show();
 

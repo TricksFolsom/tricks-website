@@ -1,3 +1,5 @@
+<%= javascript_include_tag 'employment_application' %>
+
 <div class="row">
     <% @employment_application_reviews.each do |review| %>
         <%= render partial: 'application_preview', locals: {review: review} %>

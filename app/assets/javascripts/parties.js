@@ -1,3 +1,4 @@
+// Loads in parties from JackRabbit upon request
 jQuery(function() {
   return $('.accordion-title.party-panel').on('click', function(event) {
     var party_id;
