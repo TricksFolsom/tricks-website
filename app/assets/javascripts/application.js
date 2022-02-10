@@ -212,11 +212,11 @@ const autoSizeText = function() {
   for (let i = 0; i < elements.length; i++) {
     const element = elements[i];
     results.push((function(element) {
-      let min_font_size = 0;
+      let min_font_size = 20;
       let max_font_size = parseInt($(element).data("maxFontSize"));
 
       // .resize elements have a starting font-size of 0
-      let current_test_size = 0;
+      let current_test_size = min_font_size;
 
       const max_size = element.scrollWidth * magic_scaling_number;
 
@@ -252,7 +252,7 @@ const autoSizeText = function() {
       // }, 500)
 
       // if the gap between min and max is too big, resize again.
-      while (Math.abs(max_font_size - min_font_size) > 0.7) {
+      while (Math.abs(max_font_size - min_font_size) > 1) {
           resizeText();
       }
     })(element));
