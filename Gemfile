@@ -24,7 +24,7 @@ gem 'jbuilder', '~> 2.7'
 gem 'bcrypt'
 
 # Use Active Storage variant
-gem 'image_processing', '~> 1.2'
+gem 'image_processing', '~> 1.12'
 # Allows use of validators on active storage uploads
 gem 'activestorage-validator'
 

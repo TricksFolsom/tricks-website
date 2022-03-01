@@ -221,7 +221,7 @@ GEM
     httpclient (2.8.3)
     i18n (1.9.1)
       concurrent-ruby (~> 1.0)
-    image_processing (1.12.1)
+    image_processing (1.12.2)
       mini_magick (>= 4.9.5, < 5)
       ruby-vips (>= 2.0.17, < 3)
     io-wait (0.2.1)
@@ -446,7 +446,7 @@ DEPENDENCIES
   google-analytics-rails
   google-cloud-storage
   httparty
-  image_processing (~> 1.2)
+  image_processing (~> 1.12)
   jbuilder (~> 2.7)
   jquery-minicolors-rails
   jquery-rails
