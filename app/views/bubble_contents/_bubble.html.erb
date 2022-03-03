@@ -4,7 +4,6 @@
 <% link_default = "javascript:void(0);" %>
 <% show_button_default = false %>
 <% data_toggle_default = "" %>
-<% font_size_default = "40" %>
 <% text_border_color_default = "555" %>
 <% text_border_size_default = "1" %>
 
@@ -17,7 +16,6 @@
 <% if bubble.nil? #check to see if it is a full custom bubble and use passed in locals or defaults %>
     <% bubble = BubbleContent.create() %>
     <% bubble.text = (defined? text) ? text : text_default %>
-    <%# bubble.font_size = (defined? font_size) ? font_size : font_size_default %>
     <% bubble.color = (defined? color) ? color : color_default %>
     <% bubble.text_color = (defined? text_color) ? text_color : text_color_default %>
     <% bubble.link = (defined? link) ? link : link_default %>
@@ -31,9 +29,6 @@
     <% text = bubble.text %>
 <% end %>
 
-<% if !defined? font_size %>
-    <% font_size = font_size_default %>
-<% end %>
 <% if !defined? text_border_color %>
     <% text_border_color = text_border_color_default %>
 <% end %>
@@ -70,7 +65,7 @@
 
 
 <a href="<%= link %>" data-toggle="<%= data_toggle %>" id="bubble_container" style="background-color: #<%= color %>; background-image: url(<%= image %>);">
-    <div id="bubble_text_container" class="resize" data-max-font-size="<%= font_size %>" style="color: #<%= text_color %>; filter: drop-shadow(0px 0px 4px #<%= darken_color(color, 0.3) %>);">
+    <div id="bubble_text_container" class="resize" style="color: #<%= text_color %>; filter: drop-shadow(0px 0px 4px #<%= darken_color(color, 0.3) %>);">
         <div id="bubble_text">
             <%= text %>
         </div>

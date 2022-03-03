@@ -652,6 +652,9 @@ body.is-reveal-open {
 	position: absolute;
 	top: 50%;
 	transform: translate(0, -50%);
+	// for some reason this is needed. Likely prevents some kind of scrolling optimization without it.
+	// If this is missing, our function for resizing the text to fit is always too small.
+	border: solid 1px transparent;
 }
 
 .resize {
