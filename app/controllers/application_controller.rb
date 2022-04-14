@@ -1,5 +1,6 @@
-class ApplicationController < ActionController::Base
- 
+class ApplicationController < ActionController::Base 
+  # Rescue form for invalid authentificitytoken
+  rescue_from ActionController::InvalidAuthenticityToken, :with => :bad_token
   protect_from_forgery with: :exception
   helper_method :current_user
 
@@ -39,4 +40,8 @@ class ApplicationController < ActionController::Base
 		@current_user ||= User.find(session[:user_id]) if session[:user_id]
 	end
 	
+  def bad_token
+    flash[:warning] = "Session expired"
+    redirect_to root_path
+  end
 end
