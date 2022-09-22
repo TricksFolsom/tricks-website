@@ -52,7 +52,7 @@
 <% @kids_night_outs.each do |kno| %>
         <div class="row align-center">
             <div class="column small-12" style="margin-top: 50px;">
-                <% if (kno.image_new.attached? || !kno.image.url.nil?) %>
+                <% if (kno.image_new.attached?) %>
                     <%= image_tag(kno.image_new.attached? ? kno.image_new : kno.image_url, style:"box-shadow: 0 0 20px #222; width: 100%") %>
                 <% end %>
                 <div class="row" style="margin: 0px; padding: 15px;">
