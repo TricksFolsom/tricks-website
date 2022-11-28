@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_01_063159) do
-
+ActiveRecord::Schema[7.0].define(version: 2022_11_28_220000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -23,8 +22,8 @@ ActiveRecord::Schema.define(version: 2022_02_01_063159) do
     t.integer "level_id"
     t.date "date"
     t.time "time"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.text "reason", default: "N/A | Absent was submitted before 'Reason' was added to form."
   end
 
@@ -33,7 +32,7 @@ ActiveRecord::Schema.define(version: 2022_02_01_063159) do
     t.string "record_type", null: false
     t.bigint "record_id", null: false
     t.bigint "blob_id", null: false
-    t.datetime "created_at", null: false
+    t.datetime "created_at", precision: nil, null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
   end
@@ -46,7 +45,7 @@ ActiveRecord::Schema.define(version: 2022_02_01_063159) do
     t.string "service_name", null: false
     t.bigint "byte_size", null: false
     t.string "checksum"
-    t.datetime "created_at", null: false
+    t.datetime "created_at", precision: nil, null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
@@ -63,8 +62,8 @@ ActiveRecord::Schema.define(version: 2022_02_01_063159) do
     t.string "city"
     t.string "state"
     t.string "zip"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["addressable_type", "addressable_id"], name: "index_addresses_on_addressable_type_and_addressable_id"
   end
 
@@ -72,8 +71,8 @@ ActiveRecord::Schema.define(version: 2022_02_01_063159) do
     t.string "name"
     t.date "date"
     t.string "suggestion"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.time "granite_bay_start_time"
     t.integer "granite_bay_duration"
     t.time "folsom_start_time"
@@ -91,8 +90,8 @@ ActiveRecord::Schema.define(version: 2022_02_01_063159) do
     t.string "text_color"
     t.boolean "show_button"
     t.integer "sort_order"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
   end
 
   create_table "camps", id: :serial, force: :cascade do |t|
@@ -101,35 +100,35 @@ ActiveRecord::Schema.define(version: 2022_02_01_063159) do
     t.date "registration_closes"
     t.string "image"
     t.text "description"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
   end
 
   create_table "classtypes", id: :serial, force: :cascade do |t|
     t.string "name", limit: 255
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
   end
 
   create_table "coach_classtypes", id: :serial, force: :cascade do |t|
     t.integer "classtype_id"
     t.integer "coach_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
   end
 
   create_table "coach_levels", id: :serial, force: :cascade do |t|
     t.integer "level_id"
     t.integer "coach_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
   end
 
   create_table "coach_locations", id: :serial, force: :cascade do |t|
     t.integer "coach_id"
     t.integer "location_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
   end
 
   create_table "coaches", id: :serial, force: :cascade do |t|
@@ -145,8 +144,8 @@ ActiveRecord::Schema.define(version: 2022_02_01_063159) do
     t.string "fav_food", limit: 255
     t.text "advice"
     t.string "disney_char", limit: 255
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.string "strengths", limit: 255
     t.boolean "current_employee", default: true
     t.string "tag_image"
@@ -156,14 +155,14 @@ ActiveRecord::Schema.define(version: 2022_02_01_063159) do
     t.text "comment"
     t.string "name", limit: 255
     t.integer "score"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.string "activity", limit: 255
     t.string "email", limit: 255
   end
 
   create_table "discontinue_notices", id: :serial, force: :cascade do |t|
-    t.string "reason", limit: 255
+    t.text "reason"
     t.string "student_first_name", limit: 255
     t.string "student_last_name", limit: 255
     t.integer "location"
@@ -172,8 +171,8 @@ ActiveRecord::Schema.define(version: 2022_02_01_063159) do
     t.date "last_day"
     t.string "parent_name", limit: 255
     t.boolean "understood"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
   end
 
   create_table "employment_application_reviews", id: :serial, force: :cascade do |t|
@@ -184,8 +183,8 @@ ActiveRecord::Schema.define(version: 2022_02_01_063159) do
     t.string "location"
     t.string "department"
     t.boolean "archived"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.integer "next_review_id"
     t.boolean "active", default: true
   end
@@ -238,8 +237,8 @@ ActiveRecord::Schema.define(version: 2022_02_01_063159) do
     t.string "interviewed_by"
     t.string "status"
     t.string "comment"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.boolean "archived"
   end
 
@@ -254,36 +253,56 @@ ActiveRecord::Schema.define(version: 2022_02_01_063159) do
     t.date "start_date"
     t.date "end_date"
     t.text "reason_for_leaving"
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
+    t.index ["history_type", "history_id"], name: "index_employment_histories_on_history_type_and_history_id"
+  end
+
+  create_table "events", force: :cascade do |t|
+    t.string "event_type"
+    t.string "title"
+    t.text "description"
+    t.datetime "gb_datetime"
+    t.integer "gb_duration"
+    t.string "gb_registration_link"
+    t.money "gb_price", scale: 2
+    t.datetime "fol_datetime"
+    t.integer "fol_duration"
+    t.string "fol_registration_link"
+    t.money "fol_price", scale: 2
+    t.datetime "sac_datetime"
+    t.integer "sac_duration"
+    t.string "sac_registration_link"
+    t.money "sac_price", scale: 2
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["history_type", "history_id"], name: "index_employment_histories_on_history_type_and_history_id"
   end
 
   create_table "kid_quotes", id: :serial, force: :cascade do |t|
     t.text "quote"
     t.string "name", limit: 255
     t.integer "age"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
   end
 
   create_table "kids_night_outs", id: :serial, force: :cascade do |t|
     t.string "title"
     t.text "details"
     t.string "image"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.datetime "gb_datetime"
-    t.datetime "fol_datetime"
-    t.datetime "sac_datetime"
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
+    t.datetime "gb_datetime", precision: nil
+    t.datetime "fol_datetime", precision: nil
+    t.datetime "sac_datetime", precision: nil
   end
 
   create_table "levels", id: :serial, force: :cascade do |t|
     t.string "levelname", limit: 255
     t.integer "length"
     t.string "age", limit: 255
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.integer "sort_order"
     t.integer "classtype_id"
     t.string "gender", limit: 255
@@ -299,16 +318,16 @@ ActiveRecord::Schema.define(version: 2022_02_01_063159) do
 
   create_table "locations", id: :serial, force: :cascade do |t|
     t.string "name", limit: 255
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.string "shortname"
   end
 
   create_table "making_a_differences", force: :cascade do |t|
     t.text "comment"
     t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.string "type_of_life"
   end
 
@@ -316,8 +335,8 @@ ActiveRecord::Schema.define(version: 2022_02_01_063159) do
     t.string "title"
     t.text "description"
     t.string "video"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.string "color"
     t.string "activities"
     t.integer "sort_order"
@@ -330,8 +349,8 @@ ActiveRecord::Schema.define(version: 2022_02_01_063159) do
     t.string "data_type", limit: 255, default: "Image"
     t.string "image", limit: 255
     t.text "html_code"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.string "link_path", limit: 255
     t.integer "sort_order"
   end
@@ -343,8 +362,8 @@ ActiveRecord::Schema.define(version: 2022_02_01_063159) do
     t.string "actual_size", limit: 255
     t.boolean "image"
     t.boolean "pdf_file"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
   end
 
   create_table "recital_ads", id: :serial, force: :cascade do |t|
@@ -355,8 +374,8 @@ ActiveRecord::Schema.define(version: 2022_02_01_063159) do
     t.string "image", limit: 255
     t.string "pdf_file", limit: 255
     t.integer "recital_ad_type_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
   end
 
   create_table "recital_sign_ups", id: :serial, force: :cascade do |t|
@@ -369,16 +388,16 @@ ActiveRecord::Schema.define(version: 2022_02_01_063159) do
     t.boolean "multiple_children"
     t.string "costume_fee_agreement"
     t.string "recital_fee_agreement"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
   end
 
   create_table "tricks_u_categories", id: :serial, force: :cascade do |t|
     t.string "title", limit: 255
     t.integer "weight"
     t.boolean "hidden"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
   end
 
   create_table "tricks_u_videos", id: :serial, force: :cascade do |t|
@@ -386,23 +405,23 @@ ActiveRecord::Schema.define(version: 2022_02_01_063159) do
     t.string "title", limit: 255
     t.integer "weight"
     t.integer "category_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
   end
 
   create_table "users", id: :serial, force: :cascade do |t|
     t.string "email", limit: 255
     t.string "password_digest", limit: 255
     t.string "role", limit: 255, default: "author"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
   end
 
   create_table "website_pdfs", id: :serial, force: :cascade do |t|
     t.string "file", limit: 255
     t.string "file_name", limit: 255
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
