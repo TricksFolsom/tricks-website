@@ -7,9 +7,9 @@
         <div class="columns small-12">
             <h1 style="margin-bottom: 0"><%= @website_pdf.file_name.tr("_"," ") %></h1>
             <% if @website_pdf.file_new.attached? %>
-                <iframe src="<%= @website_pdf.file_new.url %>" style="width:100%; height: 1200px; border:solid #444 2px;" frameborder="0"></iframe>
+                <iframe src="<%= @website_pdf.file_new.url %>" style="width:100%; height: 70vh; border:solid #444 2px;" frameborder="0"></iframe>
             <% else %>
-                <iframe src="<%= @website_pdf.file.url %>" style="width:100%; height: 1200px; border:solid #444 2px;" frameborder="0"></iframe>
+                <iframe src="<%= @website_pdf.file.url %>" style="width:100%; height: 70vh; border:solid #444 2px;" frameborder="0"></iframe>
             <% end %>
         </div>
     </div>
