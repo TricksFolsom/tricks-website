@@ -1,0 +1,74 @@
+<div id="<%= dom_id event %>" class="event-container">
+  <h1><%= event.title %></h1>
+  <p><%= event.description %></p>
+    <div class="row align-center" style="margin-top: 30px;">
+      
+      <% if !event.gb_datetime.nil? %>        
+        <div class="columns small-11 large-4">
+          <div style="background-color: #e5e4e2; border-radius: 10px; padding: 20px; padding-bottom: 10px;">
+            <h3>Granite Bay</h3>
+            <p>Date: <%= event.gb_datetime %></p>
+            <p>Duration: <%= event.gb_duration %></p>
+            <p>Price: <%= event.gb_price %></p>
+
+            <% if event.gb_registration_link.empty? %>
+              <% link = "https://app.jackrabbitclass.com/eventcalendar.asp?&cat2=Date Night&loc=GB&orgid=313983&date="+event.gb_datetime.strftime("%m/%d/%Y") %>
+              <% text = "View Calendar" %>
+            <% else %>
+              <% link = event.gb_registration_link %>
+              <% text = "Register" %>
+            <% end %>
+            <%= link_to text, link, target: :_blank, class: "button expanded", style: "font-size: 20px; padding: 10px;" %>
+          </div>
+        </div>
+      <% end %>
+      
+      <% if !event.fol_datetime.nil? %> 
+        <div class="columns small-11 large-4" >
+          <div style="background-color: #e5e4e2; border-radius: 10px; padding: 20px; padding-bottom: 10px;">
+            <h3>Folsom</h3>
+            <p>Date: <%= event.gb_datetime %></p>
+            <p>Duration: <%= event.gb_duration %></p>
+            <p>Price: <%= event.gb_price %></p>
+            <% if event.fol_registration_link.empty? %>
+              <% link = "https://app.jackrabbitclass.com/eventcalendar.asp?&cat2=Date Night&loc=FOL&orgid=313983&date="+event.fol_datetime.strftime("%m/%d/%Y") %>
+              <% text = "View Calendar" %>
+            <% else %>
+              <% link = event.fol_registration_link %>
+              <% text = "Register" %>
+            <% end %>
+            <%= link_to text, link, target: :_blank, class: "button expanded", style: "font-size: 20px; padding: 10px;" %>
+          </div>
+        </div>
+      <% end %>
+      
+      <% if !event.sac_datetime.nil? %> 
+        <div class="columns small-11 large-4">
+          <div style="background-color: #e5e4e2; border-radius: 10px; padding: 20px; padding-bottom: 10px;">
+            <h3>Sacramento</h3>
+            <p>Date: <%= event.gb_datetime %></p>
+            <p>Duration: <%= event.gb_duration %></p>
+            <p>Price: <%= event.gb_price %></p>
+            <% if event.sac_registration_link.empty? %>
+              <% link = "https://app.jackrabbitclass.com/eventcalendar.asp?&cat2=Date Night&loc=SAC&orgid=313983&date="+event.sac_datetime.strftime("%m/%d/%Y") %>
+              <% text = "View Calendar" %>
+            <% else %>
+              <% link = event.sac_registration_link %>
+              <% text = "Register" %>
+            <% end %>
+            <%= link_to text, link, target: :_blank, class: "button expanded", style: "font-size: 20px; padding: 10px;" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+</div>
+
+<style>
+.event-container{
+  margin: 24px;
+  padding: 24px;
+  border: solid 2px #555;
+  border-radius: 15px;
+}
+</style>

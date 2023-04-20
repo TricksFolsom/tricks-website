@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :events
 
   resources :making_a_differences
   resources :kids_night_outs

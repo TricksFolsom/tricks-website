@@ -1,0 +1,86 @@
+<%= form_with(model: event) do |form| %>
+  <%= render partial: 'helper_fields/errors', locals: {object: event} %>
+  
+
+
+
+  <div class="row align-center">
+    <div class="column small-12 large-8">
+      <%= render partial: 'helper_fields/text', locals: {form: form, field: :title, required: true} %>
+    </div>
+    <div class="columns small-12 large-4">
+      <%= render partial: 'helper_fields/select', locals: {form: form, field: :event_type, fieldname: "Event Type", options: Event::TYPES, prompt: "Select a Type", required: true}%>
+    </div>
+    <div class="column small-12">
+      <%= render partial: 'helper_fields/image_uploader', locals: {form: form, field: :image, image: event.image, uses_active_storage: true} %>
+    </div>
+  </div> 
+  
+  <div class="row align-center">
+    <div class="columns small-12">
+      <%= render partial: 'helper_fields/text_area', locals: {form: form, field: :description} %>
+    </div>
+  </div>
+  
+  <fieldset class="fieldset">
+    <legend><h1 style="font-size: 36px;">Granite Bay</h1></legend>
+    <div class="row align-center">
+      <div class="columns small-12 large-7">
+        <%= render partial: 'helper_fields/datetime', locals: {form: form, field: :gb_datetime, label: "Date & Time"} %>
+      </div>
+      <div class="columns small-12 large-3">
+        <%= render partial: 'helper_fields/number', locals: {form: form, field: :gb_duration, label: "Duration", placeholder: "In Minutes"} %>
+      </div>
+      <div class="columns small-12 large-7">
+        <%= render partial: 'helper_fields/text', locals: {form: form, field: :gb_registration_link, label: "Registration Link", placeholder: "Leave Blank for Calendar or Paste Event Link"} %>
+      </div>
+      <div class="columns small-12 large-3">
+        <%= render partial: 'helper_fields/number', locals: {form: form, field: :gb_price, label: "Price"} %>
+      </div>
+    </div>
+  </fieldset>
+
+  <fieldset class="fieldset">
+    <legend><h1 style="font-size: 36px;">Folsom</h1></legend>
+    <div class="row align-center">
+      <div class="columns small-12 large-7">
+        <%= render partial: 'helper_fields/datetime', locals: {form: form, field: :fol_datetime, label: "Date & Time"} %>
+      </div>
+      <div class="columns small-12 large-3">
+        <%= render partial: 'helper_fields/number', locals: {form: form, field: :fol_duration, label: "Duration", placeholder: "In Minutes"} %>
+      </div>
+      <div class="columns small-12 large-7">
+        <%= render partial: 'helper_fields/text', locals: {form: form, field: :fol_registration_link, label: "Registration Link", placeholder: "Leave Blank for Calendar or Paste Event Link"} %>
+      </div>
+      <div class="columns small-12 large-3">
+        <%= render partial: 'helper_fields/number', locals: {form: form, field: :fol_price, label: "Price"} %>
+      </div>
+    </div>
+  </fieldset>
+
+  <fieldset class="fieldset">
+    <legend><h1 style="font-size: 36px;">Sacramento</h1></legend>
+    <div class="row align-center">
+      <div class="columns small-12 large-7">
+        <%= render partial: 'helper_fields/datetime', locals: {form: form, field: :sac_datetime, label: "Date & Time"} %>
+      </div>
+      <div class="columns small-12 large-3">
+        <%= render partial: 'helper_fields/number', locals: {form: form, field: :sac_duration, label: "Duration", placeholder: "In Minutes"} %>
+      </div>
+      <div class="columns small-12 large-7">
+        <%= render partial: 'helper_fields/text', locals: {form: form, field: :sac_registration_link, label: "Registration Link", placeholder: "Leave Blank for Calendar or Paste Event Link"} %>
+      </div>
+      <div class="columns small-12 large-3">
+        <%= render partial: 'helper_fields/number', locals: {form: form, field: :sac_price, label: "Price"} %>
+      </div>
+    </div>
+  </fieldset>
+   
+ 
+  
+  <div class="row align-center">
+    <div class="columns small-6">
+      <%= form.submit "Submit", class: "button expanded" %>
+    </div>
+  </div>
+<% end %>
