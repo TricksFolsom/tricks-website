@@ -49,10 +49,20 @@ class LevelsController < ApplicationController
   end
   
   def get_jr_classes
-    level = Level.find(params[:level_id])
+		level = Level.find(params[:level_id])
     out = "<div class='columns 11-small'>"
 		Location.all.each do |loc|
-			url = 'https://app.jackrabbitclass.com/jr3.0/Openings/OpeningsJson?orgid=313983&loc='+loc.shortname+'&cat2='+level.jack_rabbit_name
+			case loc.shortname
+			when "FOL"
+				org_id = "550122"
+			when "GB"
+				org_id = "550123"
+			when "SAC"
+				org_id = "550124"
+			end
+			#313983 // old org_id
+			puts org_id
+			url = 'https://app.jackrabbitclass.com/jr3.0/Openings/OpeningsJson?orgid='+org_id+'&cat2='+level.jack_rabbit_name
 			response = JSON.parse(HTTParty.get(url).body)
 			out += '<div class="location-classes-information" id="'+loc.shortname+'" style="display: none; width: 100%; overflow: auto;">'
 			if response['rows'].length > 0
