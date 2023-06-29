@@ -114,7 +114,7 @@ class LevelsController < ApplicationController
 					instructor = "<span style='color: red;'>Staff</span>".html_safe
 					if !r['instructors'][0].nil?
 						# puts ":" + r['instructors'][0] + ":"
-						if loc.shortname == "GB"
+						if loc.shortname == "GB" || loc.shortname == "SAC"
 							instructor = r['instructors'][0]
 						else
 							name_parts = []
