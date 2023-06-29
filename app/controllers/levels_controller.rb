@@ -113,24 +113,26 @@ class LevelsController < ApplicationController
 
 					instructor = "<span style='color: red;'>Staff</span>".html_safe
 					if !r['instructors'][0].nil?
-
 						# puts ":" + r['instructors'][0] + ":"
-						name_parts = []
-						r['instructors'][0].split.map(&:capitalize).each do |section|
-							# we do this because sometimes they add gym locations to the end of someones name. So first we need to remove that part.
-							if section[0] != '('
-								name_parts.push(section)
+						if loc.shortname == "GB"
+							instructor = r['instructors'][0]
+						else
+							name_parts = []
+							r['instructors'][0].split.map(&:capitalize).each do |section|
+								# we do this because sometimes they add gym locations to the end of someones name. So first we need to remove that part.
+								if section[0] != '('
+									name_parts.push(section)
+								end
+							end
+							# puts "name_parts: " +  name_parts.to_s + ":"
+							if name_parts.size > 1
+								name_parts.pop(1) # Pop off the last name of the instructor
+								instructor = name_parts.join(" ")  # and join the rest
+							else 
+								instructor = name_parts[0]
 							end
 						end
-						# puts "name_parts: " +  name_parts.to_s + ":"
-						if name_parts.size > 1
-							name_parts.pop(1) # Pop off the last name of the instructor
-							instructor = name_parts.join(" ")  # and join the rest
-						else 
-							instructor = name_parts[0]
-						end
 						# puts "dispaly name: " + instructor
-						# puts ""
 					end
 
   				entry['link'] = r['online_reg_link'].gsub("amp;", "")
