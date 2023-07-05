@@ -140,7 +140,7 @@
         </li>
         <li style="border-bottom: 1px solid #dcdcdc;"><%= blog_link %></li>
       </ul>
-      <%#= link_to "Parent Portal", "https://app.jackrabbitclass.com/portal/ppLogin.asp?id=313983", class: "button expanded main-menu-button" %>
+      <%= link_to "Parent Portal", "javascript:void(0);", 'data-toggle': 'parent_portal_modal', class: "button expanded main-menu-button" %>
     </div>
     
     <% if current_user %>
@@ -265,7 +265,7 @@
               </li>
               <!-- <li><%#= faq_link = link_to "FAQ", '#', class: 'main-menu-item' %></li> -->
               <li><%= blog_link %></li>
-              <!-- <li><%#= link_to "Parent Portal", "https://app.jackrabbitclass.com/jr3.0/ParentPortal/Login?orgId=313983", class: "button main-menu-button", style: "margin-left: 20px;" %></li> -->
+              <li><%= link_to "Parent Portal", "javascript:void(0);", 'data-toggle': 'parent_portal_modal', class: "button main-menu-button", style: "margin-left: 20px;" %></li>
     
             </ul>
           </div>
@@ -382,6 +382,32 @@
               </div>
             <% end %>
           </div>
+        </div>
+        <button class="close-button" data-close aria-label="Close reveal" type="button">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+
+      <div class="reveal fast large" id="parent_portal_modal" data-reveal data-close-on-click="true" data-animation-in="scale-in-down" data-animation-out="scale-out-up">
+        <h1>Parent Portal Location</h1>
+        <div class="row" style="margin-top: 25px;">
+          <% locations = {"Granite Bay" => "GB", "Folsom" => "FOL", "Sacramento" => "SAC"} %> 
+          <% locations.each do |loc| %>
+            <% 
+              case loc[1]
+              when "FOL"
+                org_id = "550122"
+              when "GB"
+                org_id = "550123"
+              when "SAC"
+                org_id = "550124"
+              end
+            %>
+            <div class="columns small-12 large-4">
+              <%= link_to loc[0], 'https://app.jackrabbitclass.com/portal/ppLogin.asp?id=' + org_id, class: "button expanded", id: loc[1] %>
+            </div>
+          <% end %>
         </div>
         <button class="close-button" data-close aria-label="Close reveal" type="button">
           <span aria-hidden="true">&times;</span>
