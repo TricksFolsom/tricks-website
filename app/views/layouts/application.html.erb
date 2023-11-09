@@ -367,7 +367,11 @@
             <% locations = {"Granite Bay" => "GB", "Folsom" => "FOL", "Sacramento" => "SAC"} %> 
             <% locations.each do |loc| %>
               <div class="columns small-12 large-4">
-                <%= link_to loc[0], 'javascript:void(0);', class: "button expanded location-button", id: loc[1] %>
+                <% if loc[1] == "GB" %>
+                  <%= link_to loc[0], 'https://app.iclasspro.com/portal/tricksgranitebay/splash', class: "button expanded", style: "padding: 15px; font-size: 24px" %>
+                <% else %>
+                  <%= link_to loc[0], 'javascript:void(0);', class: "button expanded location-button", id: loc[1] %>
+                <% end %>
               </div>
             <% end %>
           </div>
@@ -405,7 +409,11 @@
               end
             %>
             <div class="columns small-12 large-4">
-              <%= link_to loc[0], 'https://app.jackrabbitclass.com/portal/ppLogin.asp?id=' + org_id, class: "button expanded", id: loc[1] %>
+              <% if loc[1] == "GB" %>
+                <%= link_to loc[0], 'https://app.iclasspro.com/portal/tricksgranitebay/splash', class: "button expanded" %>
+              <% else %>
+                <%= link_to loc[0], 'https://app.jackrabbitclass.com/portal/ppLogin.asp?id=' + org_id, class: "button expanded", id: loc[1] %>
+              <% end %>
             </div>
           <% end %>
         </div>
@@ -508,7 +516,8 @@
             <div class="columns large-4 small-12 small-order-1 large-order-2" style="margin-bottom: 20px;">
               <div class="row">
                 <div class="columns small-4">
-                  <%= link_to "Granite Bay", 'javascript:void(0);', class: "button expanded location-button", id: "GB" %>
+                  <%#= link_to "Granite Bay", 'javascript:void(0);', class: "button expanded location-button", id: "GB" %>
+                  <%= link_to "Granite Bay", 'https://app.iclasspro.com/portal/tricksgranitebay/splash', class: "button expanded", style: "padding: 10px 5px" %>
                 </div>
                 <div class="columns small-4">
                   <%= link_to "Folsom", 'javascript:void(0);', class: "button expanded location-button", id: "FOL" %>
