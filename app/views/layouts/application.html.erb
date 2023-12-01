@@ -45,7 +45,13 @@
   employment_link = link_to "Employment Application", new_employment_application_path
   absence_link = link_to "Notice of Absence", new_absent_path
   if !@billing_cycle.nil?
-    billing_cycle_link = link_to @billing_cycle.file_name.sub("Tricks_","").tr("_"," "), @billing_cycle
+    billing_cycle_link = link_to "Billing Cycle (2023)", @billing_cycle
+  end
+  if !@folsom_billing_cycle.nil?
+    folsom_billing_cycle_link = link_to "Billing Cycle (Folsom 2024)", @folsom_billing_cycle
+  end
+  if !@sacramento_billing_cycle.nil?
+    sacramento_billing_cycle_link = link_to "Billing Cycle (Sacramento 2024)", @sacramento_billing_cycle
   end
   if !@release_form.nil?
     release_form_link = link_to @release_form.file_name.sub("Tricks_","").tr("_"," "), @release_form
@@ -126,6 +132,12 @@
             
         		<% if !@billing_cycle.nil? %>
         			<li><%= billing_cycle_link %></li>
+        		<% end %>
+        		<% if !@folsom_billing_cycle.nil? %>
+        			<li><%= folsom_billing_cycle_link %></li>
+        		<% end %>
+        		<% if !@sacramento_billing_cycle.nil? %>
+        			<li><%= sacramento_billing_cycle_link %></li>
         		<% end %>
         		
             <%#= try_to_show_link(release_form_link) %>
@@ -257,6 +269,8 @@
                 <ul class="menu vertical load-hidden">
                   <li><%= absence_link %></li>
                   <%= try_to_show_link(billing_cycle_link) %>
+                  <%= try_to_show_link(folsom_billing_cycle_link) %>
+                  <%= try_to_show_link(sacramento_billing_cycle_link) %>
                   <%= try_to_show_link(release_form_link) %>
                   <li><%= discontinue_link %></li>
                   <li><%= employment_link %></li>
@@ -503,6 +517,8 @@
                   <ul>
                     <%= try_to_show_link(absence_link) %>
                     <%= try_to_show_link(billing_cycle_link) %>
+                    <%= try_to_show_link(folsom_billing_cycle_link) %>
+                    <%= try_to_show_link(sacramento_billing_cycle_link) %>
                     <%= try_to_show_link(release_form_link) %>
                     <%= try_to_show_link(discontinue_link) %>
                     <%= try_to_show_link(employment_link) %>
