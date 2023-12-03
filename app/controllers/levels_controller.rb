@@ -68,6 +68,10 @@ class LevelsController < ApplicationController
 			if response['rows'].length > 0
 			  sorted_classes = []
 				price = response['rows'][0]['tuition']['fee']
+				start_time = Time.parse(response['rows'][0]['start_time'])
+				end_time = Time.parse(response['rows'][0]['end_time'])
+				duration = ((end_time - start_time) / 60).to_i
+
 
 					# out += "<script>
 					# 	$('."+loc.shortname+"_price').text('$"+ '%.2f' % price +" / 4 Week Session');
@@ -77,7 +81,7 @@ class LevelsController < ApplicationController
 					<div class="row level-details" style="margin-bottom: 0px;">
 						<div class="columns small-12">
 							<h4 style="text-align: center;">
-								<span style="margin-right: 50px;">' + level.length.to_s + ' mins</span>
+								<span style="margin-right: 50px;">' + duration.to_s + ' mins</span>
 								$' + '%.2f' % price + ' / 4 Week Session
 							</h4>
 						</div>

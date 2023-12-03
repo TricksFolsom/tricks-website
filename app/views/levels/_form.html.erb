@@ -29,13 +29,10 @@
         </div>
         
         <div class="row">
-          <div class="columns large-4 ">
+          <div class="columns large-6 ">
             <%= render partial: 'helper_fields/switch', locals: {form: f, field: :active, question: "Is Active?"} %>
           </div>
-          <div class="columns large-4">
-            <%= render partial: 'helper_fields/number', locals: {form: f, field: :length} %>
-          </div>
-          <div class="columns large-4 ">
+          <div class="columns large-6 ">
             <%= render partial: 'helper_fields/switch', locals: {form: f, field: :show_registration, question: "Beginner Level?"} %>
           </div>
         </div>
