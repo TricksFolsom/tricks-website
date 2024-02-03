@@ -375,24 +375,24 @@
     </fieldset>
   </div>
 </div>
-<div class="row">
-  <div class="columns">
-    <fieldset class="fieldset">
-      <legend><h1>Other History</h1></legend>
-      <div class="row">
-        <div class="columns large-4 small-12">
-          <b>Convicted in the past 7 years?</b> 
-          <%= render partial: "answer", locals: {answer: @employment_application.convicted} %>
-        </div>
-        <% if @employment_application.convicted %>
-          <div class="columns small-12">
-            <b>Convictions:</b>
-            <%= @employment_application.convictions %>
-          </div>
-        <% end %>
-      </div>
-    </fieldset>
-  </div>
-</div>
+<%# <div class="row"> %>
+  <%# <div class="columns"> %>
+    <%# <fieldset class="fieldset"> %>
+      <%# <legend><h1>Other History</h1></legend> %>
+      <%# <div class="row"> %>
+        <%# <div class="columns large-4 small-12"> %>
+          <%# <b>Convicted in the past 7 years?</b>  %>
+          <%# <%= render partial: "answer", locals: {answer: @employment_application.convicted} %>
+        <%# </div> %>
+        <%# <% if @employment_application.convicted %>
+          <%# <div class="columns small-12"> %>
+            <%# <b>Convictions:</b> %>
+            <%# <%= @employment_application.convictions %>
+          <%# </div> %>
+        <%# <% end %>
+      <%# </div> %>
+    <%# </fieldset> %>
+  <%# </div> %>
+<%# </div> %>
 
 <%= link_to 'Back to All Applications', employment_applications_path, class: "button expanded alert" %>
