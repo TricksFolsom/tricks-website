@@ -108,12 +108,13 @@ class EmploymentApplicationsController < ApplicationController
 
   # POST /employment_applications
   def create
-    @employment_application = EmploymentApplication.new(employment_application_params)
-
     if params[:employment_application][:honeypot].present?
-      CommentMailer.comment_notification(@employment_application).deliver_now
+      str = params[:employment_application][:firstname] + " " + params[:employment_application][:lastname] + " | " + params[:employment_application][:email] + " | " + params[:employment_application][:honeypot]
+      CommentMailer.comment_notification(str).deliver_now
       return
     end
+
+    @employment_application = EmploymentApplication.new(employment_application_params)
 
     # validate that priorites do not contain blanks. Only reason that should happen is because of modifying local javascript code in the form.
     priorities_are_valid = true
