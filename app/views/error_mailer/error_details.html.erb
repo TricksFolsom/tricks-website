@@ -14,6 +14,13 @@
 				<% end %>
 			</table>
 		<% end %>
+
+		<p><b>Source Extracts:</b></p>
+		<% @exception_wrapper.source_extracts.each do |extract| %>
+			<p><%= extract[:file] %>:<%= extract[:line_number] %></p>
+			<pre><%= extract[:source] %></pre>
+		<% end %>
+
 		<p style="margin-top: 100px;"><b>Exception Trace:</b></p>
 		<% if @exception_wrapper.exception_trace %>
 			<table style="margin: 10px 10px 50px 10px; border-spacing: 0px; border: 1px #444 solid;">
@@ -43,5 +50,6 @@
 		 app/views/coaches/index.html.erb:34
 		 </p>
   </div>
+	
 </body>
 </html>
