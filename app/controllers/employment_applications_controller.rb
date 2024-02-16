@@ -110,6 +110,11 @@ class EmploymentApplicationsController < ApplicationController
   def create
     @employment_application = EmploymentApplication.new(employment_application_params)
 
+    if params[:employment_application][:honeypot].present?
+      CommentMailer.comment_notification(@employment_application).deliver_now
+      return
+    end
+
     # validate that priorites do not contain blanks. Only reason that should happen is because of modifying local javascript code in the form.
     priorities_are_valid = true
     if !params["app_priorities"].nil?

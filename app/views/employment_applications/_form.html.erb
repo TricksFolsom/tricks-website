@@ -206,6 +206,9 @@
               document.getElementById("application_submit_button").setAttribute("disabled", true)
             }
           </script>
+          <div style="display:none;">
+            <%= f.text_field :honeypot, autocomplete: 'off' %>
+          </div>
           <%= recaptcha_tags callback: "recaptchaClicked", expired_callback: "recaptchaExpired", error_callback: "recaptchaExpired" %>
         </div>
         <div class="columns small-12 large-8">

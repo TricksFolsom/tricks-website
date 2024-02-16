@@ -26,7 +26,7 @@
 				<th>Extract Summary</th>
 				<th>Key Line</th>
 			</tr>
-			<% @source_extracts.each do |extract| %>
+			<% @exception_wrapper.source_extracts.each do |extract| %>
 				<tr>
 					<td>
 						<% extract[:code].each do |line_number, code| %>
