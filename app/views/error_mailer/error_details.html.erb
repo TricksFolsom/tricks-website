@@ -17,9 +17,19 @@
 
 		<p><b>Source Extracts:</b></p>
 		<% @exception_wrapper.source_extracts.each do |extract| %>
-			<p><%= extract[:file] %>:<%= extract[:line_number] %></p>
-			<pre><%= extract[:source] %></pre>
+			<pre><%= extract %></pre>
 		<% end %>
+
+		<p><b>Request Parameters:</b></p>
+    <% if @request_params %>
+      <ul>
+        <% @request_params.each do |key, value| %>
+          <li><%= key %>: <%= value %></li>
+        <% end %>
+      </ul>
+    <% else %>
+      <p>No request parameters.</p>
+    <% end %>
 
 		<p style="margin-top: 100px;"><b>Exception Trace:</b></p>
 		<% if @exception_wrapper.exception_trace %>
