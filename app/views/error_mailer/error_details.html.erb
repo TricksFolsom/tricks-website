@@ -15,32 +15,6 @@
 			</table>
 		<% end %>
 
-		<p><b>Source Extracts:</b></p>
-		<% @exception_wrapper.source_extracts.each do |extract| %>
-			<pre><%= extract %></pre>
-		<% end %>
-
-		<h4>Source Extracts Summary:</h4>
-		<table border="1">
-			<tr>
-				<th>Extract Summary</th>
-				<th>Key Line</th>
-			</tr>
-			<% @exception_wrapper.source_extracts.each do |extract| %>
-				<tr>
-					<td>
-						<% extract[:code].each do |line_number, code| %>
-							<% if line_number == extract[:line_number] %>
-								<b><%= "#{line_number}: #{code.strip}" %></b><br>
-							<% else %>
-								<%= "#{line_number}: #{code.strip}" %><br>
-							<% end %>
-						<% end %>
-					</td>
-					<td><%= "#{extract[:line_number]}: #{extract[:code][extract[:line_number]].strip}" %></td>
-				</tr>
-			<% end %>
-		</table>
 
 		<p><b>Request Parameters:</b></p>
     <% if @request_params %>
@@ -52,6 +26,27 @@
     <% else %>
       <p>No request parameters.</p>
     <% end %>
+
+		<h4>Source Extracts Summary:</h4>
+		<table border="1">
+			<tr>
+				<th>Extract Summary</th>
+				<th>Key Line</th>
+			</tr>
+			<% extract = @exception_wrapper.source_extracts.first %>
+			<tr>
+				<td>
+					<% extract[:code].each do |line_number, code| %>
+						<% if line_number == extract[:line_number] %>
+							<b><%= "#{line_number}: #{code.strip}" %></b><br>
+						<% else %>
+							<%= "#{line_number}: #{code.strip}" %><br>
+						<% end %>
+					<% end %>
+				</td>
+				<td><%= "#{extract[:line_number]}: #{extract[:code][extract[:line_number]].strip}" %></td>
+			</tr>
+		</table>
 
 		<p style="margin-top: 100px;"><b>Exception Trace:</b></p>
 		<% if @exception_wrapper.exception_trace %>
