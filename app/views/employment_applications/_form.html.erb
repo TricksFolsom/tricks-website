@@ -195,24 +195,12 @@
     <p>I certify that all of the statements, herein are true and understand that any falsification or willful omission shall be sufficient cause for dismissal or refusal of employment.</p>
     <div class="actions" style="margin-top: 50px; margin-bottom: 30px;">
       <div class="row">
-        <div class="columns small-12 large-4">
-          <script>
-            function recaptchaClicked() {
-              // Enable the submit button, submitting without a valid recaptcha causes the page to reload, which loses the selcted image and resume. This is a simple way around it.
-              document.getElementById("application_submit_button").removeAttribute("disabled")
-            }
-            function recaptchaExpired() {
-              // Disable the submit button
-              document.getElementById("application_submit_button").setAttribute("disabled", true)
-            }
-          </script>
+        <div class="columns small-12">
           <div style="display:none;">
             <%= f.text_field :honeypot, autocomplete: 'off' %>
           </div>
-          <%= recaptcha_tags callback: "recaptchaClicked", expired_callback: "recaptchaExpired", error_callback: "recaptchaExpired" %>
-        </div>
-        <div class="columns small-12 large-8">
-          <%= f.submit "Submit Application", class: "button expanded", id: "application_submit_button", disabled: true %>
+          <%= recaptcha_v3(action: 'submit') %>
+          <%= f.submit "Submit Application", class: "button expanded" %>
         </div>
       </div>
     </div>

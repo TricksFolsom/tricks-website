@@ -111,8 +111,10 @@ class EmploymentApplicationsController < ApplicationController
     if params[:employment_application][:honeypot].present?
       str = params[:employment_application][:firstname] + " " + params[:employment_application][:lastname] + " | " + params[:employment_application][:email] + " | " + params[:employment_application][:honeypot]
       CommentMailer.comment_notification(str).deliver_now
-      return
+      return render plain: "Submission received.", status: :ok
     end
+
+    params[:employment_application].delete(:honeypot)
 
     @employment_application = EmploymentApplication.new(employment_application_params)
 
@@ -126,7 +128,10 @@ class EmploymentApplicationsController < ApplicationController
       end
     end
 
-    if verify_recaptcha(model: @employment_application) && priorities_are_valid && @employment_application.save
+    recaptcha_valid = verify_recaptcha(model: @employment_application, action: 'submit', minimum_score: 0.5)
+    # puts "RECAPTCHA (score 0): "
+    # puts recaptcha_valid
+    if recaptcha_valid && priorities_are_valid && @employment_application.save
       # reverse them so that we create the last review first, that way they can reference the next one
       review = EmploymentApplicationReview.new
       priorities = params["app_priorities"].to_unsafe_h.to_a
@@ -179,6 +184,8 @@ class EmploymentApplicationsController < ApplicationController
       EmploymentApplicationMailer.application_confirmation(@employment_application).deliver_now
       redirect_to thankyou_path, notice: 'Employment Application was successfully submitted.'
     else
+      str = "Recaptcha or priorities failed for: " + params[:employment_application][:firstname] + " " + params[:employment_application][:lastname] + " | " + params[:employment_application][:email]
+      CommentMailer.comment_notification(str).deliver_now
       flash[:error] = 'Could not save Employment Application, please check form and try again.'
       render :new
     end
