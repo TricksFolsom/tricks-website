@@ -38,7 +38,7 @@
 		</div>
 
 		<div class="row align-justified" style="margin: 30px 0px 10px 0px;">
-			<% locations = {"Granite Bay" => "GB", "Folsom" => "FOL", "Sacramento" => "SAC"} %> 
+			<% locations = {"Folsom" => "FOL", "Sacramento" => "SAC"} %> 
 			<% locations.each do |loc| %>
 				<div class="columns 3-small">
 					<%= link_to(loc[0], 'javascript:void(0);', class: "button expanded location-button", id: loc[1], style: "margin-bottom: 0;") %>

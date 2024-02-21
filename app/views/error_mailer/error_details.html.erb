@@ -6,7 +6,7 @@
   <div>
   	<h3>URL: <%= @url %></h3>
     <h4>@error.inspect: <%= @error.inspect %></h4>
-		<p style="margin-top: 100px;"><b>Application Trace:</b></p>
+		<p style="margin-top: 20px;"><b>Application Trace:</b></p>
 		<% if @trace %>
 			<table style="margin: 10px 10px 50px 10px; border-spacing: 0px; border: 1px #444 solid;">
 				<% @trace.each do |trace| %>
@@ -14,34 +14,29 @@
 				<% end %>
 			</table>
 		<% end %>
-		<p style="margin-top: 100px;"><b>Exception Trace:</b></p>
-		<% if @exception_wrapper.exception_trace %>
-			<table style="margin: 10px 10px 50px 10px; border-spacing: 0px; border: 1px #444 solid;">
-				<% @exception_wrapper.exception_trace.each do |trace| %>
-					<tr><td style="padding: 5px 15px; border: solid #444 1px;"><%= trace %></td></tr>
-				<% end %>
-			</table>
-		<% end %>
-		
-		<p>@exception_wrapper.source_extracts (might be able to format this cleverly?)</p>
-		<p><%= @exception_wrapper.source_extracts %></p>
 
-		<p>I wish it could look like this:</p>
-		<p>ActionView::Template::Error (ActiveStorage::InvariableError):
-		     26:   if image.nil? 
-		     27:     # use the normal picture
-		     28:     if coach.image_new.attached? 
-		     29:       image = coach.image_new.variant(resize_to_fill: [210,290])
-		     30:     elsif !coach.image.file.nil?
-		     31:       image = coach.image.thumb.url
-		     32:     end
-		
-		 app/views/coaches/_coach_container.html.erb:29
-		 app/views/coaches/index.html.erb:37
-		 app/views/coaches/index.html.erb:35
-		 app/views/coaches/index.html.erb:34:in `each'
-		 app/views/coaches/index.html.erb:34
-		 </p>
+		<h4>Source Extracts Summary:</h4>
+		<% extract = @exception_wrapper.source_extracts.first %>
+
+		<% extract[:code].each do |line_number, code| %>
+			<% if line_number == extract[:line_number] %>
+				<b><%= "#{line_number}: #{code.strip}" %></b><br>
+			<% else %>
+				<%= "#{line_number}: #{code.strip}" %><br>
+			<% end %>
+		<% end %>
+
+		<p><b>Request Parameters:</b></p>
+    <% if @request_params %>
+      <ul>
+        <% @request_params.each do |key, value| %>
+          <li><%= key %>: <%= value %></li>
+        <% end %>
+      </ul>
+    <% else %>
+      <p>No request parameters.</p>
+    <% end %>
   </div>
+	
 </body>
 </html>

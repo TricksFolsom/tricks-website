@@ -32,9 +32,9 @@
           <div class="columns large-6 ">
             <%= render partial: 'helper_fields/date', locals: {form: f, field: :startdate, label: "Start Date at Tricks:", default_date: Date.today} %>
           </div>
-          <div class="columns small-12 ">
-            <%= render partial: 'helper_fields/text', locals: {form: f, field: :strengths} %>
-          </div>
+          <%# <div class="columns small-12 "> %>
+            <%#= render partial: 'helper_fields/text', locals: {form: f, field: :strengths} %>
+          <%# </div> %>
           <div class="columns small-12 ">
             <%= render partial: 'helper_fields/multi_select_buttons', locals:{form: f, field: :location_ids, label: "Locations", array: Location.all, second_field: :name} %>
           </div>

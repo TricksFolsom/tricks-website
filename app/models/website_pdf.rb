@@ -12,6 +12,8 @@ class WebsitePdf < ActiveRecord::Base
     'Tricks Release Form',
     'Tricks Family Rules',
     'Tricks Billing Cycle',
+    'Tricks Folsom Billing Cycle',
+    'Tricks Sacramento Billing Cycle',
     #'Tricks Instructor Application',
     #'Tricks Office Application',
     'Tricks Dance Dress Code',

@@ -16,7 +16,10 @@ class EmploymentApplication < ActiveRecord::Base
     has_one_attached :resume_new
 
     validates_presence_of :firstname
-    
+
+    # allows use of honeypot in the form, but does not save to database
+    attr_accessor :honeypot
+
 	def self.search(search)
         if search
             where("concat(firstname, ' ', lastname) ILIKE ?", "%#{search}%")

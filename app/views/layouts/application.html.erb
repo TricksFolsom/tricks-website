@@ -45,7 +45,13 @@
   employment_link = link_to "Employment Application", new_employment_application_path
   absence_link = link_to "Notice of Absence", new_absent_path
   if !@billing_cycle.nil?
-    billing_cycle_link = link_to @billing_cycle.file_name.sub("Tricks_","").tr("_"," "), @billing_cycle
+    billing_cycle_link = link_to "Billing Cycle (2023)", @billing_cycle
+  end
+  if !@folsom_billing_cycle.nil?
+    folsom_billing_cycle_link = link_to "Billing Cycle (Folsom 2024)", @folsom_billing_cycle
+  end
+  if !@sacramento_billing_cycle.nil?
+    sacramento_billing_cycle_link = link_to "Billing Cycle (Sacramento 2024)", @sacramento_billing_cycle
   end
   if !@release_form.nil?
     release_form_link = link_to @release_form.file_name.sub("Tricks_","").tr("_"," "), @release_form
@@ -127,6 +133,12 @@
         		<% if !@billing_cycle.nil? %>
         			<li><%= billing_cycle_link %></li>
         		<% end %>
+        		<% if !@folsom_billing_cycle.nil? %>
+        			<li><%= folsom_billing_cycle_link %></li>
+        		<% end %>
+        		<% if !@sacramento_billing_cycle.nil? %>
+        			<li><%= sacramento_billing_cycle_link %></li>
+        		<% end %>
         		
             <%#= try_to_show_link(release_form_link) %>
         		<% if !@release_form.nil? %>
@@ -140,7 +152,7 @@
         </li>
         <li style="border-bottom: 1px solid #dcdcdc;"><%= blog_link %></li>
       </ul>
-      <%= link_to "Parent Portal", "https://app.jackrabbitclass.com/portal/ppLogin.asp?id=313983", class: "button expanded main-menu-button" %>
+      <%= link_to "Parent Portal", "javascript:void(0);", 'data-toggle': 'parent_portal_modal', class: "button expanded main-menu-button" %>
     </div>
     
     <% if current_user %>
@@ -257,6 +269,8 @@
                 <ul class="menu vertical load-hidden">
                   <li><%= absence_link %></li>
                   <%= try_to_show_link(billing_cycle_link) %>
+                  <%= try_to_show_link(folsom_billing_cycle_link) %>
+                  <%= try_to_show_link(sacramento_billing_cycle_link) %>
                   <%= try_to_show_link(release_form_link) %>
                   <li><%= discontinue_link %></li>
                   <li><%= employment_link %></li>
@@ -265,7 +279,7 @@
               </li>
               <!-- <li><%#= faq_link = link_to "FAQ", '#', class: 'main-menu-item' %></li> -->
               <li><%= blog_link %></li>
-              <li><%= link_to "Parent Portal", "https://app.jackrabbitclass.com/jr3.0/ParentPortal/Login?orgId=313983", class: "button main-menu-button", style: "margin-left: 20px;" %></li>
+              <li><%= link_to "Parent Portal", "javascript:void(0);", 'data-toggle': 'parent_portal_modal', class: "button main-menu-button", style: "margin-left: 20px;" %></li>
     
             </ul>
           </div>
@@ -367,7 +381,11 @@
             <% locations = {"Granite Bay" => "GB", "Folsom" => "FOL", "Sacramento" => "SAC"} %> 
             <% locations.each do |loc| %>
               <div class="columns small-12 large-4">
-                <%= link_to loc[0], 'javascript:void(0);', class: "button expanded location-button", id: loc[1] %>
+                <% if loc[1] == "GB" %>
+                  <%= link_to loc[0], 'https://app.iclasspro.com/portal/tricksgranitebay/splash', class: "button expanded", style: "padding: 15px; font-size: 24px" %>
+                <% else %>
+                  <%= link_to loc[0], 'javascript:void(0);', class: "button expanded location-button", id: loc[1] %>
+                <% end %>
               </div>
             <% end %>
           </div>
@@ -382,6 +400,36 @@
               </div>
             <% end %>
           </div>
+        </div>
+        <button class="close-button" data-close aria-label="Close reveal" type="button">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+
+      <div class="reveal fast large" id="parent_portal_modal" data-reveal data-close-on-click="true" data-animation-in="scale-in-down" data-animation-out="scale-out-up">
+        <h1>Parent Portal Location</h1>
+        <div class="row" style="margin-top: 25px;">
+          <% locations = {"Granite Bay" => "GB", "Folsom" => "FOL", "Sacramento" => "SAC"} %> 
+          <% locations.each do |loc| %>
+            <% 
+              case loc[1]
+              when "FOL"
+                org_id = "550122"
+              when "GB"
+                org_id = "550123"
+              when "SAC"
+                org_id = "550124"
+              end
+            %>
+            <div class="columns small-12 large-4">
+              <% if loc[1] == "GB" %>
+                <%= link_to loc[0], 'https://app.iclasspro.com/portal/tricksgranitebay/splash', class: "button expanded" %>
+              <% else %>
+                <%= link_to loc[0], 'https://app.jackrabbitclass.com/portal/ppLogin.asp?id=' + org_id, class: "button expanded", id: loc[1] %>
+              <% end %>
+            </div>
+          <% end %>
         </div>
         <button class="close-button" data-close aria-label="Close reveal" type="button">
           <span aria-hidden="true">&times;</span>
@@ -469,6 +517,8 @@
                   <ul>
                     <%= try_to_show_link(absence_link) %>
                     <%= try_to_show_link(billing_cycle_link) %>
+                    <%= try_to_show_link(folsom_billing_cycle_link) %>
+                    <%= try_to_show_link(sacramento_billing_cycle_link) %>
                     <%= try_to_show_link(release_form_link) %>
                     <%= try_to_show_link(discontinue_link) %>
                     <%= try_to_show_link(employment_link) %>
@@ -482,7 +532,8 @@
             <div class="columns large-4 small-12 small-order-1 large-order-2" style="margin-bottom: 20px;">
               <div class="row">
                 <div class="columns small-4">
-                  <%= link_to "Granite Bay", 'javascript:void(0);', class: "button expanded location-button", id: "GB" %>
+                  <%#= link_to "Granite Bay", 'javascript:void(0);', class: "button expanded location-button", id: "GB" %>
+                  <%= link_to "Granite Bay", 'https://app.iclasspro.com/portal/tricksgranitebay/splash', class: "button expanded", style: "padding: 10px 5px" %>
                 </div>
                 <div class="columns small-4">
                   <%= link_to "Folsom", 'javascript:void(0);', class: "button expanded location-button", id: "FOL" %>
