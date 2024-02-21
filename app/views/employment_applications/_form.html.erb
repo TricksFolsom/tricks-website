@@ -175,17 +175,17 @@
     </div>
   </fieldset>
   
-  <fieldset class="fieldset">
-    <legend><h1>Other History</h1></legend>
-    <div class="row">
-      <div class="columns small-12">
-        <%= render partial: 'helper_fields/switch', locals: {form: f, field: :convicted, question: "Have you been convicted of a crime in the last 7 years?"} %>
-      </div>
-      <div class="columns small-12" id="convictions_question">
-        <%= render partial: 'helper_fields/text_area', locals: {form: f, field: :convictions, question: "List the convictions that are a matter of public record (arrests are not convictions). A conviction will not necessarily disqualify you for employment:"} %>
-      </div>
-    </div>
-  </fieldset>
+  <%# <fieldset class="fieldset"> %>
+    <%# <legend><h1>Other History</h1></legend> %>
+    <%# <div class="row"> %>
+      <%# <div class="columns small-12"> %>
+        <%# <%= render partial: 'helper_fields/switch', locals: {form: f, field: :convicted, question: "Have you been convicted of a crime in the last 7 years?"} %>
+      <%# </div> %>
+      <%# <div class="columns small-12" id="convictions_question"> %>
+        <%# <%= render partial: 'helper_fields/text_area', locals: {form: f, field: :convictions, question: "List the convictions that are a matter of public record (arrests are not convictions). A conviction will not necessarily disqualify you for employment:"} %>
+      <%# </div> %>
+    <%# </div> %>
+  <%# </fieldset> %>
   
   <fieldset class="fieldset">
     <legend><h1>Certification</h1></legend>
@@ -206,6 +206,9 @@
               document.getElementById("application_submit_button").setAttribute("disabled", true)
             }
           </script>
+          <div style="display:none;">
+            <%= f.text_field :honeypot, autocomplete: 'off' %>
+          </div>
           <%= recaptcha_tags callback: "recaptchaClicked", expired_callback: "recaptchaExpired", error_callback: "recaptchaExpired" %>
         </div>
         <div class="columns small-12 large-8">

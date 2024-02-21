@@ -26,13 +26,13 @@ class CommentsController < ApplicationController
 
   # GET /comments/new
   # GET /comments/new.json
-  def new
-    @comment = Comment.new
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @comment }
-    end
-  end
+  # def new
+  #   @comment = Comment.new
+  #   respond_to do |format|
+  #     format.html # new.html.erb
+  #     format.json { render json: @comment }
+  #   end
+  # end
 
   # GET /comments/1/edit
   def edit

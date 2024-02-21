@@ -6,6 +6,7 @@
     Optional locals:
     label
     required
+    placeholder
 %>
 
 <%#= render partial: 'helper_fields/number', locals: {form: f, field: :text} %>
@@ -15,6 +16,9 @@
 <% end %>
 <% if !defined? required %>
     <% required = false %>
+<% end %>
+<% if !defined? placeholder %>
+    <% placeholder = "" %>
 <% end %>
 <% if !defined? min %>
     <% min = "" %>
@@ -31,5 +35,5 @@
 
 <div class="input-group">
     <%= form.label field, label, class: "input-group-label" %>
-    <%= form.number_field field, value: value, min: min, max: max, step: step, required: required, class: "input-group-field" %>
+    <%= form.number_field field, value: value, min: min, max: max, step: step, required: required, placeholder: placeholder, class: "input-group-field" %>
 </div>

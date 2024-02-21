@@ -49,15 +49,29 @@ class LevelsController < ApplicationController
   end
   
   def get_jr_classes
-    level = Level.find(params[:level_id])
+		level = Level.find(params[:level_id])
     out = "<div class='columns 11-small'>"
 		Location.all.each do |loc|
-			url = 'https://app.jackrabbitclass.com/jr3.0/Openings/OpeningsJson?orgid=313983&loc='+loc.shortname+'&cat2='+level.jack_rabbit_name
+			case loc.shortname
+			when "FOL"
+				org_id = "550122"
+			when "GB"
+				org_id = "550123"
+			when "SAC"
+				org_id = "550124"
+			end
+			#313983 // old org_id
+			puts org_id
+			url = 'https://app.jackrabbitclass.com/jr3.0/Openings/OpeningsJson?orgid='+org_id+'&cat2='+level.jack_rabbit_name
 			response = JSON.parse(HTTParty.get(url).body)
 			out += '<div class="location-classes-information" id="'+loc.shortname+'" style="display: none; width: 100%; overflow: auto;">'
 			if response['rows'].length > 0
 			  sorted_classes = []
 				price = response['rows'][0]['tuition']['fee']
+				start_time = Time.parse(response['rows'][0]['start_time'])
+				end_time = Time.parse(response['rows'][0]['end_time'])
+				duration = ((end_time - start_time) / 60).to_i
+
 
 					# out += "<script>
 					# 	$('."+loc.shortname+"_price').text('$"+ '%.2f' % price +" / 4 Week Session');
@@ -67,7 +81,7 @@ class LevelsController < ApplicationController
 					<div class="row level-details" style="margin-bottom: 0px;">
 						<div class="columns small-12">
 							<h4 style="text-align: center;">
-								<span style="margin-right: 50px;">' + level.length.to_s + ' mins</span>
+								<span style="margin-right: 50px;">' + duration.to_s + ' mins</span>
 								$' + '%.2f' % price + ' / 4 Week Session
 							</h4>
 						</div>
@@ -103,24 +117,26 @@ class LevelsController < ApplicationController
 
 					instructor = "<span style='color: red;'>Staff</span>".html_safe
 					if !r['instructors'][0].nil?
-
 						# puts ":" + r['instructors'][0] + ":"
-						name_parts = []
-						r['instructors'][0].split.map(&:capitalize).each do |section|
-							# we do this because sometimes they add gym locations to the end of someones name. So first we need to remove that part.
-							if section[0] != '('
-								name_parts.push(section)
+						if loc.shortname == "GB" || loc.shortname == "SAC"
+							instructor = r['instructors'][0]
+						else
+							name_parts = []
+							r['instructors'][0].split.map(&:capitalize).each do |section|
+								# we do this because sometimes they add gym locations to the end of someones name. So first we need to remove that part.
+								if section[0] != '('
+									name_parts.push(section)
+								end
+							end
+							# puts "name_parts: " +  name_parts.to_s + ":"
+							if name_parts.size > 1
+								name_parts.pop(1) # Pop off the last name of the instructor
+								instructor = name_parts.join(" ")  # and join the rest
+							else 
+								instructor = name_parts[0]
 							end
 						end
-						# puts "name_parts: " +  name_parts.to_s + ":"
-						if name_parts.size > 1
-							name_parts.pop(1) # Pop off the last name of the instructor
-							instructor = name_parts.join(" ")  # and join the rest
-						else 
-							instructor = name_parts[0]
-						end
 						# puts "dispaly name: " + instructor
-						# puts ""
 					end
 
   				entry['link'] = r['online_reg_link'].gsub("amp;", "")
@@ -209,6 +225,6 @@ class LevelsController < ApplicationController
     
     # Only allow a trusted parameter "white list" through.
     def level_params
-      params.require(:level).permit(:description, :short_description, :video_url, :classtype_id, :levelname, :length, :age, :gender, :sort_order, :jack_rabbit_name, :color, :image, :show_registration, :active)
+      params.require(:level).permit(:description, :short_description, :video_url, :classtype_id, :levelname, :age, :gender, :sort_order, :jack_rabbit_name, :color, :image, :show_registration, :active)
     end
 end
