@@ -48,15 +48,10 @@
         <%= render partial: 'helper_fields/text_area', locals: {form: f, field: :reason, required: true} %>
       </div>
     </div>
-
-    <div class="row">
-      <div class="columns small-12">
-        <%= recaptcha_tags %>
-      </div>
-    </div>
     
     <div class="row" style="margin-top: 50px;">
       <div class="columns small-12">
+        <%= recaptcha_v3(action: 'submit') %>
         <%= f.submit "Submit Absence", class: "button expanded" %>
       </div>
     </div>

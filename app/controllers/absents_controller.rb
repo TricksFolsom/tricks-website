@@ -25,7 +25,7 @@ class AbsentsController < ApplicationController
     @absent = Absent.new(absent_params)
     
     respond_to do |format|
-      if verify_recaptcha(model: @absent) && @absent.save
+      if verify_recaptcha(model: @absent, action: 'submit', minimum_score: 0.5) && @absent.save
         AbsentMailer.gym_notification(@absent).deliver_now
         format.html { redirect_to thankyou_path, notice: 'Your absent notification has been submitted.' }
         format.json { render json: absents_path, status: :created, location: @absent }
