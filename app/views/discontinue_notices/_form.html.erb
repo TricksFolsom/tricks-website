@@ -48,15 +48,10 @@
       <%= render partial: 'helper_fields/switch', locals: {form: f, field: :understood, question: "I understand that my account must be at a zero (0) balance and that make-ups can only be used on an enrolled family member.", required: true} %>
     </div>
   </div>
-  
-  <div class="row">
-    <div class="columns small-12">
-      <%= recaptcha_tags %>
-    </div>
-  </div>
-  
+    
   <div class="row" style="margin-top: 50px; margin-bottom: 150px;">
     <div class="columns small-12">
+      <%= recaptcha_v3(action: 'submit') %>
       <%= f.submit "Submit Notice", class: "button expanded" %>
     </div>
   </div>

@@ -129,8 +129,6 @@ class EmploymentApplicationsController < ApplicationController
     end
 
     recaptcha_valid = verify_recaptcha(model: @employment_application, action: 'submit', minimum_score: 0.5)
-    # puts "RECAPTCHA (score 0): "
-    # puts recaptcha_valid
     if recaptcha_valid && priorities_are_valid && @employment_application.save
       # reverse them so that we create the last review first, that way they can reference the next one
       review = EmploymentApplicationReview.new

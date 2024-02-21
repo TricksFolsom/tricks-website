@@ -28,7 +28,7 @@ class DiscontinueNoticesController < ApplicationController
     @discontinue_notice = DiscontinueNotice.new(discontinue_notice_params)
 
     respond_to do |format|
-      if verify_recaptcha(model: @discontinue_notice) && @discontinue_notice.save
+      if verify_recaptcha(model: @discontinue_notice, action: 'submit', minimum_score: 0.5) && @discontinue_notice.save
         DiscontinueMailer.gym_notification(@discontinue_notice).deliver_now
         format.html { redirect_to root_path, notice: 'Notice to Discontinue was successfully submitted. Sorry to see you go :(' }
         format.json { render json: @discontinue_notice, status: :created, location: @discontinue_notice }
