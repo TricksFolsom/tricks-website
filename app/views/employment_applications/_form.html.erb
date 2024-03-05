@@ -256,9 +256,7 @@
               
               <% locations = [] %>
               <% Location.all.each do |loc| %>
-                <% if loc.name != "Granite Bay" %>
-                  <% locations.push([loc.name, loc.name.downcase.gsub(" ", "_")]) %>
-                <% end %>
+                <% locations.push([loc.name, loc.name.downcase.gsub(" ", "_")]) %>
               <% end %>
 
               <%= (select_tag "app_priorities[${priority}][location]", options_for_select(locations), {prompt: '', required: required_fields, class: "input-group-field app-priority-location-selector"}).to_s %>
