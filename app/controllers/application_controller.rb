@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   helper_method :current_user
 
-  before_action :set_variables
+  before_action :set_variables, :set_csp_header
 
   def set_variables
     @bgc_yellow = "#FFF55E" #"#F2E300"
@@ -45,5 +45,9 @@ class ApplicationController < ActionController::Base
   def bad_token
     flash[:warning] = "Session expired"
     redirect_to root_path
+  end
+
+  def set_csp_header
+    response.headers['Content-Security-Policy'] = "frame-ancestors 'self' https://tricksfolsom.com;"
   end
 end
