@@ -22,7 +22,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <script>
       function sendHeight() {
-        const height = document.documentElement.scrollHeight;
+        const height = document.documentElement.scrollHeight + 20;
         window.parent.postMessage({ frameHeight: height }, "*"); // Replace "*" with the parent page domain for added security
       }
 
