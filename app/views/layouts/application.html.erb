@@ -69,98 +69,101 @@
 
   %>
   <body>
-    <div class="off-canvas position-right" id="mobile_menu" data-off-canvas>
-      <%= link_to "Register Now", "javascript:void(0);", 'data-toggle': 'register_now_modal', class: "button expanded main-menu-button" %>
-      <ul class="vertical menu accordion-menu" style="margin-bottom: 20px;" data-accordion-menu>
-        <li>
-          <a href="#">Programs</a>
-          <ul class="vertical menu nested">
-            <li>
-              <a href="#">Gymnastics</a>
-              <ul class="vertical menu nested">
-                <li><%= tb_link = link_to "Preschool (0-5)", tumblebunnies_path %></li>
-                <li><%= gym_link = link_to "School Age (6-18)", gymnastics_path %></li>
-                <!-- <li><%#= comp_link = link_to "Competitive", competitive_path %></li> -->
-              </ul>
-            </li>
-            <li>
-              <a href="#">Dance</a>
-              <ul class="vertical menu nested">
-                <li><%= pre_dance_link = link_to "Preschool (0-5)", preschool_dance_path %></li>
-                <li><%= school_dance_link = link_to "School Age (6-18)", dance_path %></li>
-                <%= try_to_show_link(summer_recital_link) %>
-                <!-- <li><%#= recital_info_link = link_to "Summer Recital Info", recital_info_path %></li> -->
-              </ul>
-            </li>
-            <li><%= tag_link = link_to "TAG", tag_path %></li>
-            <li><%= swim_link = link_to "Swim", swim_path %></li>
-            <!-- <li><%#= campus_link = link_to "CampUs", campus_path %></li> -->
-          </ul>
-        </li>
-        <li>
-          <a href="#">Parties & Events</a>
-          <ul class="vertical menu nested">
-            <li><%= try_to_show_link(parties_link) %></li>
-            <li><%= kids_night_outs_link %></li>
-            <!-- <li><%#= bff_dance_parties_link %></li> -->
-            <li><%= camps_link %></li>
-          </ul>
-        </li>
-        <li>
-          <a href="#">About Us</a>
-          <ul class="vertical menu nested">
-            <li><%= story_link %></li>
-            <li><%= facilities_link %></li>
-            <li>
-              <a href="#">Our Staff</a>
-              <ul class="vertical menu nested">
-                <li><%= gb_staff_link %></li>
-                <li><%= fol_staff_link %></li>
-                <li><%= sac_staff_link %></li>
-              </ul>
-            </li>
-            <li><%= testimonials_link %></li>
-            <li><%= making_a_differences_link %></li>
-            <li><%= family_rules_link %></li>
-            <li><%= newsletter_link %></li>
-          </ul>
-        </li>
-        <li>
-          <a href="#">Forms</a>
-          <ul class="vertical menu nested">
-            <li><%= absence_link %></li>
-            
-        		<% if !@billing_cycle.nil? %>
-        			<li><%= billing_cycle_link %></li>
-        		<% end %>
-        		<% if !@folsom_billing_cycle.nil? %>
-        			<li><%= folsom_billing_cycle_link %></li>
-        		<% end %>
-        		<% if !@sacramento_billing_cycle.nil? %>
-        			<li><%= sacramento_billing_cycle_link %></li>
-        		<% end %>
-        		
-            <%#= try_to_show_link(release_form_link) %>
-        		<% if !@release_form.nil? %>
-        			<li><%= release_form_link %></li>
-        		<% end %>
-          		
-            <li><%= discontinue_link %></li>
-            <li><%= employment_link %></li>
-            <!--<li><%#= recital_ad_link %></li>-->
-          </ul>
-        </li>
-        <li style="border-bottom: 1px solid #dcdcdc;"><%= blog_link %></li>
-      </ul>
-      <%= link_to "Parent Portal", "javascript:void(0);", 'data-toggle': 'parent_portal_modal', class: "button expanded main-menu-button" %>
-    </div>
-    
-    <% if current_user %>
-      <div class="off-canvas position-left" id="staff_menu_off_canvas" data-off-canvas>
-        <%= render partial: '/layouts/staff_menu', given_locals: {vertical: true} %>
+    <% if !Rails.env.production? || request.subdomain != 'old' %>
+      <div class="off-canvas position-right" id="mobile_menu" data-off-canvas>
+        <%= link_to "Register Now", "javascript:void(0);", 'data-toggle': 'register_now_modal', class: "button expanded main-menu-button" %>
+        <ul class="vertical menu accordion-menu" style="margin-bottom: 20px;" data-accordion-menu>
+          <li>
+            <a href="#">Programs</a>
+            <ul class="vertical menu nested">
+              <li>
+                <a href="#">Gymnastics</a>
+                <ul class="vertical menu nested">
+                  <li><%= tb_link = link_to "Preschool (0-5)", tumblebunnies_path %></li>
+                  <li><%= gym_link = link_to "School Age (6-18)", gymnastics_path %></li>
+                  <!-- <li><%#= comp_link = link_to "Competitive", competitive_path %></li> -->
+                </ul>
+              </li>
+              <li>
+                <a href="#">Dance</a>
+                <ul class="vertical menu nested">
+                  <li><%= pre_dance_link = link_to "Preschool (0-5)", preschool_dance_path %></li>
+                  <li><%= school_dance_link = link_to "School Age (6-18)", dance_path %></li>
+                  <%= try_to_show_link(summer_recital_link) %>
+                  <!-- <li><%#= recital_info_link = link_to "Summer Recital Info", recital_info_path %></li> -->
+                </ul>
+              </li>
+              <li><%= tag_link = link_to "TAG", tag_path %></li>
+              <li><%= swim_link = link_to "Swim", swim_path %></li>
+              <!-- <li><%#= campus_link = link_to "CampUs", campus_path %></li> -->
+            </ul>
+          </li>
+          <li>
+            <a href="#">Parties & Events</a>
+            <ul class="vertical menu nested">
+              <li><%= try_to_show_link(parties_link) %></li>
+              <li><%= kids_night_outs_link %></li>
+              <!-- <li><%#= bff_dance_parties_link %></li> -->
+              <li><%= camps_link %></li>
+            </ul>
+          </li>
+          <li>
+            <a href="#">About Us</a>
+            <ul class="vertical menu nested">
+              <li><%= story_link %></li>
+              <li><%= facilities_link %></li>
+              <li>
+                <a href="#">Our Staff</a>
+                <ul class="vertical menu nested">
+                  <li><%= gb_staff_link %></li>
+                  <li><%= fol_staff_link %></li>
+                  <li><%= sac_staff_link %></li>
+                </ul>
+              </li>
+              <li><%= testimonials_link %></li>
+              <li><%= making_a_differences_link %></li>
+              <li><%= family_rules_link %></li>
+              <li><%= newsletter_link %></li>
+            </ul>
+          </li>
+          <li>
+            <a href="#">Forms</a>
+            <ul class="vertical menu nested">
+              <li><%= absence_link %></li>
+              
+              <% if !@billing_cycle.nil? %>
+                <li><%= billing_cycle_link %></li>
+              <% end %>
+              <% if !@folsom_billing_cycle.nil? %>
+                <li><%= folsom_billing_cycle_link %></li>
+              <% end %>
+              <% if !@sacramento_billing_cycle.nil? %>
+                <li><%= sacramento_billing_cycle_link %></li>
+              <% end %>
+              
+              <%#= try_to_show_link(release_form_link) %>
+              <% if !@release_form.nil? %>
+                <li><%= release_form_link %></li>
+              <% end %>
+                
+              <li><%= discontinue_link %></li>
+              <li><%= employment_link %></li>
+              <!--<li><%#= recital_ad_link %></li>-->
+            </ul>
+          </li>
+          <li style="border-bottom: 1px solid #dcdcdc;"><%= blog_link %></li>
+        </ul>
+        <%= link_to "Parent Portal", "javascript:void(0);", 'data-toggle': 'parent_portal_modal', class: "button expanded main-menu-button" %>
       </div>
+      <% if current_user %>
+        <div class="off-canvas position-left" id="staff_menu_off_canvas" data-off-canvas>
+          <%= render partial: '/layouts/staff_menu', given_locals: {vertical: true} %>
+        </div>
+      <% end %>
     <% end %>
     <div class="off-canvas-content" data-off-canvas-content >
+    
+    <% if !Rails.env.production? || request.subdomain != 'old' %>
       <% show_size = false %>
       <% if !Rails.env.production? && show_size %>
       <div style="position: fixed; left: 50%; top: 50px; width: 20%; margin-left: -10%; border: solid 2px #333; z-index: 10000; background-color: white; text-align: center;">
@@ -306,7 +309,7 @@
         <div class="row show-for-small" style="padding-top: 60px;"></div>
         <div class="row show-for-large" style="padding-top: 30px;"></div>
       <% end %>  
-      
+      <% end %>
       <div class="row" style="padding-top: 20px;">
         <div class="columns small-12" id="main-container">
           <% if flash.to_a.length > 0 %>
@@ -448,6 +451,7 @@
 
     
   
+    <% if !Rails.env.production? || request.subdomain != 'old' %>
     <div id="footer" style="z-index: 100; margin-top: 150px;">
       <!--<div style="height: 100px; width: 100%; background-color: #fff;">-->
         <!-- only here for a bit of padding above the footer -->
@@ -581,6 +585,7 @@
       <% buffer = 20 %>
       <div style="width: 100%; height: <%= (height * 2) + buffer %>px; background-image: url(&quot;data:image/svg+xml;charset=utf8,<svg height='100%' width='100%' viewBox='0 0 <%= width %> <%= (height * 2) + buffer %>' xmlns='http://www.w3.org/2000/svg'><path d='m 0 0 q <%= width / 8 %> 0 <%= width / 4 %> <%= height %> t <%= width / 4 %> <%= height %> t <%= width / 4 %> -<%= height %> t <%= width / 4 %> -<%= height %> l 0 <%= (height * 2) + buffer %> l -<%= width %> 0 z' stroke='white' fill='white' /></svg>&quot;); background-size: contain;"></div>
     </div>
+    <% end %>
     </div>
   </body>
 </html>
