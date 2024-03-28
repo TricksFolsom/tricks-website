@@ -48,6 +48,6 @@ class ApplicationController < ActionController::Base
   end
 
   def set_csp_header
-    response.headers['Content-Security-Policy'] = "frame-ancestors 'self' https://tricksfolsom.com;"
+    response.headers['Content-Security-Policy'] = "frame-ancestors 'self' https://tricksfolsom.com http://localhost:5173;"
   end
 end

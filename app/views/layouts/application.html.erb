@@ -20,6 +20,15 @@
     <meta name="description" content="Gymnastics is perhaps one of the most comprehensive lifestyle exercise programs available to children, incorporating strength, flexibility, speed, balance, coordination, power and discipline."/>
 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script>
+      function sendHeight() {
+        const height = document.documentElement.scrollHeight;
+        window.parent.postMessage({ frameHeight: height }, "*"); // Replace "*" with the parent page domain for added security
+      }
+
+      window.onload = sendHeight;
+      window.onresize = sendHeight; // Optional, if you want to adjust the height when the window is resized
+    </script>
   </head>
 
 <%
