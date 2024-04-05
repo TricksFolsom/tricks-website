@@ -108,15 +108,23 @@ class EmploymentApplicationsController < ApplicationController
 
   # POST /employment_applications
   def create
-    if params[:employment_application][:honeypot].present?
-      str = params[:employment_application][:firstname] + " " + params[:employment_application][:lastname] + " | " + params[:employment_application][:email] + " | " + params[:employment_application][:honeypot]
+    unless verify_recaptcha(model: @employment_application, action: 'submit', minimum_score: 0.7)
+      str = "Recaptcha or priorities failed for: #{params[:employment_application][:firstname]} #{params[:employment_application][:lastname]} | #{params[:employment_application][:email]}"
       CommentMailer.comment_notification(str).deliver_now
-      return render plain: "Submission received.", status: :ok
+      redirect_to root_path
+      return
+    end
+
+    if params[:employment_application][:honeypot].present?
+      # str = params[:employment_application][:firstname] + " " + params[:employment_application][:lastname] + " | " + params[:employment_application][:email] + " | " + params[:employment_application][:honeypot]
+      # CommentMailer.comment_notification(str).deliver_now
+      redirect_to root_path
+      return
     end
 
     params[:employment_application].delete(:honeypot)
 
-    @employment_application = EmploymentApplication.new(employment_application_params)
+    @employment_application = EmploymentApplication.new(employment_application_params) 
 
     # validate that priorites do not contain blanks. Only reason that should happen is because of modifying local javascript code in the form.
     priorities_are_valid = true
@@ -128,8 +136,7 @@ class EmploymentApplicationsController < ApplicationController
       end
     end
 
-    recaptcha_valid = verify_recaptcha(model: @employment_application, action: 'submit', minimum_score: 0.5)
-    if recaptcha_valid && priorities_are_valid && @employment_application.save
+    if priorities_are_valid && @employment_application.save
       # reverse them so that we create the last review first, that way they can reference the next one
       review = EmploymentApplicationReview.new
       priorities = params["app_priorities"].to_unsafe_h.to_a
@@ -182,9 +189,7 @@ class EmploymentApplicationsController < ApplicationController
       EmploymentApplicationMailer.application_confirmation(@employment_application).deliver_now
       redirect_to thankyou_path, notice: 'Employment Application was successfully submitted.'
     else
-      str = "Recaptcha or priorities failed for: " + params[:employment_application][:firstname] + " " + params[:employment_application][:lastname] + " | " + params[:employment_application][:email]
-      CommentMailer.comment_notification(str).deliver_now
-      flash[:error] = 'Could not save Employment Application, please check form and try again.'
+      flash[:error] = 'Invalid priorities found, please try again'
       render :new
     end
   end
