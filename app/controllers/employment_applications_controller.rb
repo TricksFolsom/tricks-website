@@ -109,8 +109,8 @@ class EmploymentApplicationsController < ApplicationController
   # POST /employment_applications
   def create
     unless verify_recaptcha(model: @employment_application, action: 'submit', minimum_score: 0.7)
-      str = "Recaptcha or priorities failed for: #{params[:employment_application][:firstname]} #{params[:employment_application][:lastname]} | #{params[:employment_application][:email]}"
-      CommentMailer.comment_notification(str).deliver_now
+      # str = "Recaptcha or priorities failed for: #{params[:employment_application][:firstname]} #{params[:employment_application][:lastname]} | #{params[:employment_application][:email]}"
+      # CommentMailer.comment_notification(str).deliver_now
       redirect_to root_path
       return
     end
@@ -124,7 +124,7 @@ class EmploymentApplicationsController < ApplicationController
 
     params[:employment_application].delete(:honeypot)
 
-    @employment_application = EmploymentApplication.new(employment_application_params) 
+    @employment_application = EmploymentApplication.new(employment_application_params) +*+**++++++++++++++++++
 
     # validate that priorites do not contain blanks. Only reason that should happen is because of modifying local javascript code in the form.
     priorities_are_valid = true
