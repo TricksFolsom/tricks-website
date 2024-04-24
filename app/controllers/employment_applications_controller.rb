@@ -111,8 +111,8 @@ class EmploymentApplicationsController < ApplicationController
     unless verify_recaptcha(model: @employment_application, action: 'submit', minimum_score: 0.5)
       str = "Recaptcha failed for: #{params[:employment_application][:firstname]} #{params[:employment_application][:lastname]} | #{params[:employment_application][:email]}"
       CommentMailer.comment_notification(str).deliver_now
-      redirect_to root_path
-      return
+      # redirect_to root_path
+      # return
     end
 
     if params[:employment_application][:honeypot].present?
