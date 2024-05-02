@@ -108,16 +108,17 @@ class EmploymentApplicationsController < ApplicationController
 
   # POST /employment_applications
   def create
+    # this is broken and was preventing people from submitting applications. The honey pot has proven effective.
     unless verify_recaptcha(model: @employment_application, action: 'submit', minimum_score: 0.5)
-      str = "Recaptcha failed for: #{params[:employment_application][:firstname]} #{params[:employment_application][:lastname]} | #{params[:employment_application][:email]}"
-      CommentMailer.comment_notification(str).deliver_now
+      # str = "Recaptcha failed for: #{params[:employment_application][:firstname]} #{params[:employment_application][:lastname]} | #{params[:employment_application][:email]}"
+      # CommentMailer.comment_notification(str).deliver_now
       # redirect_to root_path
       # return
     end
 
     if params[:employment_application][:honeypot].present?
       str = "Honey Pot Caught this one:" + params[:employment_application][:firstname] + " " + params[:employment_application][:lastname] + " | " + params[:employment_application][:email] + " | " + params[:employment_application][:honeypot]
-      CommentMailer.comment_notification(str).deliver_now
+      # CommentMailer.comment_notification(str).deliver_now
       redirect_to root_path
       return
     end

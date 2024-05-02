@@ -80,9 +80,6 @@ gem 'google-cloud-storage'
 # Used to integrate with stripe.com for payment handling
 gem "stripe"
 
-# Google Analytics
-gem 'google-analytics-rails'
-
 # reCAPTCHA https://github.com/ambethia/recaptcha
 gem "recaptcha"
 
