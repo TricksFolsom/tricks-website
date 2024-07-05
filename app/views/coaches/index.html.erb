@@ -3,7 +3,6 @@
 <h1>The Tricks Family</h1>
 
 <div class="row" style="padding-bottom: 1rem;">
-  <div class="columns"><%= link_to "Granite Bay", {:controller => "coaches", :action => "loc", :name => "Granite Bay"}, class: "button expanded" %></div>
   <div class="columns"><%= link_to "Folsom", {:controller => "coaches", :action => "loc", :name => "Folsom"}, class: "button expanded"  %></div>
   <div class="columns"><%= link_to "Sacramento", {:controller => "coaches", :action => "loc", :name => "Sacramento"}, class: "button expanded"  %></div>
   <div class="columns"><%= link_to "Past Employees", {:controller => "coaches", :action => "past_employees"}, class: 'button expanded' %></div>
@@ -25,21 +24,6 @@
     <%#= button_to "Office", {:controller => "coaches", :action => "type", :name => "Office"}  %>
   </div>
 </div> -->
-
-<div class="row align-center" id="classtype-container">
-  <div class="columns small-12">
-    <h2>Granite Bay</h2>
-  </div>
-  <div class="row align-center">
-    <% @coaches.each do |coach| %>
-      <% coach.locations.each do |location| %>
-        <% if location.name == "Granite Bay" %>
-          <%= render 'coach_container', :coach => coach  %>
-        <% end %>
-      <% end %>
-    <% end %>
-  </div>
-</div>
 
 <div class="row align-center" id="classtype-container">
   <div class="columns small-12">

@@ -126,8 +126,6 @@ function updateLocation(loc) {
 
 function convertToShortName(loc) {
   switch (loc) {
-    case "Granite Bay":
-      return "GB";
     case "Folsom":
       return "FOL";
     case "Sacramento":
@@ -138,8 +136,6 @@ function convertToShortName(loc) {
 
 function convertToFullName(loc) {
   switch (loc) {
-    case "GB":
-      return "Granite Bay";
     case "FOL":
       return "Folsom";
     case "SAC":

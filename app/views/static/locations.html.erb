@@ -4,32 +4,7 @@
 
 
 <div class="row align-center">
-	<div class="columns large-4 small-11" style="margin-bottom: 100px;">
-		<div class="row align-center">
-			<div class="columns small-8 large-11">
-				<%= render :partial => "bubble_contents/bubble", locals: {given_bubble: BubbleContent.where(sort_order: 100).first, text_border_color: "777", text_border_size: "2"} %>
-			</div>
-		</div>
-		<div class="row align-center location-information">
-			<div class="columns small-10">
-				<p>4070 Cavitt Stallman Rd<br>
-				Granite Bay, CA 95746</p>
-				<p>Phone: (916) 791-4496</p>
-				<p>Email: <a href="mailto:tricksgb@gmail.com?subject=Email from Website">tricksgb@gmail.com</a></p>
-				<div class="flex-video" style="margin-top: 50px;">
-					<iframe frameborder="0" src="https://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=Tricks+Gymnastics+Inc,+Cavitt+Stallman+Road,+Granite+Bay,+CA&amp;aq=1&amp;oq=tricks+gym&amp;sll=37.269174,-119.306607&amp;sspn=15.593278,33.815918&amp;ie=UTF8&amp;hq=Tricks+Gymnastics+Inc,&amp;hnear=Cavitt+Stallman+Rd,+Granite+Bay,+Placer,+California&amp;t=m&amp;ll=38.74759,-121.218853&amp;spn=0.015396,0.031757&amp;z=14&amp;output=embed&iwloc=near"></iframe>
-				</div>
-				<form action="http://maps.google.com/maps" method="get" target="_blank">
-					For directions, enter starting address:
-					<input type="text" name="saddr" />
-					<input type="hidden" name="daddr" value="4070 Cavitt Stallman Rd, Granite Bay, CA 95746" />
-					<input type="submit" value="Get Directions" style="padding: 10px" class="button expanded" />
-				</form>
-			</div>
-		</div>
-	</div>
-	
-	<div class="columns large-4 small-11" style="margin-bottom: 100px;">
+	<div class="columns large-5 small-11" style="margin-bottom: 100px;">
 		<div class="row align-center">
 			<div class="columns small-8 large-11">
 				<%= render :partial => "bubble_contents/bubble", locals: {given_bubble: BubbleContent.where(sort_order: 101).first, text_border_color: "777", text_border_size: "2"} %>
@@ -54,7 +29,7 @@
 		</div>
 	</div>
 	
-	<div class="columns large-4 small-11" style="margin-bottom: 100px;">
+	<div class="columns large-5 small-11" style="margin-bottom: 100px;">
 		<div class="row align-center">
 			<div class="columns small-8 large-11">
 				<%= render :partial => "bubble_contents/bubble", locals: {given_bubble: BubbleContent.where(sort_order: 102).first, text_border_color: "777", text_border_size: "2"} %>
@@ -78,15 +53,6 @@
 			</div>
 		</div>
 	</div>
-</div>
-
-<div class="reveal fast medium" style="z-index: 1010" id="granite_bay_modal" data-reveal data-close-on-click="true" data-animation-in="scale-in-down" data-animation-out="scale-out-up">
-	<div class="flex-video">
-		<iframe src="https://www.google.com/maps/embed?pb=!4v1519880743652!6m8!1m7!1sCAoSLEFGMVFpcE5qR25MUUowalJhMGhMVERLVnptSEpfbDBjUEE5VEpNc0QtMzVh!2m2!1d38.745712297871!2d-121.22287603716!3f146.1345429876841!4f-0.874783306286318!5f0.4000000000000002" frameborder="0" allowfullscreen></iframe>
-	</div>
-	<button class="close-button" data-close aria-label="Close reveal" type="button">
-		<span aria-hidden="true">&times;</span>
-	</button>
 </div>
 
 <div class="reveal fast medium" style="z-index: 1010" id="folsom_modal" data-reveal data-close-on-click="true" data-animation-in="scale-in-down" data-animation-out="scale-out-up">

@@ -34,7 +34,7 @@ class EmploymentApplication < ActiveRecord::Base
     # validate :has_department
 
     # def has_location
-    #     if granite_bay.blank? && folsom.blank? && sacramento.blank?
+    #     if folsom.blank? && sacramento.blank?
     #         errors[:base] << "Must select at least one location"
     #     end
     # end

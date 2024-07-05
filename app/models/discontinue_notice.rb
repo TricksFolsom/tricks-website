@@ -3,6 +3,6 @@ class DiscontinueNotice < ActiveRecord::Base
 
     validates_presence_of :class_day, :class_time, :last_day, :location, :parent_name, :reason, :student_last_name, :student_first_name, :understood
 
-	LOCATIONS = [['Granite Bay', 0], ['Folsom', 1], ['Sacramento', 2]]
+	LOCATIONS = [['Folsom', 1], ['Sacramento', 2]]
 	DAYS = [['Monday', 0], ['Tuesday', 1], ['Wednesday', 2], ['Thursday', 3], ['Friday', 4], ['Saturday', 5]]
 end

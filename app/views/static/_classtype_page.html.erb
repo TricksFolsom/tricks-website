@@ -55,9 +55,9 @@
     <h1><%= program.gsub('_', ' ') %> Schedules</h1>
   </div>
   
-  <% locations = {"Granite_Bay" => "GB", "Folsom" => "FOL", "Sacramento" => "SAC"} %>
+  <% locations = {"Folsom" => "FOL", "Sacramento" => "SAC"} %>
   <% if program == "Swim" %>
-    <% locations.except!("Granite_Bay", "Sacramento") %>
+    <% locations.except!("Sacramento") %>
   <% end %>
   <div class="row align-center" style="margin-bottom: 15px;">
     <% locations.each do |loc| %>

@@ -24,7 +24,7 @@
 
     <meta http-equiv="pragma" content="no-cache"/>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="keywords" content="Tricks Gymnastics, Dance, Swim, Granite Bay, Folsom, Roseville, Sacramento, California, Gymnastics, Fun, Classes, Tumbling, Swimming, Fitness, Birthday, Cheer, Night Out, Parents, Date Night"/>
+    <meta name="keywords" content="Tricks Gymnastics, Dance, Swim, Folsom, Sacramento, California, Gymnastics, Fun, Classes, Tumbling, Swimming, Fitness, Birthday, Cheer, Night Out, Parents, Date Night"/>
     <meta name="description" content="Gymnastics is perhaps one of the most comprehensive lifestyle exercise programs available to children, incorporating strength, flexibility, speed, balance, coordination, power and discipline."/>
 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -45,7 +45,6 @@
   camps_link = link_to "Camps", camps_path
   story_link = link_to "Our Story", our_story_path
   facilities_link = link_to "Our Facilities", locations_path
-  gb_staff_link = link_to "Granite Bay", {:controller => "coaches", :action => "loc", :name => "Granite Bay"}
   fol_staff_link = link_to "Folsom", {:controller => "coaches", :action => "loc", :name => "Folsom"}
   sac_staff_link = link_to "Sacramento", {:controller => "coaches", :action => "loc", :name => "Sacramento"}
   testimonials_link = link_to "Testimonials", site_comments_path
@@ -132,7 +131,6 @@
               <li>
                 <a href="#">Our Staff</a>
                 <ul class="vertical menu nested">
-                  <li><%= gb_staff_link %></li>
                   <li><%= fol_staff_link %></li>
                   <li><%= sac_staff_link %></li>
                 </ul>
@@ -273,7 +271,6 @@
                   <li class="has-submenu">
                     <%= link_to "Our Staff", "javascript:void()" %>
                     <ul class="menu vertical">
-                      <li><%= gb_staff_link %></li>
                       <li><%= fol_staff_link %></li>
                       <li><%= sac_staff_link %></li>
                     </ul>
@@ -398,14 +395,10 @@
         <div id="choose_location_modal">
           <h1>Choose a Location</h1>
           <div class="row" style="margin-top: 25px;">
-            <% locations = {"Granite Bay" => "GB", "Folsom" => "FOL", "Sacramento" => "SAC"} %> 
+            <% locations = {"Folsom" => "FOL", "Sacramento" => "SAC"} %> 
             <% locations.each do |loc| %>
               <div class="columns small-12 large-4">
-                <% if loc[1] == "GB" %>
-                  <%= link_to loc[0], 'https://app.iclasspro.com/portal/tricksgranitebay/splash', class: "button expanded", style: "padding: 15px; font-size: 24px" %>
-                <% else %>
-                  <%= link_to loc[0], 'javascript:void(0);', class: "button expanded location-button", id: loc[1] %>
-                <% end %>
+                <%= link_to loc[0], 'javascript:void(0);', class: "button expanded location-button", id: loc[1] %>
               </div>
             <% end %>
           </div>
@@ -430,24 +423,18 @@
       <div class="reveal fast large" id="parent_portal_modal" data-reveal data-close-on-click="true" data-animation-in="scale-in-down" data-animation-out="scale-out-up">
         <h1>Parent Portal Location</h1>
         <div class="row" style="margin-top: 25px;">
-          <% locations = {"Granite Bay" => "GB", "Folsom" => "FOL", "Sacramento" => "SAC"} %> 
+          <% locations = {"Folsom" => "FOL", "Sacramento" => "SAC"} %> 
           <% locations.each do |loc| %>
             <% 
               case loc[1]
               when "FOL"
                 org_id = "550122"
-              when "GB"
-                org_id = "550123"
               when "SAC"
                 org_id = "550124"
               end
             %>
             <div class="columns small-12 large-4">
-              <% if loc[1] == "GB" %>
-                <%= link_to loc[0], 'https://app.iclasspro.com/portal/tricksgranitebay/splash', class: "button expanded" %>
-              <% else %>
-                <%= link_to loc[0], 'https://app.jackrabbitclass.com/portal/ppLogin.asp?id=' + org_id, class: "button expanded", id: loc[1] %>
-              <% end %>
+              <%= link_to loc[0], 'https://app.jackrabbitclass.com/portal/ppLogin.asp?id=' + org_id, class: "button expanded", id: loc[1] %>
             </div>
           <% end %>
         </div>
@@ -522,7 +509,6 @@
                     <li>
                       <h3>Our Staff</h3>
                       <ul>
-                        <%= if defined? gb_staff_link then ('<li>' + gb_staff_link + '</li>').html_safe end %>
                         <%= if defined? fol_staff_link then ('<li>' + fol_staff_link + '</li>').html_safe end %>
                         <%= if defined? sac_staff_link then ('<li>' + sac_staff_link + '</li>').html_safe end %>
                       </ul>
@@ -552,24 +538,14 @@
             
             <div class="columns large-4 small-12 small-order-1 large-order-2" style="margin-bottom: 20px;">
               <div class="row">
-                <div class="columns small-4">
-                  <%#= link_to "Granite Bay", 'javascript:void(0);', class: "button expanded location-button", id: "GB" %>
-                  <%= link_to "Granite Bay", 'https://app.iclasspro.com/portal/tricksgranitebay/splash', class: "button expanded", style: "padding: 10px 5px" %>
-                </div>
-                <div class="columns small-4">
+                <div class="columns small-6">
                   <%= link_to "Folsom", 'javascript:void(0);', class: "button expanded location-button", id: "FOL" %>
                 </div>
-                <div class="columns small-4">
+                <div class="columns small-6">
                   <%= link_to "Sacramento", 'javascript:void(0);', class: "button expanded location-button", id: "SAC" %>
                 </div>
               </div>
               <div class="row" id="footer_location_container">
-                <div class="columns 9-small footer-location-information" id="GB">
-                  <p>4070 Cavitt Stallman Rd<br>
-                  Granite Bay, CA 95746</p>
-                  <p>Phone: (916) 791-4496</p>
-                  <p>Email: <%= link_to 'tricksgb@gmail.com', 'mailto:tricksgb@gmail.com?subject=Email from Website' %></p>
-                </div>
                 <div class="columns 9-small footer-location-information" id="FOL">
                   <p>370 Plaza Drive<br>
                   Folsom, CA 95630</p>

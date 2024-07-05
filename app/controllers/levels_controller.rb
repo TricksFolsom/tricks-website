@@ -55,8 +55,6 @@ class LevelsController < ApplicationController
 			case loc.shortname
 			when "FOL"
 				org_id = "550122"
-			when "GB"
-				org_id = "550123"
 			when "SAC"
 				org_id = "550124"
 			end
@@ -118,7 +116,7 @@ class LevelsController < ApplicationController
 					instructor = "<span style='color: red;'>Staff</span>".html_safe
 					if !r['instructors'][0].nil?
 						# puts ":" + r['instructors'][0] + ":"
-						if loc.shortname == "GB" || loc.shortname == "SAC"
+						if loc.shortname == "SAC"
 							instructor = r['instructors'][0]
 						else
 							name_parts = []

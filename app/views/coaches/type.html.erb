@@ -43,20 +43,6 @@
   </div>
 
   <div>
-    <div id="coach_section_header"><h3>Granite Bay</h3></div>
-    <div>
-      <% @coaches.each do |coach| %>
-        <% coach.locations.each do |location| %>
-          <% if location.name == "Granite Bay" %>
-            <%= render 'coach_container', :coach => coach  %>
-          <% end %>
-        <% end %>
-      <% end %>
-    </div>
-  </div>
-
-
-  <div>
     <div id="coach_section_header" style="margin-top: 30px"><h3>Folsom</h3></div>
     <div>
       <% @coaches.each do |coach| %>
