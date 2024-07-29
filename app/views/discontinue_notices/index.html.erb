@@ -17,7 +17,13 @@
 <% @discontinue_notices.each do |discontinue_notice| %>
   <tr>
     <td><%= discontinue_notice.reason %></td>
-    <td><%= DiscontinueNotice::LOCATIONS[discontinue_notice.location][0] %></td>
+    <td>
+      <% if discontinue_notice.location && DiscontinueNotice::LOCATIONS[discontinue_notice.location] %>
+        <%= DiscontinueNotice::LOCATIONS[discontinue_notice.location][0] %>
+      <% else %>
+        Location not available (GB)
+      <% end %>
+    </td>
     <td><%= discontinue_notice.student_first_name + " " + discontinue_notice.student_last_name %></td>
     <td><%= DiscontinueNotice::DAYS[discontinue_notice.class_day][0] %></td>
     <td><%= discontinue_notice.class_time.strftime("%l:%M %p") %></td>
