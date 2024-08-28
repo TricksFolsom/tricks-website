@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base 
+  # layout "choose_location"
+
   # Rescue form for invalid authentificitytoken
   rescue_from ActionController::InvalidAuthenticityToken, :with => :bad_token
   protect_from_forgery with: :exception

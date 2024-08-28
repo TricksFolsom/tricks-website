@@ -97,75 +97,37 @@
               <li>
                 <a href="#">Gymnastics</a>
                 <ul class="vertical menu nested">
-                  <li><%= tb_link = link_to "Preschool (0-5)", tumblebunnies_path %></li>
-                  <li><%= gym_link = link_to "School Age (6-18)", gymnastics_path %></li>
                   <!-- <li><%#= comp_link = link_to "Competitive", competitive_path %></li> -->
                 </ul>
               </li>
               <li>
                 <a href="#">Dance</a>
                 <ul class="vertical menu nested">
-                  <li><%= pre_dance_link = link_to "Preschool (0-5)", preschool_dance_path %></li>
-                  <li><%= school_dance_link = link_to "School Age (6-18)", dance_path %></li>
-                  <%= try_to_show_link(summer_recital_link) %>
                   <!-- <li><%#= recital_info_link = link_to "Summer Recital Info", recital_info_path %></li> -->
                 </ul>
               </li>
-              <li><%= tag_link = link_to "TAG", tag_path %></li>
-              <li><%= swim_link = link_to "Swim", swim_path %></li>
               <!-- <li><%#= campus_link = link_to "CampUs", campus_path %></li> -->
             </ul>
           </li>
           <li>
             <a href="#">Parties & Events</a>
             <ul class="vertical menu nested">
-              <li><%= try_to_show_link(parties_link) %></li>
-              <li><%= kids_night_outs_link %></li>
-              <!-- <li><%#= bff_dance_parties_link %></li> -->
-              <li><%= camps_link %></li>
             </ul>
           </li>
           <li>
             <a href="#">About Us</a>
             <ul class="vertical menu nested">
-              <li><%= story_link %></li>
-              <li><%= facilities_link %></li>
               <li>
                 <a href="#">Our Staff</a>
                 <ul class="vertical menu nested">
-                  <li><%= fol_staff_link %></li>
-                  <li><%= sac_staff_link %></li>
                 </ul>
               </li>
-              <li><%= testimonials_link %></li>
-              <li><%= making_a_differences_link %></li>
-              <li><%= family_rules_link %></li>
-              <li><%= newsletter_link %></li>
             </ul>
           </li>
           <li>
             <a href="#">Forms</a>
             <ul class="vertical menu nested">
-              <li><%= absence_link %></li>
               
-              <% if !@billing_cycle.nil? %>
-                <li><%= billing_cycle_link %></li>
-              <% end %>
-              <% if !@folsom_billing_cycle.nil? %>
-                <li><%= folsom_billing_cycle_link %></li>
-              <% end %>
-              <% if !@sacramento_billing_cycle.nil? %>
-                <li><%= sacramento_billing_cycle_link %></li>
-              <% end %>
-              
-              <%#= try_to_show_link(release_form_link) %>
-              <% if !@release_form.nil? %>
-                <li><%= release_form_link %></li>
-              <% end %>
-                
-              <li><%= discontinue_link %></li>
-              <li><%= employment_link %></li>
-              <!--<li><%#= recital_ad_link %></li>-->
             </ul>
           </li>
           <li style="border-bottom: 1px solid #dcdcdc;"><%= blog_link %></li>
@@ -217,91 +179,7 @@
           <div class="logo">
             <%= link_to image_tag('tricks-header.png'), root_path %>
           </div>
-          <!-- Left Nav Section -->
-          <div class="top-bar-left show-for-xlarge">
-            <ul class="menu" data-responsive-menu="drilldown large-dropdown">
-              <li><%= link_to "Register Now", "javascript:void(0);", class: "button main-menu-button", 'data-toggle': 'register_now_modal', style: "margin-right: 20px;" %></li>
-              <li class="has-submenu">
-                <%= link_to "Programs", 'javascript:void(0);', class: 'main-menu-item'  %>
-                <ul class="menu vertical load-hidden">
-                  <li class="has-submenu">
-                    <%= link_to "Gymnastics", "javascript:void(0);" %>
-                    <ul class="menu vertical">
-                      <li><%= tb_link %></li>
-                      <li><%= gym_link %></li>
-                      <!-- <li><%#= comp_link %></li> -->
-                    </ul>
-                  </li>
-                  <li class="has-submenu">
-                    <%= link_to "Dance", "javascript:void(0);" %>
-                    <ul class="menu vertical">
-                      <li><%= pre_dance_link %></li>
-                      <li><%= school_dance_link %></li>
-                      <%= try_to_show_link(summer_recital_link) %>
-                      <!--<li><%#= recital_info_link %></li>
-                      <li><%#= dance_team_link = link_to "Dance Team", dance_path %></li>
-                      <li><%#= summer_recital_link = link_to "Summer Recital", dance_path %></li>
-                      <li><%#= winter_show_link = link_to "Winter Show", dance_path %></li>-->
-                    </ul>
-                  </li>
-                  <li><%= tag_link %></li>
-                  <li><%= swim_link %></li>
-                  <%= if defined? campus_link then ('<li>' + campus_link + '</li>').html_safe end %>
-                </ul>
-              </li>
-              <li class="has-submenu">
-                <%= link_to "Parties & Events", 'javascript:void(0);', class: 'main-menu-item'  %>
-                <ul class="menu vertical load-hidden">
-                  <li><%= try_to_show_link(parties_link) %></li>
-                  <li><%= kids_night_outs_link %></li>
-                  <!-- <li><%#= bff_dance_parties_link %></li> -->
-                  <li><%= camps_link %></li>
-                  <!--<li><%#= field_trips_link = link_to "Field Trips", camps_path %></li>-->
-                  <!--<li><%#= fundraising_link = link_to "Fundraising", camps_path %></li>-->
-                </ul>
-              </li>
-            </ul>
-          </div>
-          <!-- Right Nav Section -->
-          <div class="top-bar-right show-for-xlarge">
-            <ul class="menu" data-responsive-menu="drilldown large-dropdown">
-              <li class="has-submenu">
-                <%= link_to "About Us", 'javascript:void(0);', class: 'main-menu-item' %>
-                <ul class="menu vertical load-hidden">
-                  <li><%= story_link %></li>
-                  <li><%= facilities_link %></li>
-                  <li class="has-submenu">
-                    <%= link_to "Our Staff", "javascript:void()" %>
-                    <ul class="menu vertical">
-                      <li><%= fol_staff_link %></li>
-                      <li><%= sac_staff_link %></li>
-                    </ul>
-                  </li>
-                  <li><%= testimonials_link %></li>
-                  <li> <%= making_a_differences_link %></li>
-                  <%= try_to_show_link(family_rules_link) %>
-                  <%= try_to_show_link(newsletter_link) %>
-                </ul>
-              </li>
-              <li class="has-submenu">
-                <%= link_to "Forms", 'javascript:void(0);', class: 'main-menu-item' %>
-                <ul class="menu vertical load-hidden">
-                  <li><%= absence_link %></li>
-                  <%= try_to_show_link(billing_cycle_link) %>
-                  <%= try_to_show_link(folsom_billing_cycle_link) %>
-                  <%= try_to_show_link(sacramento_billing_cycle_link) %>
-                  <%= try_to_show_link(release_form_link) %>
-                  <li><%= discontinue_link %></li>
-                  <li><%= employment_link %></li>
-                  <!--<li><%#= recital_ad_link = link_to "Recital Ad Online Order", recital_ads_ad_select_path %></li>-->
-                </ul>
-              </li>
-              <!-- <li><%#= faq_link = link_to "FAQ", '#', class: 'main-menu-item' %></li> -->
-              <li><%= blog_link %></li>
-              <li><%= link_to "Parent Portal", "javascript:void(0);", 'data-toggle': 'parent_portal_modal', class: "button main-menu-button", style: "margin-left: 20px;" %></li>
-    
-            </ul>
-          </div>
+          
           
           <% if current_user %>
             <div class="hide-for-xlarge" style="position: absolute; left: 6px; transform-origin: 0% 50% 0; transform: scale(1.1);" data-toggle="staff_menu_off_canvas">
@@ -464,107 +342,11 @@
       <!--</div>-->
       <div class="row">
         <div class="columns small-12" id="footer-content">
-          <div class="row" style="font-size: 13px;">
+          <div class="row" style="font-size: 13px; height: 200px;">
             <div class="columns large-8 small-12 small-order-2 large-order-1">
-              <div class="row show-for-medium">
-                <div class="columns medium-3 small-6">
-                  <h3 class="footer-header">Programs</h3>
-                  <ul>
-                    <li>
-                      <h3>Gymnastics</h3>
-                      <ul>
-                        <%= if defined? tb_link then ('<li>' + tb_link + '</li>').html_safe end %>
-                        <%= if defined? gym_link then ('<li>' + gym_link + '</li>').html_safe end %>
-                        <%#= if defined? comp_link then ('<li>' + comp_link + '</li>').html_safe end %>
-                      </ul>
-                    </li>
-                    <li>
-                      <h3>Dance</h3>
-                      <ul>
-                        <%= if defined? pre_dance_link then ('<li>' + pre_dance_link + '</li>').html_safe end %>
-                        <%= if defined? school_dance_link then ('<li>' + school_dance_link + '</li>').html_safe end %>
-                        <%= if defined? dance_team_link then ('<li>' + dance_team_link + '</li>').html_safe end %>
-                        <%= try_to_show_link(summer_recital_link) %>
-                        <%= if defined? winter_show_link then ('<li>' + winter_show_link + '</li>').html_safe end %>
-                      </ul>
-                    </li>
-                    <%= if defined? tag_link then ('<li>' + tag_link + '</li>').html_safe end %>
-                    <%= if defined? swim_link then ('<li>' + swim_link + '</li>').html_safe end %>
-                    <%= if defined? campus_link then ('<li>' + campus_link + '</li>').html_safe end %>
-                  </ul>
-                </div>
-                <div class="columns medium-3 small-6">
-                  <h3 class="footer-header">Parties & Events</h3>
-                  <ul>
-                    <li><%= try_to_show_link(parties_link) %></li>
-                    <li><%= kids_night_outs_link %></li>
-                    <!-- <li><%#= bff_dance_parties_link %></li> -->
-                    <li><%= camps_link %></li>
-                  </ul>
-                </div>
-                <div class="columns medium-3 small-6">
-                  
-                  <h3 class="footer-header">About Us</h3>
-                  <ul>
-                    <%= if defined? story_link then ('<li>' + story_link + '</li>').html_safe end %>
-                    <%= if defined? facilities_link then ('<li>' + facilities_link + '</li>').html_safe end %>
-                    <li>
-                      <h3>Our Staff</h3>
-                      <ul>
-                        <%= if defined? fol_staff_link then ('<li>' + fol_staff_link + '</li>').html_safe end %>
-                        <%= if defined? sac_staff_link then ('<li>' + sac_staff_link + '</li>').html_safe end %>
-                      </ul>
-                    </li>
-                    <%= try_to_show_link(making_a_differences_link) %>
-                    <%= try_to_show_link(testimonials_link) %>
-                    <%= try_to_show_link(family_rules_link) %>
-                    <%= try_to_show_link(newsletter_link) %>
-                  </ul>
-                </div>
-                <div class="columns medium-3 small-6">
-                  <h3 class="footer-header">Forms</h3>
-                  <ul>
-                    <%= try_to_show_link(absence_link) %>
-                    <%= try_to_show_link(billing_cycle_link) %>
-                    <%= try_to_show_link(folsom_billing_cycle_link) %>
-                    <%= try_to_show_link(sacramento_billing_cycle_link) %>
-                    <%= try_to_show_link(release_form_link) %>
-                    <%= try_to_show_link(discontinue_link) %>
-                    <%= try_to_show_link(employment_link) %>
-                  </ul>
-                  <h3 class="footer-header"><%= link_to "Blog", 'http://tricksgym.blogspot.com/', class: 'main-menu-item' %></h3>
-                  <h3 class="footer-header"><%= link_to "Contact", locations_path, class: 'main-menu-item' %></h3>
-                </div>
-              </div>
+
             </div>
-            
-            <div class="columns large-4 small-12 small-order-1 large-order-2" style="margin-bottom: 20px;">
-              <div class="row">
-                <div class="columns small-6">
-                  <%= link_to "Folsom", 'javascript:void(0);', class: "button expanded location-button", id: "FOL" %>
-                </div>
-                <div class="columns small-6">
-                  <%= link_to "Sacramento", 'javascript:void(0);', class: "button expanded location-button", id: "SAC" %>
-                </div>
-              </div>
-              <div class="row" id="footer_location_container">
-                <div class="columns 9-small footer-location-information" id="FOL">
-                  <p>370 Plaza Drive<br>
-                  Folsom, CA 95630</p>
-                  <p>Phone: (916) 351-0024</p>
-                  <p>Email: <%= link_to 'tricksfol@gmail.com', 'mailto:tricksfol@gmail.com?subject=Email from Website' %></p>
-                </div>
-                <div class="columns 9-small footer-location-information" id="SAC">
-                  <p>4440 Marconi Avenue, Suite 100<br>
-                  Sacramento, CA 95821</p>
-                  <p>Phone: (916) 481-4496</p>
-                  <p>Email: <%= link_to 'trickssac@gmail.com', 'mailto:trickssac@gmail.com?subject=Email from Website' %></p>
-                </div>
-                <div class="columns 9-small footer-location-information" id="NONE">
-                  Click a button for more information about the location
-                </div>
-              </div>
-            </div>
+
           </div>
           <% if !current_user %>
             <div class="row align-center">
