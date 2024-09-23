@@ -25,7 +25,7 @@ class DiscontinueNoticesController < ApplicationController
   # POST /discontinue_notices
   # POST /discontinue_notices.json
   def create
-    params_with_location = discontinue_notice_params.merge(location: "1")
+    params_with_location = discontinue_notice_params.merge(location: 1)
     @discontinue_notice = DiscontinueNotice.new(params_with_location)
 
     respond_to do |format|
@@ -44,7 +44,7 @@ class DiscontinueNoticesController < ApplicationController
   # PUT /discontinue_notices/1.json
   def update
     respond_to do |format|
-      params_with_location = discontinue_notice_params.merge(location: "1")
+      params_with_location = discontinue_notice_params.merge(location: 1)
       if @discontinue_notice.update(params_with_location)
         format.html { redirect_to @discontinue_notice, notice: 'Discontinue notice was successfully updated.' }
         format.json { head :no_content }

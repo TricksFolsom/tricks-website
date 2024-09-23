@@ -21,7 +21,7 @@
       <% if discontinue_notice.location && DiscontinueNotice::LOCATIONS[discontinue_notice.location] %>
         <%= DiscontinueNotice::LOCATIONS[discontinue_notice.location][0] %>
       <% else %>
-        Location not available (GB)
+        Location not available (GB / SAC)
       <% end %>
     </td>
     <td><%= discontinue_notice.student_first_name + " " + discontinue_notice.student_last_name %></td>
