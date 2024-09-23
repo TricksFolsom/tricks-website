@@ -21,9 +21,6 @@
   
   <div class="row">
     <div class="columns large-6 ">
-      <%= render partial: 'helper_fields/select', locals: {form: f, field: :location, options: DiscontinueNotice::LOCATIONS, prompt: "Select a Location", required: true} %>
-    </div>
-    <div class="columns large-6 ">
       <%= render partial: 'helper_fields/text', locals: {form: f, field: :parent_name, label: "Parent Name", required: true} %>
     </div>
   </div>
