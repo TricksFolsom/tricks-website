@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :kids_night_outs
   get 'datenights', to: redirect('kids_night_outs')
   resources :bff_dance_parties
+  get 'employment_applications/new', to: redirect('https://tricksfolsom.com/employment', status: 301)
   resources :employment_applications, except: [:edit]
   resources :recital_sign_ups
   resources :parties, except: [:show]
@@ -29,6 +30,7 @@ Rails.application.routes.draw do
   resources :recital_ads
   resources :recital_ad_types
   resources :promo_slides
+  get 'absents/new', to: redirect('https://tricksfolsom.com/absence', status: 301)
   resources :absents
   resources :tricks_u_categories
   resources :tricks_u_videos
