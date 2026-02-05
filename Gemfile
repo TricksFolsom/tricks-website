@@ -90,8 +90,8 @@ gem 'mailgun-ruby', '~>1.1.6'
 # instead of only in style="" attr
 gem 'premailer-rails' 
 
-# CSS Framework
-gem 'foundation-rails'
+# CSS Framework (libsass-compatible)
+gem 'foundation-rails', '6.6.2.0'
 
 # Allows making http requests and waiting for responses. Needed to get json class infor from jackrabbit
 gem 'httparty'
