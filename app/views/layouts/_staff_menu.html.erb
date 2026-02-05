@@ -61,5 +61,9 @@
   <% if can? :show, EmploymentApplication %>
     <li><%= link_to "Applications", employment_applications_path %></li>
   <% end %>
+
+  <% if can? :manage, :all %>
+    <li><%= link_to "Data Exports", "/exports" %></li>
+  <% end %>
   <li style="padding: <%= vertical ? 10 : 5 %>px;"><%= link_to "Logout", logout_path, class: "button alert expand", style: "padding: " + (vertical ? "10" : "5") + "px 10px;" %> </li>
 </ul>

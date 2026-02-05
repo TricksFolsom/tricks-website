@@ -38,6 +38,12 @@ Rails.application.routes.draw do
   resources :discontinue_notices
   resources :bubble_contents
 
+  get 'exports', to: 'exports#index'
+  get 'exports/kid_quotes', to: 'exports#kid_quotes'
+  get 'exports/comments', to: 'exports#comments'
+  get 'exports/making_a_differences', to: 'exports#making_a_differences'
+  get 'exports/tricks_u', to: 'exports#tricks_u'
+
   %w[gymnastics tumblebunnies tag dance preschool_dance swim locations site_comments campus recital_ad_order_thank_you recital_info thankyou our_story safety_video food_drive summer_recital].each do |page|
     get page, controller: "static", action: page
   end
