@@ -1,7 +1,7 @@
 {
   "name": "tricks-app",
   "engines": {
-    "node": "16.x"
+    "node": "20.x"
   },
   "license": "UNLICENSED",
   "version": "1.0.0",
